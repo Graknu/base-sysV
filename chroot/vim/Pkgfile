@@ -4,7 +4,7 @@ source=(http://yaolinux.techozor.fr/sources-base/vim-$version.tar.bz2
 	http://yaolinux.techozor.fr/sources-base/vim-8.0-branch_update-1.patch)
 
 build() {
-cd vim-$version
+cd vim-80
 patch -Np1 -i ../vim-8.0-branch_update-1.patch
 cat > src/auto/config.cache << "EOF"
 vim_cv_getcwd_broken=no
