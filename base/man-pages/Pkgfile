@@ -1,0 +1,16 @@
+description="Man Pages for Linux"
+url="http://man7.org/linux/man-pages/index.html"
+packager="Hugo <graknu@techozor.fr>"
+
+name=man-pages
+version=4.09
+
+
+source=(http://yaolinux.techozor.fr/sources-base/man-pages-4.09.tar.xz)
+
+
+build() {
+cd $name-$version
+make install
+}
+
