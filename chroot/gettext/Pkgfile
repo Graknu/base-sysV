@@ -4,6 +4,7 @@ source=(http://yaolinux.techozor.fr/sources-base/gettext-$version.tar.xz)
 
 build() {
 cd gettext-$version
+cd gettext-tools
 EMACS="no" \
 ./configure \
     --prefix=/tools \
