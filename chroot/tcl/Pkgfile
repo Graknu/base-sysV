@@ -1,5 +1,5 @@
-version=8.6.8
-source=(https://downloads.sourceforge.net/tcl/tcl${version}-src.tar.gz)
+version=8.6.4
+source=(http://yaolinux.techozor.fr/sources-base/tcl-core$version-src.tar.gz)
 
 build()
 {
@@ -7,15 +7,12 @@ cd tcl$version
 
 
 cd unix
-./configure --prefix=/tools
-
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/tools \
+    --libdir=/tools/lib64
 make
-
 make install
-
-chmod -v u+w /tools/lib/libtcl8.6.so
-
+make install-private-headers
 make install-private-headers
 
-ln -sv tclsh8.6 /tools/bin/tclsh
 }

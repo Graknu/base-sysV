@@ -1,13 +1,10 @@
-version=1.6.1
-source=(\
-http://ftp.gnu.org/gnu/dejagnu/dejagnu-$version.tar.gz )
+version=1.6
+source=(http://yaolinux.techozor.fr/sources-base/dejagnu-$version.tar.gz)
 build()
 {
 cd dejagnu-$version
 
-./configure --prefix=/tools \
-	--libdir=/tools/lib64
-
+./configure --prefix=/tools 
 make install
 
 make check
