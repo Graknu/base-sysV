@@ -26,8 +26,7 @@ plain "$(gettext "CLFS path is set: %s: OK")" "$CLFS"
 plain "$(gettext "CLFS_TARGET is set: %s: OK")" "$CLFS_TARGET"
 
 # Checking the user
-[ "$(whoami)" == "clfs" ] || abort "$(gettext "This script MUST be run as 'clfs' user and not as: <%s>")" 
-"$(whoami)"
+[ "$(whoami)" == "clfs" ] || abort "$(gettext "This script MUST be run as 'clfs' user and not as: <%s>")" "$(whoami)"
 plain "$(gettext "User 'clfs': OK")"
 
 # Checking Directories
