@@ -4,7 +4,7 @@ release=1
 source=(http://yaolinux.techozor.fr/sources-base/glibc-$version.tar.xz)
 
 build() {
-cd $name-$version
+cd glibc-$version
 mkdir -v ../glibc-build
 cd ../glibc-build
 BUILD_CC="gcc" CC="${CLFS_TARGET}-gcc ${BUILD32}" \
