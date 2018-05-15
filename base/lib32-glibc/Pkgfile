@@ -1,0 +1,36 @@
+description=""
+url="http://www.gnu.org/software/libc"
+packager="Hugo <graknu@techozor.fr>"
+
+name=lib32-glibc
+version=2.25
+
+
+source=(http://yaolinux.techozor.fr/sources-base/glibc-2.25.tar.xz)
+
+
+build() {
+cd glibc-$version
+LINKER=$(readelf -l /tools/bin/bash | sed -n 's@.*interpret.*/tools\(.*\)]$@\1@p')
+sed -i "s|libs -o|libs -L/usr/lib -Wl,-dynamic-linker=${LINKER} -o|" \
+  scripts/test-installation.pl
+unset LINKER
+mkdir -v ../glibc-build
+cd ../glibc-build
+CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" \
+../glibc-2.25/configure \
+    --prefix=/usr \
+    --enable-kernel=3.12.0 \
+    --libexecdir=/usr/lib/glibc \
+    --host=${CLFS_TARGET32} \
+    --enable-stack-protector=strong \
+    --enable-obsolete-rpc
+make
+sed -i '/cross-compiling/s@ifeq@ifneq@g' ../glibc-2.25/localedata/Makefile
+make check
+touch /etc/ld.so.conf
+make DESTDIR=$PKG install &&
+rm -v /usr/include/rpcsvc/*.x
+rm -rf $PKG/{etc,sbin,usr/{bin,sbin,share},var}
+}
+

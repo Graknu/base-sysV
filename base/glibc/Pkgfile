@@ -1,0 +1,41 @@
+description=""
+url=""
+packager="Hugo <graknu@techozor.fr>"
+
+name=glibc
+version=2.25
+
+
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
+
+
+build() {
+cd $name-$version
+LINKER=$(readelf -l /tools/bin/bash | sed -n 's@.*interpret.*/tools\(.*\)]$@\1@p')
+sed -i "s|libs -o|libs -L/usr/lib64 -Wl,-dynamic-linker=${LINKER} -o|" \
+  scripts/test-installation.pl
+unset LINKER
+mkdir -v ../glibc-build
+cd ../glibc-build
+echo "libc_cv_slibdir=/lib64" >> config.cache
+CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" \
+../glibc-2.25/configure \
+    --prefix=/usr \
+    --enable-kernel=3.12.0 \
+    --libexecdir=/usr/lib64/glibc \
+    --libdir=/usr/lib64 \
+    --enable-obsolete-rpc \
+    --enable-stack-protector=strong \
+    --cache-file=config.cache
+
+make
+make check
+make DESTDIR=$PKG install &&
+rm -v /usr/include/rpcsvc/*.x
+rm -f $PKG/etc/ld.so.{cache,conf}
+cp -v ../glibc-2.25/nscd/nscd.conf /etc/nscd.conf
+mkdir -pv /var/cache/nscd
+install -v -Dm644 ../glibc-2.25/nscd/nscd.tmpfiles /usr/lib/tmpfiles.d/nscd.conf
+install -v -Dm644 ../glibc-2.25/nscd/nscd.service /lib/systemd/system/nscd.service
+}
+
