@@ -26,22 +26,25 @@ plain "$(gettext "CLFS path is set: %s: OK")" "$CLFS"
 plain "$(gettext "CLFS_TARGET is set: %s: OK")" "$CLFS_TARGET"
 
 # Checking the user
-[ "$(whoami)" == "clfs" ] || abort "$(gettext "This script MUST be run as 'clfs' user and not as: <%s>")" 
-"$(whoami)"
+[ "$(whoami)" == "clfs" ] || abort "$(gettext "This script MUST be run as 'clfs' user and not as: <%s>")" "$(whoami)"
 plain "$(gettext "User 'clfs': OK")"
 
 # Checking Directories
 [ -d $CLFS ] || abort "$(gettext "%s directory not found.")" "$CLFS"
 plain "$(gettext "Found %s directory: OK")" "$CLFS"
-[ -O $CLFS ] || abort "$(gettext "%s is not owned by user 'lfs'.")" "$CLFS"
+[ -O $CLFS ] || abort "$(gettext "%s is not owned by user 'clfs'.")" "$CLFS"
 
 [ -d $CLFS/sources ] || abort "$(gettext "%s/sources directory not found.")" "$CLFS"
 plain "$(gettext "Found %s/sources directory: OK")" "$CLFS"
-[ -O $CLFS/sources ] || abort "$(gettext "%s/sources is not owned by user 'lfs'.")" "$CLFS"
+[ -O $CLFS/sources ] || abort "$(gettext "%s/sources is not owned by user 'clfs'.")" "$CLFS"
 
 [ -d $CLFS/tools ] || abort "$(gettext "%s/tools directory not found.")" "$CLFS"
 plain "$(gettext "Found %s/tools directory: OK")" "$CLFS"
-[ -O $CLFS/tools ] || abort "$(gettext "%s/tools is not owned by user 'lfs'.")" "$CLFS"
+[ -O $CLFS/tools ] || abort "$(gettext "%s/tools is not owned by user 'clfs'.")" "$CLFS"
+
+[ -d $CLFS/cross-tools ] || abort "$(gettext "%s/cross-tools directory not found.")" "$CLFS"
+plain "$(gettext "Found %s/cross-tools directory: OK")" "$CLFS"
+[ -O $CLFS/cross-tools ] || abort "$(gettext "%s/cross-tools is not owned by user 'clfs'.")" "$CLFS"
 
 if [ ! -d $HOME/logs ]; then
     plain "$(gettext "$HOME/logs directory not found. Creating it...")"
@@ -87,7 +90,7 @@ echo
 msg "$(gettext "Downloading sources...")"
 echo
 
-for i in `cat scripts/wget_nutyx_list|grep -v ^#|sed "s@  @|@"`
+for i in `cat scripts/wget_yaolinux_package|grep -v ^#|sed "s@  @|@"`
 do
 	FILE=`echo $i|cut -d "|" -f2`
 	MD5SUM=`echo $i|cut -d "|" -f1`
