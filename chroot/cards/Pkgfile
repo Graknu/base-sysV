@@ -14,6 +14,6 @@ ln -sv pkgadd /tools/bin/pkgrm
 
 sed -i "s/profile/noprofile/" /tools/bin/pkgmk
 
-mkdir -pv $LFS/var/lib/pkg/DB
-install -m644 src/pkgadd.conf $LFS/var/lib/pkg/pkgadd.conf
+mkdir -pv $CLFS/var/lib/pkg/DB
+install -m644 src/pkgadd.conf $CLFS/var/lib/pkg/pkgadd.conf
 }

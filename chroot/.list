@@ -1,6 +1,6 @@
 gmp
 mpfr
-mpx
+mpc
 isl
 zlib
 binutils
@@ -23,7 +23,7 @@ sed
 tar
 texinfo
 util-linux
-xim
+vim
 xz
 libarchive
 cards
