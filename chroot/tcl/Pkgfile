@@ -13,6 +13,4 @@ CC="gcc ${BUILD64}" ./configure \
 make
 make install
 make install-private-headers
-make install-private-headers
-
 }
