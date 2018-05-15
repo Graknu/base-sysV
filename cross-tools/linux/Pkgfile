@@ -4,7 +4,7 @@ source=(http://yaolinux.techozor.fr/sources-base/linux-4.9.tar.xz
 	http://yaolinux.techozor.fr/sources-base/patch-$version.xz)
 
 build() {
-cd linux-$version
+cd linux-4.9
 xzcat ../patch-4.9.21.xz | patch -Np1 -i -
 make mrproper
 make ARCH=x86_64 headers_check
