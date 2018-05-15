@@ -1,0 +1,24 @@
+version=2.28
+source=(http://yaolinux.techozor.fr/sources-base/binutils-$version.tar.bz2)
+
+build() {
+cd binutils-$version
+mkdir -v ../binutils-build
+cd ../binutils-build
+AR=ar AS=as \
+../binutils-2.28/configure \
+    --prefix=/cross-tools \
+    --host=${CLFS_HOST} \
+    --target=${CLFS_TARGET} \
+    --with-sysroot=${CLFS} \
+    --with-lib-path=/tools/lib:/tools/lib64 \
+    --disable-nls \
+    --disable-static \
+    --enable-64-bit-bfd \
+    --enable-gold=yes \
+    --enable-plugins \
+    --enable-threads \
+    --disable-werror
+make
+make install
+}

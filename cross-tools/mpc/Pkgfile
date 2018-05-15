@@ -1,15 +1,9 @@
-description="MPC is a C library for the arithmetic of complex numbers with arbitrarily high precision and 
-correct rounding of the result."
-packager="Hugo <graknu@techozor.fr>"
-
-name=mpc
 version=1.0.3
-release=1
 
-source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.gz)
+source=(http://yaolinux.techozor.fr/sources-base/mpc-$version.tar.gz)
 
 build() {
-cd $name-$version
+cd mpc-$version
 LDFLAGS="-Wl,-rpath,/cross-tools/lib" \
 ./configure \
     --prefix=/cross-tools \

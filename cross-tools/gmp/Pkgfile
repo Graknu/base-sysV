@@ -1,15 +1,9 @@
-description="GMP is a library for arithmetic on arbitrary precision integers, rational numbers, and 
-floating-point numbers."
-packager="Hugo <graknu@techozor.fr>"
-
-name=gmp
 version=6.1.2
-release=1
 
-source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
+source=(http://yaolinux.techozor.fr/sources-base/gmp-$version.tar.xz)
 
 build() {
-cd $name-$version
+cd gmp-$version
 ./configure \
     --prefix=/cross-tools \
     --enable-cxx \

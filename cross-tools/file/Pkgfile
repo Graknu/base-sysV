@@ -1,15 +1,9 @@
-description="The File package contains a utility for determining the type of a given file or files."
-url="ftp://ftp.fu-berlin.de/unix/tools/file/"
-packager="Hugo <graknu@techozor.fr>"
-
-name=file
 version=5.31
-release=1
 
-source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.gz)
+source=(http://yaolinux.techozor.fr/sources-base/file-$version.tar.gz)
 
 build() {
-cd $name-$version
+cd file-$version
 ./configure \
     --prefix=/cross-tools
 make

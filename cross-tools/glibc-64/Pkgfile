@@ -1,0 +1,23 @@
+version=2.25
+source=(http://yaolinux.techozor.fr/sources-base/glibc-$version.tar.xz)
+
+build() {
+cd glibc-$version
+mkdir -v ../glibc-build
+cd ../glibc-build
+echo "libc_cv_slibdir=/tools/lib64" >> config.cache
+BUILD_CC="gcc" CC="${CLFS_TARGET}-gcc ${BUILD64}" \
+AR="${CLFS_TARGET}-ar" RANLIB="${CLFS_TARGET}-ranlib" \
+../glibc-2.25/configure \
+    --prefix=/tools \
+    --host=${CLFS_TARGET} \
+    --build=${CLFS_HOST} \
+    --libdir=/tools/lib64 \
+    --enable-kernel=3.12.0 \
+    --with-binutils=/cross-tools/bin \
+    --with-headers=/tools/include \
+    --enable-obsolete-rpc \
+    --cache-file=config.cache
+make
+make install
+}

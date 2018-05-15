@@ -1,0 +1,14 @@
+version=0.17.1
+
+source=(http://yaolinux.techozor.fr/sources-base/isl-$version.tar.xz)
+
+build() {
+cd isl-$version
+LDFLAGS="-Wl,-rpath,/cross-tools/lib" \
+./configure \
+    --prefix=/cross-tools \
+    --disable-static \
+    --with-gmp-prefix=/cross-tools
+make
+make install
+}
