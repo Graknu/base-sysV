@@ -1,0 +1,19 @@
+description="Pkg-config-lite is a tool to help you insert the correct compiler options on the command 
+line when compiling applications and libraries."
+packager="Hugo <graknu@techozor.fr>"
+
+name=pkg-config-lite
+version=0.28-1
+release=1
+
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.gz)
+
+build() {
+cd $name-$version
+./configure \
+    --prefix=/cross-tools \
+    --host=${CLFS_TARGET} \
+    --with-pc-path=/tools/lib64/pkgconfig:/tools/share/pkgconfig
+make
+make install
+}

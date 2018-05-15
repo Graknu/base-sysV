@@ -1,0 +1,22 @@
+description="The MPFR library is a C library for multiple-precision floating-point computations with 
+correct rounding."
+packager="Hugo <graknu@techozor.fr>"
+
+name=mpfr
+version=3.1.5
+release=1
+
+source=(http://yaolinux.techozor.fr/sources-base/mpfr-3.1.5.tar.xz
+	http://yaolinux.techozor.fr/sources-base/mpfr-3.1.5-fixes-1.patch)
+
+build() {
+cd $name-$version
+patch -Np1 -i ../mpfr-3.1.5-fixes-1.patch
+LDFLAGS="-Wl,-rpath,/cross-tools/lib" \
+./configure \
+    --prefix=/cross-tools \
+    --disable-static \
+    --with-gmp=/cross-tools
+make
+make install
+}

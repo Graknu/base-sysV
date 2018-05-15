@@ -1,0 +1,19 @@
+description="Libraries for terminal-independent handling of character screens."
+url="http://www.gnu.org/software/ncurses/ncurses.html"
+packager="Hugo <graknu@techozor.fr>"
+
+name=ncurses
+version=6.0
+release=1
+
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.gz)
+
+build() {
+cd $name-$version
+AWK=gawk ./configure \
+    --prefix=/cross-tools \
+    --without-debug
+make -C include
+make -C progs tic
+install -v -m755 progs/tic /cross-tools/bin
+}

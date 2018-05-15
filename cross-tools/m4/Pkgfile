@@ -1,0 +1,17 @@
+description="The M4 package contains a macro processor."
+url="http://www.seindal.dk/rene/gnu/"
+packager="Hugo <graknu@techozor.fr>"
+
+name=m4
+version=1.4.18
+release=1
+
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
+
+build() {
+cd $name-$version
+./configure \
+    --prefix=/cross-tools
+make
+make install
+}
