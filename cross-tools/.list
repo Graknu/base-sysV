@@ -1,0 +1,14 @@
+file
+linux
+m4
+ncurses
+pkg-config-lite
+gmp
+mpfr
+mpc
+isl
+binutils
+gcc_static
+glibc-32
+glibc-64
+gcc_finale
