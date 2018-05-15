@@ -2,6 +2,7 @@ name=zlib
 version=1.2.11
 source=(http://yaolinux.techozor.fr/sources-base/zlib-$version.tar.xz)
 build() {
+cd zlib-$version
 ./configure \
     --prefix=/tools \
     --libdir=/tools/lib64
