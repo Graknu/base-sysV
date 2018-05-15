@@ -1,9 +1,9 @@
-version=5.2.3
+version=1.0.3
 
-source=(http://yaolinux.techozor.fr/sources-base/xz-$version.tar.xz)
+source=(http://yaolinux.techozor.fr/sources-base/mpc-$version.tar.gz)
 
 build() {
-cd xz-$version
+cd mpc-$version
 ./configure \
     --prefix=/tools \
     --build=${CLFS_HOST} \

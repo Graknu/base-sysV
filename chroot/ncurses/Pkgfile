@@ -1,17 +1,19 @@
-version=6.1
-source=(ftp://invisible-island.net/ncurses/ncurses-$version.tar.gz)
+version=6.0
 
-build()
-{
+source=(http://yaolinux.techozor.fr/sources-base/ncurses-$version.tar.gz)
+
+build() {
 cd ncurses-$version
-
-sed -i s/mawk// configure
-
-./configure --prefix=/tools --with-shared \
- --without-debug --without-ada --enable-widec  \
- --enable-overwrite
-	
+./configure \
+    --prefix=/tools \
+    --with-shared \
+    --build=${CLFS_HOST} \
+    --host=${CLFS_TARGET} \
+    --without-debug \
+    --without-ada \
+    --enable-overwrite \
+    --with-build-cc=gcc \
+    --libdir=/tools/lib64
 make
-	
 make install
 }

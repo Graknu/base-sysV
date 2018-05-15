@@ -1,9 +1,10 @@
 name=zlib
 version=1.2.11
-source=(http://www.zlib.net/zlib-$version.tar.xz)
+source=(http://yaolinux.techozor.fr/sources-base/zlib-$version.tar.xz)
 build() {
-cd $name-$version
-./configure --prefix=/tools
+./configure \
+    --prefix=/tools \
+    --libdir=/tools/lib64
 make
 make install
 }

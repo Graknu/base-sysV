@@ -1,15 +1,13 @@
 version=4.2.1
-source=(http://ftp.gnu.org/gnu/make/make-$version.tar.bz2)
 
-build()
-{
-cd  make-$version
+source=(http://yaolinux.techozor.fr/sources-base/make-$version.tar.bz2)
 
-sed -i '211,217 d; 219,229 d; 232 d' glob/glob.c
-
-./configure --prefix=/tools --without-guile
-
+build() {
+cd make-$version
+./configure \
+    --prefix=/tools \
+    --build=${CLFS_HOST} \
+    --host=${CLFS_TARGET}
 make
-
 make install
 }

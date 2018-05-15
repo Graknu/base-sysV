@@ -1,16 +1,14 @@
-version=6.5
-source=(\
-http://ftp.gnu.org/gnu/texinfo/texinfo-$version.tar.xz)
+version=6.3
 
-build()
-{
-cd texinfo-*
+source=(http://yaolinux.techozor.fr/sources-base/texinfo-$version.tar.xz)
 
-./configure --prefix=/tools
-
+build() {
+cd texinfo-$version
+PERL=/usr/bin/perl \
+./configure \
+    --prefix=/tools \
+    --build=${CLFS_HOST} \
+    --host=${CLFS_TARGET}
 make
-
 make install
-	
-
 }

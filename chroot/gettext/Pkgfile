@@ -1,16 +1,17 @@
 version=0.19.8.1
-source=(http://ftp.gnu.org/gnu/gettext/gettext-$version.tar.xz)
-build()
-{
-cd gettext-$version/gettext-tools
 
-EMACS="no" ./configure --prefix=/tools --disable-shared
+source=(http://yaolinux.techozor.fr/sources-base/gettext-$version.tar.xz)
 
+build() {
+cd gettext-$version
+EMACS="no" \
+./configure \
+    --prefix=/tools \
+    --build=${CLFS_HOST} \
+    --host=${CLFS_TARGET} \
+    --disable-shared
 make -C gnulib-lib
 make -C intl pluralx.c
-make -C src msgfmt
-make -C src msgmerge
-make -C src xgettext
-
+make -C src msgfmt msgmerge xgettext
 cp -v src/{msgfmt,msgmerge,xgettext} /tools/bin
 }

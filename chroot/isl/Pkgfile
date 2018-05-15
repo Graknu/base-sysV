@@ -1,9 +1,9 @@
-version=5.2.3
+version=0.17.1
 
-source=(http://yaolinux.techozor.fr/sources-base/xz-$version.tar.xz)
+source=(http://yaolinux.techozor.fr/sources-base/isl-$version.tar.xz)
 
 build() {
-cd xz-$version
+cd isl-$version
 ./configure \
     --prefix=/tools \
     --build=${CLFS_HOST} \

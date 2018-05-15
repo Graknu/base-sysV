@@ -1,14 +1,13 @@
 version=2.7.5
-source=(http://ftp.gnu.org/gnu/patch/patch-$version.tar.xz)
 
-build()
-{
+source=(http://yaolinux.techozor.fr/sources-base/patch-$version.tar.xz)
+
+build() {
 cd patch-$version
-
-./configure --prefix=/tools
-
+./configure \
+    --prefix=/tools \
+    --build=${CLFS_HOST} \
+    --host=${CLFS_TARGET}
 make
-
-
 make install
 }

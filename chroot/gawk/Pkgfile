@@ -1,11 +1,13 @@
-version=4.2.1
-source=(http://ftp.gnu.org/gnu/gawk/gawk-$version.tar.xz)
-build()
-{
+version=4.1.4
+
+source=(http://yaolinux.techozor.fr/sources-base/gawk-$version.tar.xz)
+
+build() {
 cd gawk-$version
-
- ./configure --prefix=/tools
+./configure \
+    --prefix=/tools \
+    --build=${CLFS_HOST} \
+    --host=${CLFS_TARGET}
 make
-
 make install
 }

@@ -1,13 +1,14 @@
-version=5.33
-source=(ftp://ftp.astron.com/pub/file/file-$version.tar.gz)
+version=5.31
 
-build()
-{
+source=(http://yaolinux.techozor.fr/sources-base/file-$version.tar.gz)
+
+build() {
 cd file-$version
-
-./configure --prefix=/tools
-
+./configure \
+    --prefix=/tools \
+    --libdir=/tools/lib64 \
+    --build=${CLFS_HOST} \
+    --host=${CLFS_TARGET}
 make
-
 make install
 }

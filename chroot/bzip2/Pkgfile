@@ -1,11 +1,12 @@
 version=1.0.6
-source=(http://www.bzip.org/$version/bzip2-$version.tar.gz)
 
-build()
-{
+source=(http://yaolinux.techozor.fr/sources-base/bzip2-$version.tar.gz)
+
+build() {
 cd bzip2-$version
-
-make
-
+cp -v Makefile{,.orig}
+sed -e 's@^\(all:.*\) test@\1@g' \
+    -e 's@/lib\(/\| \|$\)@/lib64\1@g' Makefile.orig > Makefile
+make CC="${CC}" AR="${AR}" RANLIB="${RANLIB}"
 make PREFIX=/tools install
 }
