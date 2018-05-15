@@ -41,7 +41,7 @@ do
     if [ "$BUILD" == "yes" ]; then
         cd $DIR
         case $PASS in
-            cross)
+            cross-tools)
                 PKGMK="pkgmk.passes"
                 $PKGMK -cf ../../../bin/pkgmk.conf.passes -kw 2>&1|tee ${LOG}/$NAME.log || exit 1;;
             tools)
