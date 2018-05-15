@@ -23,7 +23,7 @@ sed
 tar
 texinfo
 util-linux
-xim
+vim
 xz
 libarchive
 cards
