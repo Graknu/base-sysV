@@ -5,7 +5,7 @@ trap "interrupted" SIGHUP SIGINT SIGQUIT SIGTERM
 color_mesg
 
 version="development"
-[ -z "${URL}" ] && URL="http://rems.techozor.fr/isonutyx/"
+[ -z "${URL}" ] && URL="http://yaolinux.techozor.fr/sources-base/"
 echo
 msg "$(gettext "This script will run some pre-checks and")"
 msg "$(gettext "download missing sources...")"
@@ -19,48 +19,55 @@ read a
 [ -f ~/.bash_profile ] || abort "$(gettext ".bash_profile file not found.")"
 plain "$(gettext "Found .bash_profile file: OK")"
 
-[ -n $LFS ] || abort "$(gettext "LFS path is not set.")"
-plain "$(gettext "LFS path is set: %s: OK")" "$LFS"
+[ -n $CLFS ] || abort "$(gettext "CLFS path is not set.")"
+plain "$(gettext "CLFS path is set: %s: OK")" "$CLFS"
 
-[ -n $LFS_TARGET ] || abort "$(gettext "LFS_TARGET is not set.")"
-plain "$(gettext "LFS_TARGET is set: %s: OK")" "$LFS_TARGET"
+[ -n $CLFS_TARGET ] || abort "$(gettext "CLFS_TARGET is not set.")"
+plain "$(gettext "CLFS_TARGET is set: %s: OK")" "$CLFS_TARGET"
 
 # Checking the user
-[ "$(whoami)" == "lfs" ] || abort "$(gettext "This script MUST be run as 'lfs' user and not as: <%s>")" "$(whoami)"
-plain "$(gettext "User 'lfs': OK")"
+[ "$(whoami)" == "clfs" ] || abort "$(gettext "This script MUST be run as 'clfs' user and not as: <%s>")" 
+"$(whoami)"
+plain "$(gettext "User 'clfs': OK")"
 
 # Checking Directories
-[ -d $LFS ] || abort "$(gettext "%s directory not found.")" "$LFS"
-plain "$(gettext "Found %s directory: OK")" "$LFS"
-[ -O $LFS ] || abort "$(gettext "%s is not owned by user 'lfs'.")" "$LFS"
+[ -d $CLFS ] || abort "$(gettext "%s directory not found.")" "$CLFS"
+plain "$(gettext "Found %s directory: OK")" "$CLFS"
+[ -O $CLFS ] || abort "$(gettext "%s is not owned by user 'lfs'.")" "$CLFS"
 
-[ -d $LFS/sources ] || abort "$(gettext "%s/sources directory not found.")" "$LFS"
-plain "$(gettext "Found %s/sources directory: OK")" "$LFS"
-[ -O $LFS/sources ] || abort "$(gettext "%s/sources is not owned by user 'lfs'.")" "$LFS"
+[ -d $CLFS/sources ] || abort "$(gettext "%s/sources directory not found.")" "$CLFS"
+plain "$(gettext "Found %s/sources directory: OK")" "$CLFS"
+[ -O $CLFS/sources ] || abort "$(gettext "%s/sources is not owned by user 'lfs'.")" "$CLFS"
 
-[ -d $LFS/tools ] || abort "$(gettext "%s/tools directory not found.")" "$LFS"
-plain "$(gettext "Found %s/tools directory: OK")" "$LFS"
-[ -O $LFS/tools ] || abort "$(gettext "%s/tools is not owned by user 'lfs'.")" "$LFS"
+[ -d $CLFS/tools ] || abort "$(gettext "%s/tools directory not found.")" "$CLFS"
+plain "$(gettext "Found %s/tools directory: OK")" "$CLFS"
+[ -O $CLFS/tools ] || abort "$(gettext "%s/tools is not owned by user 'lfs'.")" "$CLFS"
 
 if [ ! -d $HOME/logs ]; then
     plain "$(gettext "$HOME/logs directory not found. Creating it...")"
     rm -rf $HOME/logs
     mkdir -p $HOME/logs
 fi
-plain "$(gettext "Directory $HOME/logs: OK")" "$LFS"
+plain "$(gettext "Directory $HOME/logs: OK")" "$CLFS"
 
 # Checking Links
 if [ ! -L /sources ]; then
     error "$(gettext "Missing symbolic link: /sources")"
-    abort "$(gettext "Run as root: %s")" "ln -sv $LFS/sources /sources"
+    abort "$(gettext "Run as root: %s")" "ln -sv $CLFS/sources /sources"
 fi
 plain "$(gettext "Link /sources: OK")"
 
 if [ ! -L /tools ]; then
     error "$(gettext "Missing symbolic link: /tools")"
-    abort "$(gettext "Run as root: %s")" "ln -sv $LFS/tools /tools"
+    abort "$(gettext "Run as root: %s")" "ln -sv $CLFS/tools /tools"
 fi
 plain "$(gettext "Link /tools: OK")"
+
+if [ ! -L /cross-tools ]; then
+    error "$(gettext "Missing symbolic link: /cross-tools")"
+    abort "$(gettext "Run as root: %s")" "ln -sv $CLFS/cross-tools /cross-tools"
+fi
+plain "$(gettext "Link /cross-tools: OK")"
 
 if [ ! -L $HOME/bin ]; then
     plain "$(gettext "Link $HOME/bin not found. Creating it...")"
@@ -75,7 +82,7 @@ fi
 plain "$(gettext "Link $HOME/config: OK")"
 
 # Diverse
-[ -f $LFS/sources/.md5sums ] && rm $LFS/sources/.md5sums
+[ -f $CLFS/sources/.md5sums ] && rm $CLFS/sources/.md5sums
 echo
 msg "$(gettext "Downloading sources...")"
 echo
@@ -84,19 +91,19 @@ for i in `cat scripts/wget_nutyx_list|grep -v ^#|sed "s@  @|@"`
 do
 	FILE=`echo $i|cut -d "|" -f2`
 	MD5SUM=`echo $i|cut -d "|" -f1`
-	if [ ! -f $LFS/sources/$FILE ]; then
-		wget --no-check-certificate $URL/sources/$FILE -P $LFS/sources
+	if [ ! -f $CLFS/sources/$FILE ]; then
+		wget --no-check-certificate $URL/sources/$FILE -P $CLFS/sources
 	fi
 	if [ "$MD5SUM" != "skip" ]; then
-		echo "$MD5SUM  $FILE" >> $LFS/sources/.md5sums
+		echo "$MD5SUM  $FILE" >> $CLFS/sources/.md5sums
 	fi
 done
-if [ -f $LFS/sources/.md5sums ]; then
-	cd  $LFS/sources
+if [ -f $CLFS/sources/.md5sums ]; then
+	cd  $CLFS/sources
 	md5sum -c .md5sums || exit 1
 	cd -
 else
-    abort "$(gettext "%s/sources/md5sums not found - impossible to verify sources.")" "$LFS"
+    abort "$(gettext "%s/sources/md5sums not found - impossible to verify sources.")" "$CLFS"
 fi
 echo ""
 msg "$(gettext "=====> Successfull configured")"
