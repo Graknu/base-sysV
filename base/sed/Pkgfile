@@ -1,0 +1,23 @@
+description="GNU stream editor"
+packager="Hugo <graknu@techozor.fr>"
+
+name=sed
+version=4.4
+
+
+source=(http://yaolinux.techozor.fr/sources-base/sed-4.4.tar.xz)
+
+
+build() {
+cd $name-$version
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr \
+    --bindir=/bin \
+    --docdir=/usr/share/doc/sed-4.4
+make
+make htlk
+make check
+make DESTDIR=$PKG install
+make DESTDIR=$PKG install-html-am
+}
+

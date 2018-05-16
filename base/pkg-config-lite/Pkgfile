@@ -1,0 +1,27 @@
+description="A system for managing library compile/link flags	"
+packager="Hugo <graknu@techozor.fr>"
+
+name=pkg-config-lite
+version=0.28-1
+
+
+source=(http://yaolinux.techozor.fr/sources-base/pkg-config-lite-0.28-1.tar.gz)
+
+
+build() {
+cd $name-$version
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr \
+    --docdir=/usr/share/doc/pkg-config-0.28-1 \
+    --with-pc-path=/usr/share/pkgconfig
+make
+make check
+make DESTDIR=$PKG install
+export PKG_CONFIG_PATH32="/usr/lib/pkgconfig"
+export PKG_CONFIG_PATH64="/usr/lib64/pkgconfig"
+cat >> $PKG/root/.bash_profile << EOF
+export PKG_CONFIG_PATH32="${PKG_CONFIG_PATH32}"
+export PKG_CONFIG_PATH64="${PKG_CONFIG_PATH64}"
+EOF
+}
+

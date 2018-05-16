@@ -1,0 +1,28 @@
+description="Extended attribute support library for ACL support (32-bit)"
+packager="Hugo <graknu@techozor.fr>"
+
+name=lib32-attr
+version=2.4.47
+
+
+source=(http://yaolinux.techozor.fr/sources-base/attr-2.4.47.src.tar.gz)
+
+
+build() {
+cd attr-$version
+sed -i -e "/SUBDIRS/s|man[25]||g" man/Makefile
+sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in
+CC="gcc ${BUILD32}" \
+./configure \
+    --prefix=/usr \
+    --libdir=/lib \
+    --libexecdir=/usr/lib
+make
+make -j1 tests root-tests
+make DESTDIR=$PKG  install install-dev install-lib
+ln -sfv ../../lib/$(readlink $PKG/lib/libattr.so) $PKG/usr/lib/libattr.so
+rm -v $PKG/lib/libattr.so
+chmod 755 -v $PKG/lib/libattr.so.1.1.0
+rm -rf $PKG/usr/{bin,include,share}
+}
+

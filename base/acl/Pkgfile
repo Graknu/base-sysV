@@ -1,0 +1,27 @@
+description="Access control list utilities, libraries and headers"
+packager="Hugo <graknu@techozor.fr>"
+
+name=acl
+version=2.2.52
+
+
+source=(http://yaolinux.techozor.fr/sources-base/acl-2.2.52.src.tar.gz)
+
+
+build() {
+cd $name-$version
+sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in
+sed -i "s:| sed.*::g" test/{sbits-restore,cp,misc}.test
+CC="gcc ${BUILD64}" \
+./configure \
+    --prefix=/usr \
+    --libdir=/lib64 \
+    --libexecdir=/usr/lib64
+make
+make test
+make DESTDIR=$PKG install install-dev install-lib
+ln -sfv ../../lib64/$(readlink $PKG/lib64/libacl.so) 
+$PKG/usr/lib64/libacl.so
+rm -v $PKG/lib64/libacl.so
+}
+

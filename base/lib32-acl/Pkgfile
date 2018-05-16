@@ -1,0 +1,28 @@
+description="Access control list libraries (32-bit)"
+packager="Hugo <graknu@techozor.fr>"
+
+name=lib32-acl
+version=2.2.52
+
+
+source=(http://yaolinux.techozor.fr/sources-base/acl-2.2.52.src.tar.gz)
+
+
+build() {
+cd acl-$version
+sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in
+sed -i "s:| sed.*::g" test/{sbits-restore,cp,misc}.test
+CC="gcc ${BUILD32}" \
+./configure \
+    --prefix=/usr \
+    --libdir=/lib \
+    --libexecdir=/usr/lib
+make
+make tests
+make DESTDIR=$PKG install install-dev install-lib
+ln -sfv ../../lib/$(readlink $PKG/lib/libacl.so) $PKG/usr/lib/libacl.so
+rm -v $PKG/lib/libacl.so
+chmod 755 -v $PKG/lib/libacl.so.1.1.0
+rm -rf $PKG/usr/{bin,include,share}
+}
+
