@@ -20,6 +20,7 @@ LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64 ${BUILD64}" \
 make
 make check
 make DESTDIR=$PKG install
+mkdir $PKG/lib64
 mv -v $PKG/usr/lib64/libz.so.* $PKG/lib64
 ln -sfv ../../lib64/$(readlink $PKG/usr/lib64/libz.so) $PKG/usr/lib64/libz.so
 mkdir -pv $PKG/usr/share/doc/zlib-1.2.11
