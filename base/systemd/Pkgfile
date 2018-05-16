@@ -1,0 +1,71 @@
+version=233
+
+source=(http://www.linuxfromscratch.org/~krejzi/systemd/systemd-233.tar.xz)
+
+build() {
+cd systemd-$version
+sed -i '/virt-install-hook /d' Makefile.in
+sed -i '/timesyncd.conf/d' src/timesync/timesyncd.conf.in
+
+cat > config.cache << "EOF"
+KILL="/bin/kill"
+MOUNT_PATH="/bin/mount"
+UMOUNT_PATH="/bin/umount"
+SULOGIN="/sbin/sulogin"
+XSLTPROC="/usr/bin/xsltproc"
+cc_cv_LDFLAGS__Wl__fuse_ld_gold=no
+EOF
+
+CC="gcc ${BUILD64}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    --libexecdir=/usr/lib64 \
+    --docdir=/usr/share/doc/systemd-233 \
+    --with-rootprefix="" \
+    --with-rootlibdir=/lib64 \
+    --enable-split-usr \
+    --disable-firstboot \
+    --disable-ldconfig \
+    --disable-lto \
+    --disable-sysusers \
+    --disable-networkd \
+    --disable-resolved \
+    --with-default-dnssec=no \
+    --with-kbd-loadkeys=/bin/loadkeys \
+    --with-kbd-setfont=/bin/setfont \
+    --with-dbuspolicydir=/etc/dbus-1/system.d \
+    --with-dbussessionservicedir=/usr/share/dbus-1/services \
+    --with-dbussystemservicedir=/usr/share/dbus-1/system-services \
+    --config-cache
+make
+sed -e 's@test/udev-test.pl @@'  \
+        -e 's@test-copy$(EXEEXT) @@' \
+        -i Makefile.in
+sed -i "s:minix:ext4:g" src/test/test-path-util.c
+make check
+make DESTDIR=$PKG install
+install -v -m644 man/*.html $PKG/usr/share/doc/systemd-233
+rm -rfv $PKG/usr/lib/rpm
+for tool in runlevel reboot shutdown poweroff halt telinit; do
+  ln -sfv ../bin/systemctl $PKG/sbin/$tool
+done
+
+ln -sfv ../lib/systemd/systemd $PKG/sbin/init
+
+cat > /etc/os-release << "EOF"
+# Begin /etc/os-release
+
+NAME=Yaolinux
+ID=Hello
+
+PRETTY_NAME=Yaolinux-Hello
+ANSI_COLOR=0;33
+
+VERSION=GIT-20170803
+VERSION_ID=20170803
+
+# End /etc/os-release
+EOF
+}

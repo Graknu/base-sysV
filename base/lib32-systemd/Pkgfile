@@ -1,0 +1,34 @@
+version=233
+
+source=(http://www.linuxfromscratch.org/~krejzi/systemd/systemd-233.tar.xz)
+
+build() {
+cd systemd-$version
+CC="gcc ${BUILD32}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH32}" \
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    --libexecdir=/usr/lib \
+    --docdir=/usr/share/doc/systemd-233 \
+    --with-rootprefix="" \
+    --with-rootlibdir=/lib \
+    --enable-split-usr \
+    --disable-firstboot \
+    --disable-ldconfig \
+    --disable-lto \
+    --disable-sysusers \
+    --with-default-dnssec=no \
+    --with-kbd-loadkeys=/bin/loadkeys \
+    --with-kbd-setfont=/bin/setfont \
+    --with-dbuspolicydir=/etc/dbus-1/system.d \
+    --with-dbussessionservicedir=/usr/share/dbus-1/services \
+    --with-dbussystemservicedir=/usr/share/dbus-1/system-services \
+    --config-cache
+
+make
+
+make DESTDIR=$PKG install
+  rm -rf "${pkgdir}"/{etc,var}
+  rm -rf "${pkgdir}"/usr/{bin,include,share}
+}
