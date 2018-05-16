@@ -20,8 +20,8 @@ make
 make check
 make DESTDIR=$PKG install
 
-mkdir -pv /usr/share/gdb/auto-load/usr/lib
-mv -v /usr/lib/libisl*gdb.py /usr/share/gdb/auto-load/usr/lib
+mkdir -pv $PKG/usr/share/gdb/auto-load/usr/lib
+mv -v $PKG/usr/lib/libisl*gdb.py $PKG/usr/share/gdb/auto-load/usr/lib
 
 rm -rf $PKG/usr/{bin,include,share}
 }
