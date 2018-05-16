@@ -1,0 +1,13 @@
+version=2.44
+
+source=(http://search.cpan.org/CPAN/authors/id/T/TO/TODDR/XML-Parser-2.44.tar.gz)
+
+build() {
+cd XML-Parser-$version
+USE_ARCH=32 perl Makefile.PL
+
+make
+
+make DESTDIR=$PKG install
+
+}

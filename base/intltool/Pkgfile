@@ -1,0 +1,15 @@
+version=0.51.0
+
+source=()
+
+build() {
+cd intltool-$version
+patch -Np1 -i ../intltool-0.51.0-perl-5.22-compatibility.patch
+./configure \
+    --prefix=/usr
+
+make
+
+make DESTDIR=$PKG install
+
+}
