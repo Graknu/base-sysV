@@ -1,0 +1,26 @@
+description="Minimalist command line interface to MPD"
+url="https://www.musicpd.org/clients/mpc/"
+packager="Hugo <graknu@techozor.fr>"
+
+name=mpc
+version=1.0.3
+
+
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.gz)
+
+
+build() {
+cd $name-$version
+CC="gcc -isystem /usr/include ${BUILD64}" \
+LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64 ${BUILD64}" \
+./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib64 \
+    --docdir=/usr/share/doc/mpc-1.0.3
+make
+make html
+make check
+make DESTDIR=$PKG install
+make DESTDIR=$PKG install-html
+}
+
