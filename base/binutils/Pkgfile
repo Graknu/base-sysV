@@ -1,0 +1,32 @@
+description="A set of programs to assemble and manipulate binary and object files"
+url="http://www.gnu.org/software/binutils/"
+packager="Hugo <graknu@techozor.fr>"
+
+name=binutils
+version=2.28
+
+
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.bz2)
+
+
+build() {
+cd $name-$version
+expect -c "spawn ls"
+mkdir -v ../binutils-build
+cd ../binutils-build
+CC="gcc -isystem /usr/include ${BUILD64}" \
+LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64:/usr/lib:/lib ${BUILD64}" \
+../binutils-2.28/configure \
+    --prefix=/usr \
+    --enable-shared \
+    --enable-64-bit-bfd \
+    --libdir=/usr/lib64 \
+    --enable-gold=yes \
+    --enable-plugins \
+    --with-system-zlib \
+    --enable-threads
+make tooldir=/usr
+make check
+make tooldir=/usr DESTDIR=$PKG install
+}
+
