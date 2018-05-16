@@ -1,0 +1,27 @@
+description="A free library for arbitrary precision arithmetic (32-bit)"
+url="http://gmplib.org/"
+packager="Hugo <graknu@techozor.fr>"
+
+name=lib32-gmp
+version=6.1.2
+
+
+source=(http://yaolinux.techozor.fr/sources-base/gmp-$version.tar.xz)
+
+
+build() {
+cd gmp-$version
+CC="gcc -isystem /usr/include ${BUILD32}" \
+CXX="g++ -isystem /usr/include ${BUILD32}" \
+LDFLAGS="-Wl,-rpath-link,/usr/lib:/lib ${BUILD32}" \
+  ABI=32 ./configure \
+    --prefix=/usr \
+    --enable-cxx
+make
+make check
+make DESTDIR=$PKG install
+
+mv -v $PKG/usr/include/gmp{,-32}.h
+rm -rf $PKG/usr/{include,share,bin}
+}
+

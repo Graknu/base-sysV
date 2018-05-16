@@ -1,0 +1,28 @@
+description="Multiple-precision floating-point library"
+url="http://www.mpfr.org/"
+packager="Hugo <graknu@techozor.fr>"
+
+name=mpfr
+version=3.1.5
+
+
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz
+	http://yaolinux.techozor.fr/sources-base/$name-$version-fixes-1.patch)
+
+
+build() {
+cd $name-$version
+patch -Np1 -i ../$name-$version-fixes-1.patch
+CC="gcc -isystem /usr/include ${BUILD64}" \
+    LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64 ${BUILD64}" \
+./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib64 \
+    --docdir=/usr/share/doc/mpfr-3.1.5
+make
+make html
+make check
+make DESTDIR=$PKG install
+make DESTDIR=$PKG install-html
+}
+

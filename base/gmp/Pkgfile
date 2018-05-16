@@ -1,0 +1,46 @@
+description="A free library for arbitrary precision arithmetic"
+url="http://gmplib.org"
+packager="Hugo <graknu@techozor.fr>"
+
+name=gmp
+version=6.1.2
+
+
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
+
+
+build() {
+cd $name-$version
+CC="gcc -isystem /usr/include ${BUILD64}" \
+CXX="g++ -isystem /usr/include ${BUILD64}" \
+LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64 ${BUILD64}" \
+./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib64 \
+    --enable-cxx \
+    --docdir=/usr/share/doc/gmp-6.1.2
+make
+make html
+make check
+make DESTDIR=$PKG install
+make install-html
+mv -v $PKG/usr/include/gmp{,-64}.h
+cat > $PKG/usr/include/gmp.h << "EOF"
+/* gmp.h - Stub Header  */
+#ifndef __STUB__GMP_H__
+#define __STUB__GMP_H__
+
+#if defined(__x86_64__) || \
+    defined(__sparc64__) || \
+    defined(__arch64__) || \
+    defined(__powerpc64__) || \
+    defined (__s390x__)
+# include "gmp-64.h"
+#else
+# include "gmp-32.h"
+#endif
+
+#endif /* __STUB__GMP_H__ */
+EOF
+}
+
