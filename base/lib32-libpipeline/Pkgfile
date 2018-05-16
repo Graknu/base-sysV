@@ -1,3 +1,6 @@
+name=lib32-libpipeline
+description="a C library for manipulating pipelines of subprocesses in a flexible and convenient way"
+packager=rems
 version=1.4.1
 
 source=(http://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.4.1.tar.gz)
