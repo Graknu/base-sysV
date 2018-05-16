@@ -1,3 +1,6 @@
+name=expat
+description="An XML parser library"
+packager=rems
 version=2.2.0
 
 source=(http://downloads.sourceforge.net/expat/expat-2.2.0.tar.bz2)
