@@ -1,0 +1,22 @@
+version=2.29.2
+
+source=(http://www.kernel.org/pub/linux/utils/util-linux/v2.29/util-linux-2.29.2.tar.xz)
+
+build() {
+cd util-linux-$version
+CC="gcc ${BUILD64}" ./configure \
+ADJTIME_PATH=/var/lib/hwclock/adjtime \
+    --libdir=/lib64 \
+    --enable-write \
+    --disable-chfn-chsh \
+    --disable-login \
+    --disable-nologin \
+    --disable-su \
+    --disable-setpriv \
+    --disable-runuser \
+    --docdir=/usr/share/doc/util-linux-2.29.2 
+make
+
+make DESTDIR=$PKG install
+
+}

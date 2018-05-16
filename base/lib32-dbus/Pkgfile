@@ -1,0 +1,26 @@
+version=1.10.8
+
+source=(http://dbus.freedesktop.org/releases/dbus/dbus-1.10.18.tar.gz)
+
+build() {
+cd dbus-$version
+CC="gcc ${BUILD32}" USE_ARCH=32 PKG_CONFIG_PATH=${PKG_CONFIG_PATH32} \
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --libdir=/usr/lib \
+    --libexecdir=/usr/lib/dbus-1.0 \
+    --localstatedir=/var \
+    --with-systemdsystemunitdir=/lib/systemd/system \
+    --docdir=/usr/share/doc/dbus-1.10.18 \
+    SYSTEMD_LIBS="-L/lib -lsystemd"
+
+make
+
+make DESTDIR=$PKG install
+mkdir -pv $PKG/lib
+mv -v $PKG/usr/lib/libdbus-1.so.* $PKG/lib
+ln -sfv ../../lib/$(readlink $PKG/usr/lib/libdbus-1.so) $PKG/usr/lib/libdbus-1.so
+rm -r $PKG/usr/{bin,include,share}
+rm -r $PKG/{etc,var}
+}

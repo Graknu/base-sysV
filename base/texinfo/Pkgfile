@@ -1,0 +1,13 @@
+version=6.3
+
+source=(http://ftp.gnu.org/gnu/texinfo/texinfo-6.3.tar.xz)
+
+build() {
+cd texinfo-$version
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr
+make
+
+make DESTDIR=$PKG install
+make DESTDIR=$PKG TEXMF=/usr/share/texmf install-tex
+}

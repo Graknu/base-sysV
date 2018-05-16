@@ -1,0 +1,15 @@
+version=1.29
+
+source=(http://ftp.gnu.org/gnu/tar/tar-1.29.tar.xz)
+
+build() {
+cd tar-$version
+FORCE_UNSAFE_CONFIGURE=1 CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr \
+    --bindir=/bin \
+    --libexecdir=/usr/sbin
+make
+
+make DESTDIR=$PKG install
+make -C doc DESTDIR=$PKG install-html docdir=/usr/share/doc/tar-1.29
+}
