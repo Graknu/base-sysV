@@ -1,0 +1,24 @@
+version=2.7.6.1
+
+source=(http://clfs.org/files/packages/git/man-db-2.7.6.1.tar.xz)
+
+build() {
+cd man-db-$version
+CC="gcc ${BUILD64}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
+./configure \
+    --prefix=/usr \
+    --libexecdir=/usr/lib64 \
+    --docdir=/usr/share/doc/man-db-2.7.6.1 \
+    --sysconfdir=/etc \
+    --libdir=/usr/lib64 \
+    --disable-setuid \
+    --enable-cache-owner=bin \
+    --with-browser=/usr/bin/lynx \
+    --with-vgrind=/usr/bin/vgrind \
+    --with-grap=/usr/bin/grap
+
+make
+
+make DESTDIR=$PKG install
+sed -i "s:man man:root root:g" $PKG/usr/lib/tmpfiles.d/man-db.conf
+}
