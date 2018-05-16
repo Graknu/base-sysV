@@ -1,0 +1,18 @@
+description="/etc/protocols and /etc/services provided by IANA"
+packager="Hugo <graknu@techozor.fr>"
+
+name=iana-etc
+version=2.30
+
+
+source=(http://yaolinux.techozor.fr/sources-base/iana-etc-2.30.tar.bz2
+	http://yaolinux.techozor.fr/sources-base/iana-etc-2.30-numbers_update-20140202-2.patch.xz)
+
+
+build() {
+cd $name-$version
+xzcat ../iana-etc-2.30-numbers_update-20140202-2.patch.xz | patch -Np1 -i -
+make
+make DESTDIR=$PKG install
+}
+

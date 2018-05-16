@@ -1,0 +1,33 @@
+description="Password and account management tool suite with support for 
+shadow files and PAM"
+packager="Hugo <graknu@techozor.fr>"
+
+name=shadow
+version=4.5
+
+
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
+
+
+build() {
+cd $name-$version
+sed -i src/Makefile.in \
+  -e 's/groups$(EXEEXT) //'
+find man -name Makefile.in -exec sed -i \
+  -e 's/man1\/groups\.1 //' \
+  -e 's/man3\/getspnam\.3 //' \
+  -e 's/man5\/passwd\.5 //' '{}' \;
+CC="gcc ${BUILD64}" ./configure \
+    --sysconfdir=/etc \
+    --with-group-name-max-length=32
+make
+make DESTDIR=$PKG install
+sed -i $PKG/etc/login.defs \
+    -e 's@#\(ENCRYPT_METHOD \).*@\1SHA512@' \
+    -e 's@/var/spool/mail@/var/mail@'
+mv -v $PKG/usr/bin/passwd $PKG/bin
+touch $PKG/var/log/{fail,last}log
+chgrp -v utmp $PKG/var/log/{fail,last}log
+chmod -v 664 $PKG/var/log/{fail,last}log
+}
+

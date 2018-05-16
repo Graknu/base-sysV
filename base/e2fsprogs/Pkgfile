@@ -1,0 +1,32 @@
+description="Ext2/3/4 filesystem libraries"
+packager="Hugo <graknu@techozor.fr>"
+
+name=e2fsprogs
+version=1.43.4
+
+
+source=(http://yaolinux.techozor.fr/sources-base/e2fsprogs-1.43.4.tar.xz)
+
+
+build() {
+cd $name-$version
+sed -i '/libdir.*=.*\/lib/s@/lib@/lib64@g' configure
+mkdir -v build
+cd build
+PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
+CC="gcc ${BUILD64}" \
+../configure \
+    --prefix=/usr \
+    --bindir=/bin \
+    --with-root-prefix="" \
+    --enable-elf-shlibs \
+    --disable-libblkid \
+    --disable-libuuid \
+    --disable-fsck \
+    --disable-uuidd
+make
+make check
+make DESTDIR=$PKG install
+make DESTDIR=$PKG install-libs
+}
+

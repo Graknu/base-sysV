@@ -1,0 +1,30 @@
+description="Utilities for monitoring your system and its processes (32-bit)"
+packager="Hugo <graknu@techozor.fr>"
+
+name=lib32-procps-ng
+version=3.3.12
+
+
+source=(http://yaolinux.techozor.fr/sources-base/procps-ng-$version.tar.xz)
+
+
+build() {
+cd procps-ng-$version
+CC="gcc ${BUILD32}" ./configure \
+    --prefix=/usr \
+    --exec-prefix= \
+    --libdir=/usr/lib \
+    --docdir=/usr/share/doc/procps-ng-3.3.12 \
+    --disable-kill
+sed -i -r 's|(pmap_initname)\\\$|\1|' testsuite/pmap.test/pmap.exp
+make
+make check
+make DESTDIR=$PKG install
+mv -v $PKG/usr/lib/libprocps.so.* $PKG/lib
+ln -sfv ../../lib/$(readlink $PKG/usr/lib/libprocps.so) 
+$PKG/usr/lib/libprocps.so
+
+rm -r $PKG/bin
+rm -r $PKG/usr/{bin,include,share}
+}
+

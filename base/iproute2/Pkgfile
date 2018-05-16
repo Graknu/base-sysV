@@ -1,0 +1,21 @@
+description="IP Routing Utilities"
+packager="Hugo <graknu@techozor.fr>"
+
+name=iproute2
+version=4.9.0
+
+
+source=(http://yaolinux.techozor.fr/sources-base/iproute2-4.9.0.tar.xz)
+
+
+build() {
+cd $name-$version
+sed -i '/ARPD/d' Makefile
+            sed -i 's/arpd.8//' man/man8/Makefile
+            sed -i '/tc-simple/s@tc-skbmod.8 @@' man/man8/Makefile
+            rm -v doc/arpd.sgml
+make CC="gcc ${BUILD64}" LIBDIR=/usr/lib64
+make LIBDIR=/usr/lib64 \
+    DOCDIR=/usr/share/doc/iproute2-4.9.0 DESTDIR=$PKG install
+}
+

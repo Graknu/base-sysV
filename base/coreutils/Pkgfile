@@ -1,0 +1,28 @@
+description="The basic file, shell and text manipulation utilities of the GNU operating system"
+packager="Hugo <graknu@techozor.fr>"
+
+name=coreutils
+version=8.27
+
+
+source=(http://yaolinux.techozor.fr/sources-base/coreutils-8.27.tar.xz
+	http://yaolinux.techozor.fr/sources-base/coreutils-8.27-uname-1.patch)
+
+
+build() {
+cd $name-$version
+patch -Np1 -i ../coreutils-8.27-uname-1.patch
+FORCE_UNSAFE_CONFIGURE=1 \
+CC="gcc ${BUILD64}" \
+./configure \
+    --prefix=/usr \
+    --enable-no-install-program=kill,uptime \
+    --enable-install-program=hostname
+make
+make DESTDIR=$PKG install
+mv -v $PKG/usr/bin/{cat,chgrp,chmod,chown,cp,date} $PKG/bin
+mv -v $PKG/usr/bin/{dd,df,echo,false,hostname,ln,ls,mkdir,mknod} $PKG/bin
+mv -v $PKG/usr/bin/{mv,pwd,rm,rmdir,stty,true,uname} $PKG/bin
+mv -v $PKG/usr/bin/chroot $PKG/usr/sbin
+}
+
