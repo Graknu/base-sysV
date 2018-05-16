@@ -1,3 +1,6 @@
+name=man-db
+description="A utility for reading man pages"
+packager=rems
 version=2.7.6.1
 
 source=(http://clfs.org/files/packages/git/man-db-2.7.6.1.tar.xz)

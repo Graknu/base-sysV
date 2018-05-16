@@ -1,0 +1,23 @@
+name=kbd
+description="Keytable files and keyboard utilities"
+packager=rems
+version=2.0.4
+
+source=(http://www.kernel.org/pub/linux/utils/kbd/kbd-2.0.4.tar.xz)
+
+build() {
+cd kbd-$version
+CC="gcc ${BUILD64}" PKG_CONFIG_PATH="/tools/lib64/pkgconfig" \
+./configure \
+    --prefix=/usr \
+    --disable-vlock \
+    --enable-optional-progs
+make
+
+make DESTDIR=$PKG install
+mkdir -pv $PKG/bin
+mv -v $PKG/usr/bin/{loadkeys,setfont} $PKG/bin
+mkdir -pv $PKG/usr/share/doc/kbd-2.0.4
+cp -R -v docs/doc/* $PKG/usr/share/doc/kbd-2.0.4
+
+}

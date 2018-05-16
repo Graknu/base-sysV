@@ -1,0 +1,27 @@
+name=iputils
+description="Network monitoring tools, including ping"
+packager=rems
+version=s20150815
+
+source=(http://clfs.org/files/packages/git/iputils-s20150815.tar.xz
+        http://yaolinux.techozor.fr/sources-base/iputils-s20150815-build-1.patch)
+
+build() {
+cd iputils-$version
+patch -Np1 -i ../iputils-s20150815-build-1.patch
+make CC="gcc ${BUILD64}" \
+    TARGETS="clockdiff ping rdisc tracepath tracepath6 traceroute6"
+mkdir -pv $PKG/bin
+mkdir -pv $PKG/usr/bin
+mkdir -pv $PKG/usr/share/man/man8
+
+install -v -m755 ping $PKG/bin
+install -v -m755 clockdiff $PKG/usr/bin
+install -v -m755 rdisc $PKG/usr/bin
+install -v -m755 tracepath $PKG/usr/bin
+install -v -m755 trace{path,route}6 $PKG/usr/bin
+install -v -m644 doc/*.8 $PKG/usr/share/man/man8
+ln -sv ping $PKG/bin/ping4
+ln -sv ping $PKG/bin/ping6
+
+}

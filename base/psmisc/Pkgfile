@@ -1,3 +1,6 @@
+name=psmisc
+description="Miscellaneous procfs tools"
+packager=rems
 version=22.21
 
 source=(http://downloads.sourceforge.net/psmisc/psmisc-22.21.tar.gz)

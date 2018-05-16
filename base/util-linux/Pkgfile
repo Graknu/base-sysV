@@ -1,3 +1,6 @@
+name=util-linux
+description="Miscellaneous system utilities for Linux"
+packager=rems
 version=2.29.2
 
 source=(http://www.kernel.org/pub/linux/utils/util-linux/v2.29/util-linux-2.29.2.tar.xz)

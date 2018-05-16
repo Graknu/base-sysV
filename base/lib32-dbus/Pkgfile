@@ -1,3 +1,6 @@
+name=lib32-dbus
+description="Freedesktop.org message bus system"
+packager=rems
 version=1.10.8
 
 source=(http://dbus.freedesktop.org/releases/dbus/dbus-1.10.18.tar.gz)

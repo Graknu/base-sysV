@@ -1,3 +1,6 @@
+name=systemd
+description="system and service manager"
+packager=rems
 version=233
 
 source=(http://www.linuxfromscratch.org/~krejzi/systemd/systemd-233.tar.xz)
@@ -21,6 +24,7 @@ CC="gcc ${BUILD64}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
     --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
+    --libdir=/usr/lib64 \
     --libexecdir=/usr/lib64 \
     --docdir=/usr/share/doc/systemd-233 \
     --with-rootprefix="" \

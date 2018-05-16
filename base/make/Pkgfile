@@ -1,3 +1,6 @@
+name=make
+description="GNU make utility to maintain groups of programs"
+packager=rems
 version=4.2.1
 
 source=(http://ftp.gnu.org/gnu/make/make-4.2.1.tar.bz2)

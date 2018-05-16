@@ -1,3 +1,6 @@
+name=texinfo
+description="GNU documentation system for on-line information and printed output"
+packager=rems
 version=6.3
 
 source=(http://ftp.gnu.org/gnu/texinfo/texinfo-6.3.tar.xz)
