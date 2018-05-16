@@ -1,3 +1,6 @@
+name=iputils
+description="Network monitoring tools, including ping"
+packager=rems
 version=s20150815
 
 source=(http://clfs.org/files/packages/git/iputils-s20150815.tar.xz
