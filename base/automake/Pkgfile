@@ -1,0 +1,20 @@
+name=automake
+description="A GNU tool for automatically creating Makefiles"
+packager=rems
+version=1.15
+
+source=(http://ftp.gnu.org/gnu/automake/automake-1.15.tar.xz)
+
+build() {
+cd automake-$version
+patch -Np1 -i ../automake-1.15-perl_5_26-1.patch
+
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr \
+    --docdir=/usr/share/doc/automake-1.15
+
+make
+
+make DESTDIR=$PKG install
+
+}

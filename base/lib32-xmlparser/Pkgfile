@@ -12,5 +12,5 @@ USE_ARCH=32 perl Makefile.PL
 make
 
 make DESTDIR=$PKG install
-
+rm -rf $PKG/usr/{include,share,bin}
 }

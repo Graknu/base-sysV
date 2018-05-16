@@ -1,0 +1,29 @@
+name=lib32-readline
+description="GNU readline library (32-bit)"
+packager=rems
+version=7.0
+
+source=(http://ftp.gnu.org/gnu/readline/readline-7.0.tar.gz)
+
+build() {
+cd readline-$version
+patch -Np1 -i ../readline-7.0-branch_update-1.patch
+sed -i '/MV.*old/d' Makefile.in
+sed -i '/{OLDSUFF}/c:' support/shlib-install
+
+CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" \
+./configure \
+./configure \
+    --prefix=/usr \
+    --libdir=/lib \
+    --docdir=/usr/share/doc/readline-7.0
+
+make SHLIB_LIBS=-lncurses
+make DESTDIR=$PKG SHLIB_LIBS=-lncurses htmldir=/usr/share/doc/readline-7.0 install
+mkdir -pv $PKG/usr/lib
+mv -v $PKG/lib/lib{readline,history}.a $PKG/usr/lib
+ln -svf ../../lib/$(readlink $PKG/lib/libreadline.so) $PKG/usr/lib/libreadline.so
+ln -svf ../../lib/$(readlink $PKG/lib/libhistory.so) $PKG/usr/lib/libhistory.so
+rm -v $PKG/lib/lib{readline,history}.so
+rm -rf $PKG/usr/{include,share,bin}
+}
