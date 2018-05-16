@@ -19,7 +19,7 @@ LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64 ${BUILD64}" \
 make
 make check
 make DESTDIR=$PKG install
-mkdir -pv /usr/share/gdb/auto-load/usr/lib64
-mv -v /usr/lib64/*gdb.py /usr/share/gdb/auto-load/usr/lib64
+mkdir -pv $PKG/usr/share/gdb/auto-load/usr/lib64
+mv -v $PKG/usr/lib64/*gdb.py $PKG/usr/share/gdb/auto-load/usr/lib64
 }
 
