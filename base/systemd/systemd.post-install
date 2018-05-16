@@ -1,1 +1,6 @@
-systemd-machine-id-setup
+if [ -e /etc/machine-id ]
+then
+    echo "Nothing to do"
+else
+    systemd-machine-id-setup
+fi
