@@ -1,3 +1,6 @@
+name=systemd
+description="system and service manager"
+packager=rems
 version=233
 
 source=(http://www.linuxfromscratch.org/~krejzi/systemd/systemd-233.tar.xz)
