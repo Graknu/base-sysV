@@ -1,3 +1,6 @@
+name=grep
+description="A string search utility"
+packager=rems
 version=3.0
 
 source=(http://ftp.gnu.org/gnu/grep/grep-3.0.tar.xz)
