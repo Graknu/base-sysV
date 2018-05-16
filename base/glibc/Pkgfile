@@ -30,12 +30,46 @@ CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" \
 
 make
 make check
-make DESTDIR=$PKG install &&
+make install_root=$PKG install &&
 rm -v /usr/include/rpcsvc/*.x
 rm -f $PKG/etc/ld.so.{cache,conf}
 cp -v ../glibc-2.25/nscd/nscd.conf /etc/nscd.conf
 mkdir -pv /var/cache/nscd
 install -v -Dm644 ../glibc-2.25/nscd/nscd.tmpfiles /usr/lib/tmpfiles.d/nscd.conf
 install -v -Dm644 ../glibc-2.25/nscd/nscd.service /lib/systemd/system/nscd.service
+
+mkdir -pv $PKG/usr/lib/locale
+
+cp $SRC/glibc.locales.supported \
+../localedata/SUPPORTED
+
+make install_root=$PKG localedata/install-locales
+
+cat > $PKG/etc/nsswitch.conf << "EOF"
+passwd: files
+group: files
+shadow: files
+
+hosts: files dns
+networks: files
+
+protocols: files
+services: files
+ethers: files
+rpc: files
+
+# End /etc/nsswitch.conf
+EOF
+
+cat > $PKG/etc/ld.so.conf << "EOF"
+# Begin /etc/ld.so.conf
+
+/usr/local/lib
+/usr/local/lib64
+/opt/lib
+/opt/lib64
+
+# End /etc/ld.so.conf
+EOF
 }
 
