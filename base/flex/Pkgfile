@@ -1,0 +1,23 @@
+description="A tool for generating text-scanning programs"
+url="https://github.com/westes/flex"
+packager="Hugo <graknu@techozor.fr>"
+
+name=flex
+version=2.6.4
+
+
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.gz)
+
+
+build() {
+cd $name-$version
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib64 \
+    --docdir=/usr/share/doc/flex-2.6.4
+make
+make check
+make DESTDIR=$PKG install
+ln -sv flex $PKG/usr/bin/lex
+}
+

@@ -1,0 +1,24 @@
+description="The GNU general-purpose parser generator"
+url="http://www.gnu.org/software/bison/bison.html"
+packager="Hugo <graknu@techozor.fr>"
+
+name=bison
+version=3.0.4
+
+
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
+
+
+build() {
+cd $name-$version
+CC="gcc ${BUILD64}" \
+CXX="g++ ${BUILD64}" \
+./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib64 \
+    --docdir=/usr/share/doc/bison-3.0.4
+make
+make check
+make DESTDIR=$PKG install
+}
+

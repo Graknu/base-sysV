@@ -1,0 +1,23 @@
+description="A tool for generating text-scanning programs"
+url="https://github.com/westes/flex"
+packager="Hugo <graknu@techozor.fr>"
+
+name=lib32-bison
+version=3.0.4
+
+
+source=(http://yaolinux.techozor.fr/sources-base/bison-$version.tar.xz)
+
+
+build() {
+cd bison-$version
+CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" \
+./configure \
+    --prefix=/usr \
+    --docdir=/usr/share/doc/bison-3.0.4
+make
+make check
+make DESTDIR=$PKG install
+rm -rf $PKG/usr/{include,share,bin}
+}
+
