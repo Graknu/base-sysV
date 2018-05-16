@@ -1,3 +1,6 @@
+name=kbd
+description="Keytable files and keyboard utilities"
+packager=rems
 version=2.0.4
 
 source=(http://www.kernel.org/pub/linux/utils/kbd/kbd-2.0.4.tar.xz)
