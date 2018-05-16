@@ -1,0 +1,18 @@
+version=1.8
+
+source=(http://ftp.gnu.org/gnu/gzip/gzip-1.8.tar.xz)
+
+build() {
+cd gzip-$version
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr \
+    --bindir=/bin
+
+make
+
+make DESTDIR=$PKG install
+
+mkdir -pv $PKG/usr/bin
+mv -v $PKG/bin/{gzexe,uncompress} $PKG/usr/bin
+mv -v $PKG/bin/z{egrep,cmp,diff,fgrep,force,grep,less,more,new} $PKG/usr/bin
+}
