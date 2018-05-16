@@ -1,0 +1,27 @@
+description="Compression library implementing the deflate compression method found in gzip and PKZIP 
+(32-bit)"
+url="http://www.zlib.net/"
+packager="Hugo <graknu@techozor.fr>"
+
+name=lib32-zlib
+version=1.2.11
+
+
+source=(http://yaolinux.techozor.fr/sources-base/zlib-$version.tar.xz)
+
+
+build() {
+cd zlib-$version
+CC="gcc -isystem /usr/include ${BUILD32}" \
+CXX="g++ -isystem /usr/include ${BUILD32}" \
+LDFLAGS="-Wl,-rpath-link,/usr/lib:/lib ${BUILD32}" \
+./configure \
+    --prefix=/usr
+make
+make check
+make DESTDIR=$PKG install
+mv -v /usr/lib/libz.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
+rm -rf $PKG/usr/{include,share,bin}
+}
+
