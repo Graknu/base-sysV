@@ -1,3 +1,6 @@
+name=xmlparser
+description="Expat-based XML parser module for perl"
+packager=rems
 version=2.44
 
 source=(http://search.cpan.org/CPAN/authors/id/T/TO/TODDR/XML-Parser-2.44.tar.gz)
