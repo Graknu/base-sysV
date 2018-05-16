@@ -1,0 +1,38 @@
+description="The GNU Compiler Collection"
+url="http://gcc.gnu.org/"
+packager="Hugo <graknu@techozor.fr>"
+
+name=gcc
+version=7.1.0
+
+
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.bz2)
+
+
+build() {
+cd $name-$version
+sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in
+mkdir -v ../gcc-build
+cd ../gcc-build
+SED=sed CC="gcc -isystem /usr/include ${BUILD64}" \
+CXX="g++ -isystem /usr/include ${BUILD64}" \
+LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64:/usr/lib:/lib" \
+../gcc-7.1.0/configure \
+    --prefix=/usr \
+    --libdir=/usr/lib64 \
+    --libexecdir=/usr/lib64 \
+    --enable-languages=c,c++ \
+    --with-system-zlib \
+    --enable-install-libiberty \
+    --disable-bootstrap
+make
+ulimit -s 32768
+make -k check
+../gcc-7.1.0/contrib/test_summary
+make DESTDIR=$PKG install
+mkdir $PKG/lib
+ln -sv ../usr/bin/cpp $PKG/lib
+mv -v $PKG/usr/lib/libstdc++*gdb.py $PKG/usr/share/gdb/auto-load/usr/lib
+mv -v $PKG/usr/lib64/libstdc++*gdb.py $PKG/usr/share/gdb/auto-load/usr/lib64
+}
+
