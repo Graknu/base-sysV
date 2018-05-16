@@ -12,5 +12,5 @@ CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" \
 make
 
 make DESTDIR=$PKG install
-
+rm -rf $PKG/usr/{bin,include,share/man,share/doc}
 }
