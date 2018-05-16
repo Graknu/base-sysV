@@ -1,6 +1,9 @@
+name=intltool
+description="The internationalization tool collection"
+packager=rems
 version=0.51.0
 
-source=()
+source=(http://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz)
 
 build() {
 cd intltool-$version
