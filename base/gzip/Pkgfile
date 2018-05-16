@@ -1,3 +1,6 @@
+name=gzip
+description="GNU compression utility"
+packager=rems
 version=1.8
 
 source=(http://ftp.gnu.org/gnu/gzip/gzip-1.8.tar.xz)
