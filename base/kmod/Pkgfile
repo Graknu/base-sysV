@@ -1,3 +1,6 @@
+name=kmod
+description="Linux kernel module management tools and library"
+packager=rems
 version=24
 
 source=(http://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-24.tar.xz)
