@@ -1,0 +1,15 @@
+version=22.21
+
+source=(http://downloads.sourceforge.net/psmisc/psmisc-22.21.tar.gz)
+
+build() {
+cd psmisc-$version
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr
+
+make
+
+make DESTDIR=$PKG install
+mv -v $PKG/usr/bin/fuser $PKG/bin
+mv -v $PKG/usr/bin/killall $PKG/bin
+}
