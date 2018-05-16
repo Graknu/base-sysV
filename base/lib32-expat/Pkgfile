@@ -1,0 +1,16 @@
+version=2.2.0
+
+source=(http://downloads.sourceforge.net/expat/expat-2.2.0.tar.bz2)
+
+build() {
+cd expat-$version
+CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" \
+./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib
+
+make
+
+make DESTDIR=$PKG install
+
+}

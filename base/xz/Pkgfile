@@ -1,0 +1,20 @@
+version=5.2.4
+
+source=(http://tukaani.org/xz/xz-5.2.3.tar.xz)
+
+build() {
+cd xz-$version
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib64 \
+    --docdir=/usr/share/doc/xz-5.2.3
+
+make
+
+make DESTDIR=$PKG install
+
+mv -v $PKG/usr/bin/{xz,lzma,lzcat,unlzma,unxz,xzcat} $PKG/bin
+mkdir -pv $PKG/lib64
+mv -v $PKG/usr/lib64/liblzma.so.* $PKG/lib64
+ln -sfv ../../lib64/$(readlink $PKG/usr/lib64/liblzma.so) $PKG/usr/lib64/liblzma.so
+}

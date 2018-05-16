@@ -1,0 +1,18 @@
+version=5.2.3
+
+source=(http://tukaani.org/xz/xz-5.2.3.tar.xz)
+
+build() {
+cd xz-$version
+CC="gcc ${BUILD32}" ./configure \
+    --prefix=/usr \
+    --docdir=/usr/share/doc/xz-5.2.3
+
+make
+
+make DESTDIR=$PKG install
+mkdir $PKG/lib
+mv -v $PKG/usr/lib/liblzma.so.* $PKG/lib
+ln -sfv ../../lib/$(readlink $PKG/usr/lib/liblzma.so) $PKG/usr/lib/liblzma.so
+rm -rf $PKG/usr/{bin,include,share}
+}
