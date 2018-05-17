@@ -1,0 +1,17 @@
+name=lib32-gdbm
+description="GNU database library"
+packager=rems
+version=1.13
+
+source=(http://ftp.gnu.org/gnu/gdbm/gdbm-1.13.tar.gz)
+
+build() {
+cd gdbm-$version
+CC="gcc ${BUILD32}" ./configure \
+    --prefix=/usr \
+    --enable-libgdbm-compat
+make
+
+make DESTDIR=$PKG install
+rm -rf $PKG/usr/{include,share,bin}
+}

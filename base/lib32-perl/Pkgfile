@@ -1,0 +1,30 @@
+name=lib32-perl
+description="A highly capable, feature-rich programming language"
+packager=rems
+version=5.26.0
+
+source=(http://www.cpan.org/src/5.0/perl-5.26.0.tar.xz)
+
+build() {
+cd perl-$version
+export BUILD_ZLIB=False
+export BUILD_BZIP2=0
+echo "127.0.0.1 localhost $(hostname)" > /etc/hosts
+./configure.gnu \
+    --prefix=/usr \
+    -Dvendorprefix=/usr \
+    -Dman1dir=/usr/share/man/man1 \
+    -Dman3dir=/usr/share/man/man3 \
+    -Dpager="/bin/less -isR" \
+    -Dcc="gcc ${BUILD32}" \
+    -Dusethreads \
+    -Duseshrplib
+
+make
+make test
+make DESTDIR=$PKG install
+unset BUILD_ZLIB BUILD_BZIP2
+mv -v $PKG/usr/bin/perl{,-32}
+mv -v $PKG/usr/bin/perl5.26.0{,-32}
+  rm -rf $PKG/usr/{include,share}
+}
