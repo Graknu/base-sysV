@@ -1,0 +1,19 @@
+name=gettext
+description="GNU internationalization library"
+packager=rems
+version=0.19.8.1
+
+source=(http://ftp.gnu.org/gnu/gettext/gettext-0.19.8.1.tar.xz)
+
+build() {
+cd $name-$version
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib64 \
+    --docdir=/usr/share/doc/gettext-0.19.8.1
+
+make
+
+make DESTDIR=$PKG install
+
+}
