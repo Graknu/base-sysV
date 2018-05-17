@@ -1,0 +1,18 @@
+name=file
+description="File type identification utility"
+packager=rems
+version=5.31
+
+source=(ftp://ftp.astron.com/pub/file/file-5.31.tar.gz)
+
+build() {
+cd $name-$version
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib64
+
+make
+
+make DESTDIR=$PKG install
+
+}

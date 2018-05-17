@@ -1,0 +1,20 @@
+name=gawk
+description="GNU version of awk"
+packager=rems
+version=4.1.4
+
+source=(http://ftp.gnu.org/gnu/gawk/gawk-4.1.4.tar.xz)
+
+build() {
+cd $name-$version
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr \
+    --libexecdir=/usr/lib64
+
+make
+
+make DESTDIR=$PKG install
+mkdir -pv $PKG/usr/share/doc/gawk-4.1.4
+cp -v doc/{awkforai.txt,*.{eps,pdf,jpg}} $PKG/usr/share/doc/gawk-4.1.4
+
+}

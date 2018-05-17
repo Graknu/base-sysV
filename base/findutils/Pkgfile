@@ -1,0 +1,19 @@
+name=findutils
+description="GNU utilities to locate files"
+packager=rems
+version=4.6.0
+
+source=(http://ftp.gnu.org/gnu/findutils/findutils-4.6.0.tar.gz)
+
+build() {
+cd $name-$version
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/usr \
+    --libexecdir=/usr/lib64/locate \
+    --localstatedir=/var/lib64/locate
+
+make
+
+make DESTDIR=$PKG install
+
+}

@@ -1,0 +1,17 @@
+name=lib32-file
+description="File type identification utility"
+packager=rems
+version=5.31
+
+source=()
+
+build() {
+cd file-$version
+CC="gcc ${BUILD32}" ./configure \
+    --prefix=/usr
+
+make
+
+make DESTDIR=$PKG install
+rm -rf $PKG/usr/{bin,include,share}
+}
