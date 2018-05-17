@@ -1,0 +1,26 @@
+name=bash
+description="The GNU Bourne Again shell"
+packager=rems
+version=4.4
+
+source=(http://ftp.gnu.org/gnu/bash/bash-4.4.tar.gz)
+
+build() {
+cd $name-$version
+patch -Np1 -i ../bash-4.4-branch_update-1.patch
+sed -i "/ac_cv_rl_libdir/s@/lib@&64@" configure
+CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" \
+./configure \
+    --prefix=/usr \
+    --without-bash-malloc \
+    --with-installed-readline \
+    --docdir=/usr/share/doc/bash-4.4
+
+make
+
+make test
+
+make DESTDIR=$PKG install
+mkdir -pv $PKG/bin
+mv -v $PKG/usr/bin/bash $PKG/bin
+}
