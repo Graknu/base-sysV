@@ -25,4 +25,5 @@ mv -v $PKG/lib/lib{readline,history}.a $PKG/usr/lib
 ln -svf ../../lib/$(readlink $PKG/lib/libreadline.so) $PKG/usr/lib/libreadline.so
 ln -svf ../../lib/$(readlink $PKG/lib/libhistory.so) $PKG/usr/lib/libhistory.so
 rm -v $PKG/lib/lib{readline,history}.so
+rm -rf "${pkgdir}"/usr/{include,share,bin}
 }
