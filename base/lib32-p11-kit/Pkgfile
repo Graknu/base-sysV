@@ -1,5 +1,7 @@
 # depends="libffi-32 make-ca libtasn1-32"
 name=lib32-p11-kit
+description="Provides a way to load and enumerate PKCS#11 modules"
+packager=rems
 version=0.23.9
 source=(https://github.com/p11-glue/p11-kit/releases/download/$version/p11-kit-$version.tar.gz)
 
