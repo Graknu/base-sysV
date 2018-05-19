@@ -1,0 +1,37 @@
+name=python
+version=3.6.4
+files="Python-$version.tar.xz"
+url="https://www.python.org/ftp/$name/$version/Python-$version.tar.xz
+     https://docs.python.org/ftp/python/doc/3.6.4/python-3.6.4-docs-html.tar.bz2"
+
+prepare(){
+    cd Python-$version
+      sed -i -e "s|^#.* /usr/local/bin/python|#!/usr/bin/python|" Lib/cgi.py
+      rm -r Modules/expat
+      rm -r Modules/zlib
+      rm -r Modules/_ctypes/{darwin,libffi}*
+      rm -r Modules/_decimal/libmpdec
+        CC="gcc -m64" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
+        ./configure --prefix=/usr \
+        --libdir=/usr/lib64 \
+        --libexecdir=/usr/lib64 \
+        --with-computed-gotos \
+        --enable-optimizations \
+        --enable-shared \
+        --with-system-expat \
+        --with-system-ffi \
+        --with-ensurepip=yes
+}
+
+build(){
+cd Python-$version
+    make
+    make DESTDIR=$PKG install
+        chmod -v 755 $PKG/usr/lib64/libpython3.6m.so
+        chmod -v 755 $PKG/usr/lib64/libpython3.so
+        tar --strip-components=1 \
+        --no-same-owner \
+        --no-same-permissions \
+        -C $PKG/usr/share/doc/python-3.6.4/html \
+        -xvf ../python-3.6.4-docs-html.tar.bz2
+}

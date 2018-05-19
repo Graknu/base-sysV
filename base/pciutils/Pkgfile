@@ -1,0 +1,18 @@
+name=pciutils
+description="PCI bus configuration space access library and tools"
+packager=rems
+version=3.5.6
+source=(https://www.kernel.org/pub/software/utils/$name/pciutils-3.5.6.tar.xz)
+
+prepare(){
+    cd $name-$version
+
+        CC="gcc -m64" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig"
+}
+
+build(){
+   cd $name-$version
+    make PREFIX=/usr LIBDIR=/usr/lib64 SHAREDIR=/usr/share/hwdata SHARED=yes MANDIR=/usr/share/man
+    make PREFIX=/usr LIBDIR=/usr/lib64 SHAREDIR=/usr/share/hwdata SHARED=yes MANDIR=/usr/share/man DESTDIR=$PKG install install-lib
+    chmod -v 755 $PKG/usr/lib/libpci.so
+}

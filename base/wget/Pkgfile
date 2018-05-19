@@ -1,0 +1,21 @@
+name=wget
+description="Network utility to retrieve files from the Web"
+packager=rems
+version=1.19.4
+source=(https://ftp.gnu.org/gnu/wget/$name-$version.tar.gz)
+
+prepare(){
+    cd $name-$version
+    CC="gcc -m64" CXX="g++ -m64" \
+    PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
+    USE_ARCH=64 ./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --libdir=/usr/lib64 \
+    --with-ssl=gnutls 
+}
+build(){
+cd $name-$version
+    make
+    make DESTDIR=$PKG install
+}
