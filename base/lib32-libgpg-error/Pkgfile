@@ -11,6 +11,7 @@ prepare(){
 }
 
 build(){
+cd libgpg-error-$version
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/{include,share}

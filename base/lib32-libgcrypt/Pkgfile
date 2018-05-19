@@ -19,6 +19,7 @@ sed 's:path="amd64":path="i586 i386":' -i mpi/config.links
 }
 
 build(){
+cd libgcrypt-$version
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/{include,share,sbin}
