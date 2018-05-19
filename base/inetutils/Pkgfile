@@ -1,0 +1,29 @@
+name=inetutils
+description="The Inetutils package contains programs for basic networking."
+packager=rems
+version=1.9.4
+sources="http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz"
+
+prepare(){
+    cd $name-$version
+
+        CC="gcc -m64" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" ./configure --prefix=/usr \
+        --libdir=/usr/lib64 \
+        --localstatedir=/var \
+        --disable-logger \
+        --disable-whois \
+        --disable-rcp \
+        --disable-rexec \
+        --disable-rlogin \
+        --disable-rsh \
+        --disable-servers
+}
+
+build(){
+    make
+    make DESTDIR=$PKG install
+    mkdir $PKG/bin
+    mkdir $PKG/sbin
+        mv -v $PKG/usr/bin/{hostname,ping,ping6,traceroute} $PKG/bin
+        mv -v $PKG/usr/bin/ifconfig $PKG/sbin
+}
