@@ -1,0 +1,12 @@
+name=meson
+description="High productivity build system"
+packager=rems
+version=0.44.1
+source="https://github.com/$namebuild/$name/releases/download/$version/$name-$version.tar.gz"
+
+build(){
+    cd $name-$version
+        CC="gcc -m64" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
+        python3 setup.py build
+    python3 setup.py install --root=$PKG --skip-build
+}

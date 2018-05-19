@@ -1,0 +1,24 @@
+name=nettle
+description="A low-level cryptographic library"
+packager=rems
+version=3.4
+source=(ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
+
+prepare(){
+    cd $name-$version
+        CC="gcc -m64" CXX="g++ -m64" \
+        PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
+        ./configure --prefix=/usr \
+        --libdir=/usr/lib64 \
+        --disable-static \
+        --enable-shared \
+        --with-include-path=/usr/lib64/gmp
+}
+
+build(){
+    make
+    make DESTDIR=$PKG install
+    chmod -v 755 $PKG/usr/lib64/lib{hogweed,nettle}.so
+    install -v -m755 -d $PKG/usr/share/doc/nettle-3.4
+    install -v -m644 nettle.html $PKG/usr/share/doc/nettle-3.4
+}

@@ -1,0 +1,23 @@
+name=lib32-nettle
+description="A low-level cryptographic library (32-bit)"
+packager=rems
+version=3.4
+source=(ftp://ftp.gnu.org/gnu/nettle/nettle-$version.tar.gz)
+
+prepare(){
+    cd nettle-$version
+        CC="gcc -m32" CXX="g++ -m32" PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
+        ./configure --prefix=/usr \
+        --build=$CLFS_TARGET32 \
+        --host=$CLFS_TARGET32 \
+        --disable-static \
+        --enable-shared \
+        --with-include-path=/usr/lib/gmp
+}
+
+build(){
+        make
+    make DESTDIR=$PKG install
+    rm -rf $PKG/usr/{include,share,bin}
+    chmod -v 755 $PKG/usr/lib/lib{hogweed,nettle}.so
+}

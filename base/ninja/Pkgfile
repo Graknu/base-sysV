@@ -1,0 +1,24 @@
+name=ninja
+description="Small build system with a focus on speed"
+packager=rems
+version=1.8.2
+sources=(https://github.com/$name-build/$name/archive/v$version/$name-$version.tar.gz)
+
+prepare(){
+    cd $name-$version
+        CC="gcc -m64" CXX="g++ -m64" \
+        PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
+        python3 configure.py --bootstrap
+}
+
+build(){
+cd $name-version
+mkdir -pv $PKG/usr/bin
+    install -vm755 ninja $PKG/usr/bin/
+    install -vDm644 misc/bash-completion \
+    $PKG/usr/share/bash-completion/completions/ninja
+    install -vDm644 misc/zsh-completion \
+    $PKG/usr/share/zsh/site-functions/_ninja
+    install -m644 -D misc/ninja.vim \
+    $PKG/usr/share/vim/vimfiles/syntax/ninja.vim
+}
