@@ -1,0 +1,22 @@
+name=libffi
+description="Portable foreign function interface library"
+packager=rems
+version=3.2.1
+files="$name-$version.tar.gz"
+source="ftp://sourceware.org/pub/$name/$name-$version.tar.gz"
+
+prepare(){
+    cd $name-$version
+        sed -e '/^includesdir/ s/$(libdir).*$/$(includedir)/'     -i include/Makefile.in
+        sed -e '/^includedir/ s/=.*$/=@includedir@/'     -e 's/^Cflags: -I${includedir}/Cflags:/'     -i libffi.pc.in
+        CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
+        ./configure --prefix=/usr \
+        --disable-static \
+        --libdir=/usr/lib64 \
+        --libexecdir=/usr/lib64
+}
+
+build(){
+    make
+    make DESTDIR=$PKG install
+}
