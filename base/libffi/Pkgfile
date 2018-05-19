@@ -2,8 +2,7 @@ name=libffi
 description="Portable foreign function interface library"
 packager=rems
 version=3.2.1
-files="$name-$version.tar.gz"
-source="ftp://sourceware.org/pub/$name/$name-$version.tar.gz"
+source=(ftp://sourceware.org/pub/$name/$name-$version.tar.gz)
 
 prepare(){
     cd $name-$version

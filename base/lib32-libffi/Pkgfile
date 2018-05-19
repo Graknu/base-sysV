@@ -1,7 +1,7 @@
 name=lib32-libffi
 description="A portable, high level programming interface to various calling conventions (32-bit)"
 version=3.2.1
-url="ftp://sourceware.org/pub/libffi/libffi-$version.tar.gz"
+url=ftp://sourceware.org/pub/libffi/libffi-$version.tar.gz)
 
 prepare(){
     cd libffi-$version
