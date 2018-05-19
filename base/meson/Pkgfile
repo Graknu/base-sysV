@@ -2,7 +2,7 @@ name=meson
 description="High productivity build system"
 packager=rems
 version=0.44.1
-source="https://github.com/$namebuild/$name/releases/download/$version/$name-$version.tar.gz"
+source=(https://github.com/$namebuild/$name/releases/download/$version/$name-$version.tar.gz)
 
 build(){
     cd $name-$version

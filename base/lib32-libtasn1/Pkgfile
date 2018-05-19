@@ -13,6 +13,7 @@ prepare(){
 }
 
 build(){
+cd libtasn1-$version
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/{bin,include,share}

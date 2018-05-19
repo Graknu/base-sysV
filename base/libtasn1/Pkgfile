@@ -15,6 +15,7 @@ prepare(){
 }
 
 build(){
+cd $name-$version
     make
     make DESTDIR=$PKG install
     make -C doc/reference DESTDIR=$PKG install-data-local
