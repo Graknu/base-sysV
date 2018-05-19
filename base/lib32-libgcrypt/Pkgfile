@@ -1,0 +1,27 @@
+#depends=libgpg-error-32
+name=libgcrypt-32
+dexcription="General purpose cryptographic library based on the code from GnuPG"
+packager=rems
+version=1.8.2
+source=(ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-$version.tar.gz)
+
+prepare(){
+    cd libgcrypt-$version
+sed 's:path="amd64":path="i586 i386":' -i mpi/config.links
+        CC="gcc ${BUILD32}" USE_ARCH=32 \
+        CXX="g++ ${BUILD32}" PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
+        ./configure --prefix=/usr \
+        --disable-static \
+        --build=$CLFS_TARGET32 \
+        --host=$CLFS_TARGET32 \
+        --enable-shared \
+        --disable-padlock-support
+}
+
+build(){
+    make
+    make DESTDIR=$PKG install
+    rm -rf $PKG/usr/{include,share,sbin}
+    mv -v $PKG/usr/bin/libgcrypt-config{,-32}
+    ln -sfv multiarch_wrapper $PKG/usr/bin/libgcrypt-config
+}

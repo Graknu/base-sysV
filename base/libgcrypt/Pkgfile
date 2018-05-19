@@ -1,0 +1,22 @@
+#depends=libgpg-error
+name=libgcrypt
+description="General purpose cryptographic library based on the code from GnuPG"
+packager=rems
+version=1.8.2
+url=(ftp://ftp.gnupg.org/gcrypt/libgcrypt/$name-$version.tar.gz)
+
+prepare(){
+    cd $name-$version
+        CC="gcc ${BUILD64}" USE_ARCH=64 \
+        CXX="g++ ${BUILD64}" PKG_CONFIG_PATH="/usr/lib64/pkgconfig"
+        ./configure --prefix=/usr \
+        --libdir=/usr/lib64 \
+        --disable-static \
+        --enable-shared
+}
+
+build(){
+    make
+    make DESTDIR=$PKG install
+    mv -v $PKG/usr/bin/libgcrypt-config{,-64}
+}
