@@ -1,0 +1,19 @@
+name=libtasn1-32
+version=4.13
+description="The ASN.1 library used in GNUTLS (32 bit)"
+url=(ftp://ftp.gnu.org/gnu/libtasn1/libtasn1-$version.tar.gz)
+
+prepare(){
+    cd libtasn1-$version
+        CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" \
+        PKG_CONFIG_PATH="${PKG_CONFIG_PATH32}" \
+        USE_ARCH=32 \
+        ./configure --prefix=/usr \
+        --disable-static
+}
+
+build(){
+    make
+    make DESTDIR=$PKG install
+    rm -rf $PKG/usr/{bin,include,share}
+}

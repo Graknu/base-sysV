@@ -1,0 +1,21 @@
+name=libtasn1
+description="The ASN.1 library used in GNUTLS"
+packager=rems
+version=4.13
+source=(ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
+
+prepare(){
+    cd $name-$version
+        CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" \
+        PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
+        USE_ARCH=64 \
+        ./configure --prefix=/usr \
+        --libdir=/usr/lib64 \
+        --disable-static
+}
+
+build(){
+    make
+    make DESTDIR=$PKG install
+    make -C doc/reference DESTDIR=$PKG install-data-local
+}
