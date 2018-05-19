@@ -1,0 +1,22 @@
+name=gnutls
+description="A library which provides a secure layer over a reliable transport layer"
+packager=rems
+version=3.6.2
+sources=(https://www.gnupg.org/ftp/gcrypt/$name/v3.6/$name-$version.tar.xz)
+
+prepare(){
+    cd $name-$version
+        export USE_ARCH=64 && CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
+        ./configure --prefix=/usr \
+        --libdir=/usr/lib64
+        --with-included-unistring \
+        --with-default-trust-store-pkcs11="pkcs11:" \
+        --disable-static \
+        --disable-valgrind-tests        
+}
+
+build(){
+    cd $name-$version
+    make
+    make DESTDIR=$PKG install
+}

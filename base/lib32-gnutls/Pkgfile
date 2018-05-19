@@ -1,0 +1,23 @@
+#depends="nettle-32 libgcrypt-32 make-ca libtasn1-32 p11-kit-32"
+name=lib32-gnutls
+version=3.6.2
+sources="https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-$version.tar.xz"
+
+prepare(){
+    cd gnutls-$version
+        export USE_ARCH=32 && CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH32}" \
+        ./configure --prefix=/usr \
+        --build=$CLFS_TARGET32 \
+        --host=$CLFS_TARGET32 \
+        --with-included-unistring \
+        --with-default-trust-store-pkcs11="pkcs11:" \
+        --disable-static \
+        --disable-guile \
+        --disable-valgrind-tests
+}
+
+build(){
+    make
+    make DESTDIR=$PKG install
+    rm -rf $PKG/usr/{bin,include,share}
+}
