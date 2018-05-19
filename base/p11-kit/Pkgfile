@@ -1,0 +1,24 @@
+# depends="libffi make-ca libtasn1"
+name=p11-kit
+description="Provides a way to load and enumerate PKCS#11 modules"
+packager=rems
+version=0.23.9
+source=(https://github.com/p11-glue/$name/releases/download/$version/$name-$version.tar.gz)
+
+prepare(){
+    cd $name-$version
+    CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" \
+    PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
+    USE_ARCH=64 ./configure --prefix=/usr \
+    --sysconfdir=/etc \
+    --localestatedir=/var/p11-kit
+    --with-trust-paths=/etc/pki/anchors \
+    --with-module-path=/usr/lib64/pkcs11 \
+    --libdir=/usr/lib64 \
+    --libexecdir=/usr/lib64
+}
+
+build(){
+    make
+    make DESTDIR=$PKG install
+}

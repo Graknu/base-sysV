@@ -1,0 +1,26 @@
+# depends="libffi-32 make-ca libtasn1-32"
+name=lib32-p11-kit
+version=0.23.9
+source=(https://github.com/p11-glue/p11-kit/releases/download/$version/p11-kit-$version.tar.gz)
+
+prepare(){
+    cd p11-kit-$version
+    CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" \
+    PKG_CONFIG_PATH="${PKG_CONFIG_PATH32}" \
+    USE_ARCH=64 \
+    ./configure --prefix=/usr \
+    --sysconfdir=/etc \
+    --localstatedir=/var/p11-kit
+    --with-trust-paths=/etc/pki/anchors \
+    --with-module-path=/usr/lib/pkcs11 \
+    --disable-doc \
+    --build=$CLFS_TARGET32 \
+    --host=$CLFS_TARGET32
+
+}
+
+build(){
+    make
+    make DESTDIR=$PKG install
+    rm -rf $PKG/etc $PKG/usr/{bin,include,share}
+}
