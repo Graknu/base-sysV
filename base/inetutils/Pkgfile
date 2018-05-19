@@ -2,7 +2,7 @@ name=inetutils
 description="The Inetutils package contains programs for basic networking."
 packager=rems
 version=1.9.4
-sources="http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz"
+source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
 
 prepare(){
     cd $name-$version
