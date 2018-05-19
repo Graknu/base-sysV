@@ -13,6 +13,7 @@ prepare(){
 }
 
 build(){
+cd elfutils-$version
     make
     make -C libelf DESTDIR=$PKG install
     mkdir -pv $PKG/usr/lib/pkgconfig
