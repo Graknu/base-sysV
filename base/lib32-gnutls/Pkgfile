@@ -19,6 +19,7 @@ prepare(){
 }
 
 build(){
+cd gnutls-$version
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/{bin,include,share}

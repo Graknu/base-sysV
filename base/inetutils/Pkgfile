@@ -20,6 +20,7 @@ prepare(){
 }
 
 build(){
+cd $name-$version
     make
     make DESTDIR=$PKG install
     mkdir $PKG/bin
