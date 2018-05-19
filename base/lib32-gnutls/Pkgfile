@@ -1,5 +1,7 @@
 #depends="nettle-32 libgcrypt-32 make-ca libtasn1-32 p11-kit-32"
 name=lib32-gnutls
+description="Libraries and userspace tools which provide a secure layer over a reliable transport layer."
+packager=rems
 version=3.6.2
 sources="https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-$version.tar.xz"
 
