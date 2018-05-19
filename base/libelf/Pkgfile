@@ -1,0 +1,19 @@
+name=libelf
+description="Libraries to handle ELF object files and DWARF debugging information"
+packager=rems
+version=0.170
+url=(https://sourceware.org/ftp/elfutils/$version/elfutils-$version.tar.bz2)
+
+prepare(){
+    cd elfutils-$version
+        CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
+        ./configure --prefix=/usr \
+        --libdir=/usr/lib64 \
+}
+
+build(){
+    make
+    make -C libelf DESTDIR=$PKG install
+    mkdir -pv $PKG/usr/lib64/pkgconfig
+    install -vm644 config/libelf.pc $PKG/usr/lib64/pkgconfig
+}
