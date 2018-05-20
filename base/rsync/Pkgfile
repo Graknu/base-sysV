@@ -1,0 +1,29 @@
+description="Synchronizing files over a network by sending just the differences in the files."
+url="http://samba.anu.edu.au/rsync/"
+packager="rems"
+name=rsync
+version=3.1.3
+
+source=(http://yaolinux.techozor.fr/sources-base/blfs-systemd-units-20180105.tar.bz2
+        http://rsync.samba.org/ftp/$name/$name-$version.tar.gz
+        rsync.driver )
+
+build() {
+
+cd $name-$version
+./configure --prefix=/usr \
+-mandir=/usr/share/man \
+--without-included-zlib \
+--infodir=/usr/share/info
+make
+make DESTDIR=$PKG install
+
+# drivers
+mkdir -p $PKG/var/lib/pkg/drivers
+install -m 755 $SRC/rsync.driver \
+$PKG/var/lib/pkg/drivers/rsync
+
+# service
+cd $SRC/blfs-systemd-units-20180105
+make DESTDIR=$PKG install-rsyncd
+}
