@@ -1,0 +1,25 @@
+name=nasm
+description="An 80x86 assembler designed for portability and modularity"
+packager=rems
+version=2.13.03
+
+source=(http://yaolinux.techozor.fr/sources-base/nasm-2.13.03.tar.xz)
+
+build() {
+cd $name-$version
+CC="gcc ${BUILD64}" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
+    ./configure \
+    --prefix=/usr\
+    --libdir=/usr/lib64
+    --libexecdir=/usr/lib64
+    --mandir=/usr/share/man
+
+make
+mkdir -p $PKG/usr/bin 
+mkdir -p $PKG/usr/share/man/man1
+make INSTALLROOT=$PKG install
+mkdir -pv $PKG/usr/share/doc/nasm-$version/html
+cd $SRC/$name-$version
+cp -v doc/html/*.html    $PKG/usr/share/doc/nasm-$version/html
+cp -v doc/*.{txt,ps,pdf} $PKG/usr/share/doc/nasm-$version
+}
