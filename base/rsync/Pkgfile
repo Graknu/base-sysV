@@ -11,9 +11,12 @@ source=(http://yaolinux.techozor.fr/sources-base/blfs-systemd-units-20180105.tar
 build() {
 
 cd $name-$version
-CC="gcc -m64" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
+CC="gcc -m64" CXX="g++ -m64" \
+PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 ./configure --prefix=/usr \
--mandir=/usr/share/man \
+--libdir=/usr/lib64 \
+--libexecdir=/usr/lib64 \
+--mandir=/usr/share/man \
 --without-included-zlib \
 --infodir=/usr/share/info
 make
