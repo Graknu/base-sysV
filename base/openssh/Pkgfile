@@ -1,0 +1,29 @@
+name=openssh
+description="Free version of the SSH connectivity tools"
+packager=rems
+version=7.7p1
+
+source=(https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$name-$version.tar.gz
+        http://yaolinux.techozor.fr/sources-base/openssh-7.7p1-openssl-1.1.0-1.patch
+        http://yaolinux.techozor.fr/sources-base/blfs-systemd-units-20180105.tar.bz2)
+
+build() {
+cd $name-$version
+patch -Np1 -i ../openssh-7.7p1-openssl-1.1.0-1.patch
+CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" \
+PKG_CONFIG_PATH=/usr/lib64/pkgconfig ./configure \
+            --prefix=/usr                     \
+            --sysconfdir=/etc/ssh             \
+            --with-md5-passwords              \
+            --with-privsep-path=/var/lib/sshd
+make
+
+make DESTDIR=$PKG install
+install -v -m755    contrib/ssh-copy-id $PKG/usr/bin
+mkdir -pv $PKG/usr/share/man/man1
+install -v -m644    contrib/ssh-copy-id.1 \
+                    $PKG/usr/share/man/man1
+install -v -m755 -d $PKG/usr/share/doc/openssh-7.7p1
+install -v -m644    INSTALL LICENCE OVERVIEW README* \
+                    $PKG/usr/share/doc/openssh-7.7p1
+}
