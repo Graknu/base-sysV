@@ -1,0 +1,30 @@
+name=openssl
+description="The Open Source toolkit for Secure Sockets Layer and Transport Layer Security"
+packager=rems
+version=1.1.0h
+
+source=(http://yaolinux.techozor.fr/sources-base/openssl-1.1.0h.tar.gz)
+
+build() {
+cd $name-$version
+CC="gcc ${BUILD64}" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
+./Configure --prefix=/usr --openssldir=/etc/ssl \
+--libdir=lib64 shared zlib-dynamic
+
+make
+
+sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
+make DESTDIR=$PKG MANSUFFIX=ssl install
+mv -v $PKG/usr/share/doc/openssl $PKG/usr/share/doc/openssl-1.1.0h
+cp -vfr doc/* $PKG/usr/share/doc/openssl-1.1.0h
+}
+
+devel()
+{
+cd $PKG
+bsdtar -cf \
+$PKGMK_PACKAGE_DIR/${name}.devel${PKGMK_BUILDVER}any.$PKGMK_PACKAGE_EXT \
+usr/lib64/pkgconfig usr/include
+
+rm -r usr/lib64/pkgconfig usr/include
+}

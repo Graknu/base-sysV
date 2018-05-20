@@ -1,0 +1,41 @@
+name=curl
+description="Utility for transferring files with URL syntax to many protocols"
+packager=rems
+version=7.59.0
+
+source=(http://yaolinux.techozor.fr/sources-base/curl-7.59.0.tar.xz)
+
+build() {
+cd -$version
+CC="gcc ${BUILD64}" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
+./configure \
+--prefix=/usr \
+--libdir=/usr/lib64 \
+--libexecdir=/usr/lib64 \
+--bindir=/bin  \
+--with-ca-path=/etc/ssl/certs \
+--enable-threaded-resolver
+
+make
+
+make DESTDIR=$PKG install
+rm -rf docs/examples/.deps
+find docs \( -name Makefile\* -o -name \*.1 -o -name \*.3 \) -exec rm -v {} \;
+install -v -d -m755 $PKG/usr/share/doc/curl-7.59.0
+cp -v -R docs/*     $PKG/usr/share/doc/curl-7.59.0
+
+# reorganise the libs
+mkdir $PKG/lib
+mv $PKG/usr/lib/libcurl.so.4.5.0 \
+$PKG/lib/
+for LIB in libcurl.so{,.4}
+    do 
+        ln -sv libcurl.so.4.5.0 $PKG/lib64/$LIB
+        rm $PKG/usr/lib64/$LIB
+        ln -sv ../../lib64/libcurl.so.4.5.0 \
+        $PKG/usr/lib64/$LIB
+done
+
+ln -sv ../../lib64/libcurl.so.4.5.0 \
+$PKG/usr/lib64/libcurl.so.4.5.0
+}
