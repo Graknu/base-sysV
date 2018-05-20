@@ -1,0 +1,22 @@
+if [ ! -f /etc/rsyncd.conf.new ]; then
+	cat > /etc/rsyncd.conf.new << "EOF"
+# use chroot = no
+# [rsync]
+#   path = /srv/rsync/
+#   comment = Files to transfer
+#   read only = yes
+#   exclude from = /etc/rsync_exclude_files.txt
+#   secrets file = /etc/rsyncd.secrets
+EOF
+echo "To use rsync as a service, do \
+
+cp /etc/rsyncd.conf.new /etc/rsyncd.conf \
+
+modify the conf file with your favorite text editor \
+
+and do as root \
+systemctl enable rsyncd && systemctl start rsyncd"
+else
+echo "A new rsync conf file is coming with rsync"
+
+fi
