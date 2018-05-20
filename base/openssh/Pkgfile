@@ -15,7 +15,8 @@ PKG_CONFIG_PATH=/usr/lib64/pkgconfig ./configure \
             --prefix=/usr                     \
             --sysconfdir=/etc/ssh             \
             --with-md5-passwords              \
-            --with-privsep-path=/var/lib/sshd
+            --with-privsep-path=/var/lib/sshd \
+            --with-libedit
 make
 
 make DESTDIR=$PKG install
