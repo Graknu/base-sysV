@@ -3,7 +3,7 @@ description="Next generation of the python high-level scripting language"
 packager=rems
 version=3.6.4
 source=(https://www.python.org/ftp/$name/$version/Python-$version.tar.xz
-        https://docs.python.org/ftp/python/doc/3.6.4/python-3.6.4-docs-html.tar.bz2)
+        https://docs.python.org/ftp/python/doc/$version/$name-$version-docs-html.tar.bz2)
 
 prepare(){
     cd Python-$version
@@ -33,6 +33,6 @@ cd Python-$version
         tar --strip-components=1 \
         --no-same-owner \
         --no-same-permissions \
-        -C $PKG/usr/share/doc/python-3.6.4/html \
-        -xvf ../python-3.6.4-docs-html.tar.bz2
+        -C $PKG/usr/share/doc/$name-$version/html \
+        -xvf ../$name-$version-docs-html.tar.bz2
 }
