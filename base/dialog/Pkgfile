@@ -1,0 +1,28 @@
+name=dialog
+description="To create nice user interfaces to shell scripts or other scripting languages."
+packager=rems
+version=1.3-20160828
+
+source=(http://yaolinux.techozor.fr/sources-base/$name_$version.orig.tar.gz)
+
+build() {
+cd -$version
+CC="gcc ${BUILD64}" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
+./configure \
+--prefix=/usr \
+--enable-nls --bindir=/bin \
+--with-ncursesw \
+--mandir=/usr/share/man
+
+make
+
+make DESTDIR=$PKG install
+
+devel() {
+cd $PKG
+bsdtar -cf \
+$PKGMK_PACKAGE_DIR/$name.devel${PKGMK_BUILDVER}`uname -m`.$PKGMK_PACKAGE_EXT \
+usr/lib
+
+rm -r usr/lib
+}

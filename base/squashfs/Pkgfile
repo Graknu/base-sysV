@@ -1,0 +1,16 @@
+name=squashfs
+description="Squashfs is a compressed read-only filesystem for Linux."
+packager=rems
+version=4.3
+
+source=(http://yaolinux.techozor.fr/sources-base/$name$version.tar.gz)
+
+build() {
+cd $name$version/squashfs-tools
+make XZ_SUPPORT=1 LZMA_XZ_SUPPORT=1 LZA_SUPPORT=1
+CC="gcc ${BUILD64}" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
+make XZ_SUPPORT=1 LZMA_XZ_SUPPORT=1 LZA_SUPPORT=1
+mkdir -p $PKG/bin
+make DESTDIR=$PKG/bin install
+
+}
