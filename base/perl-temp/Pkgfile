@@ -6,11 +6,11 @@ name=perl-temp
 version=5.26.0
 
 
-source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
+source=(http://yaolinux.techozor.fr/sources-base/perl-$version.tar.xz)
 
 
 build() {
-cd $name-$version
+cd perl-$version
 sed -i 's@/usr/include@/tools/include@g' ext/Errno/Errno_pm.PL
 ./configure.gnu \
     --prefix=/tools \
