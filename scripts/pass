@@ -138,9 +138,9 @@ do
 			
 		    util-linux)
 		    	rm -vf /usr/include/{blkid,libmount,uuid}
-			for lib in blkid lzma mount uuid
+			for lib in blkid mount uuid
                         do
-                            rm -vf /usr/lib64/${lib}.so*
+                            rm -vf /usr/lib64/lib${lib}.so*
                         done
 			for pc in blkid mount uuid
 			do
