@@ -140,11 +140,11 @@ do
 		    	rm -vf /usr/include/{blkid,libmount,uuid}
 			for lib in blkid lzma mount uuid
                         do
-                            rm -vf /usr/lib/${lib}.so*
+                            rm -vf /usr/lib64/${lib}.so*
                         done
 			for pc in blkid mount uuid
 			do
-			    rm -vf /usr/lib/pkgconfig/${pc}.pc
+			    rm -vf /usr/lib64/pkgconfig/${pc}.pc
 			done
 			$PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
 			;;
