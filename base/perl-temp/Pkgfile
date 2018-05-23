@@ -1,5 +1,4 @@
-description="Le paquet Perl contient le langage de rapport et d'extraction pratique (Practical Extraction 
-and Report Language)"
+description="Le paquet Perl contient le langage de rapport et d'extraction pratique"
 url="https://www.perl.org/"
 packager="Hugo <graknu@techozor.fr>"
 
