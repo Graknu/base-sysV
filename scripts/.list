@@ -90,4 +90,12 @@ dbus
 tar
 texinfo
 util-linux
-vil
+vim
+lib32-libgpg-error
+libgpg-error
+libgcrypt
+make-ca
+libtasn1
+p11-kit
+libedit
+openssh
