@@ -3,7 +3,7 @@ and Report Language)"
 url="https://www.perl.org/"
 packager="Hugo <graknu@techozor.fr>"
 
-name=perl
+name=perl-temp
 version=5.26.0
 
 
