@@ -95,7 +95,7 @@ do
 	FILE=`echo $i|cut -d "|" -f2`
 	MD5SUM=`echo $i|cut -d "|" -f1`
 	if [ ! -f $CLFS/sources/$FILE ]; then
-		wget --no-check-certificate $URL/sources/$FILE -P $CLFS/sources
+		wget --no-check-certificate $URL/$FILE -P $CLFS/sources
 	fi
 	if [ "$MD5SUM" != "skip" ]; then
 		echo "$MD5SUM  $FILE" >> $CLFS/sources/.md5sums
