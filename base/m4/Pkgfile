@@ -15,6 +15,6 @@ CC="gcc ${BUILD64}" ./configure \
     --prefix=/usr
 make
 make check
-make install
+make DESTDIR=$PKG install
 }
 
