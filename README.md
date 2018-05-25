@@ -292,6 +292,61 @@ export BUILD64="${BUILD64}"
 export CLFS_TARGET32="${CLFS_TARGET32}"
 EOF
 ```
+## Create passwd and group files
+```bash
+cat > /etc/passwd << "EOF"
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:/bin:/bin/false
+daemon:x:2:6:/sbin:/bin/false
+messagebus:x:27:27:D-Bus Message Daemon User:/dev/null:/bin/false
+systemd-bus-proxy:x:71:72:systemd Bus Proxy:/:/bin/false
+systemd-journal-gateway:x:73:73:systemd Journal Gateway:/:/bin/false
+systemd-journal-remote:x:74:74:systemd Journal Remote:/:/bin/false
+systemd-journal-upload:x:75:75:systemd Journal Upload:/:/bin/false
+systemd-network:x:76:76:systemd Network Management:/:/bin/false
+systemd-resolve:x:77:77:systemd Resolver:/:/bin/false
+systemd-timesync:x:78:78:systemd Time Synchronization:/:/bin/false
+systemd-coredump:x:79:79:systemd Core Dumper:/:/bin/false
+nobody:x:65534:65533:Unprivileged User:/dev/null:/bin/false
+EOF
+```
+```bash
+cat > /etc/group << "EOF"
+root:x:0:
+bin:x:1:
+sys:x:2:
+kmem:x:3:
+tty:x:5:
+tape:x:4:
+daemon:x:6:
+floppy:x:7:
+disk:x:8:
+lp:x:9:
+dialout:x:10:
+audio:x:11:
+video:x:12:
+utmp:x:13:
+usb:x:14:
+cdrom:x:15:
+adm:x:16:
+mail:x:30:
+messagebus:x:27:
+nogroup:x:65533:
+systemd-bus-proxy:x:72:
+systemd-journal:x:28:
+systemd-journal-gateway:x:73:
+systemd-journal-remote:x:74:
+systemd-journal-upload:x:75:
+systemd-network:x:76:
+systemd-resolve:x:77:
+systemd-timesync:x:78:
+systemd-coredump:x:79:
+wheel:x:39:
+EOF
+```
+```bash
+exec /tools/bin/bash --login +h
+```
 
 ## Some "command not found" will appears, but not important here
 
