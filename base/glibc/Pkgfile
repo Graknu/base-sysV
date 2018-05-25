@@ -39,7 +39,7 @@ install -v -Dm644 ../glibc-2.25/nscd/nscd.tmpfiles $PKG/usr/lib/tmpfiles.d/nscd.
 install -v -Dm644 ../glibc-2.25/nscd/nscd.service $PKG/lib/systemd/system/nscd.service
 
 mkdir -pv $PKG/usr/lib/locale
-mkdir -pv ../localedata/SUPPORTED
+mkdir -pv ../localedata/
 
 cp $SRC/glibc.locales.supported \
 ../localedata/SUPPORTED
