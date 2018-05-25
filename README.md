@@ -77,13 +77,15 @@ exec env -i HOME=${HOME} TERM=${TERM} PS1='\u:\w\$ ' /bin/bash
 EOF 
 ```
 ```bash
-set +h 
-umask 022 
-CLFS=/mnt/clfs 
-LC_ALL=POSIX 
-PATH=/home/clfs/bin:/cross-tools/bin:/bin:/usr/bin 
-export CLFS LC_ALL PATH 
-unset CFLAGS CXXFLAGS PKG_CONFIG_PATH > /home/clfs/.bashrc
+cat > ~/.bashrc << "EOF"
+set +h
+umask 022
+CLFS=/mnt/clfs
+LC_ALL=POSIX
+PATH=/home/clfs/bin:/cross-tools/bin:/bin:/usr/bin
+export CLFS LC_ALL PATH
+unset CFLAGS CXXFLAGS PKG_CONFIG_PATH
+EOF
 ```
 ## You are in the LFS user, now continue the installation with
 ```bash
