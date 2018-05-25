@@ -185,13 +185,13 @@ cd $CLFS/root/development/base/nutyx
 
 ## install it
 ```bash
-/tools/bin/pkgadd -r $LFS nutyx1* \
-/tools/bin/pkgadd -r $LFS nutyx.man1*
+/tools/bin/pkgadd -r $CLFS nutyx1* \
+/tools/bin/pkgadd -r $CLFS nutyx.man1*
 ```
 
 ## check if it's present
 ```bash
-/tools/bin/pkginfo -r $LFS -i
+/tools/bin/pkginfo -r $CLFS -i
 ```
 
 ## It's have to return 
