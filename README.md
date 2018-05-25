@@ -45,9 +45,11 @@ chown -v clfs ${CLFS}/tools \
 chown -v clfs ${CLFS}/cross-tools \
 chown -v clfs ${CLFS}/sources \
 chown -v clfs $CLFS \
+
 cat > /home/clfs/.bash_profile << "EOF" \
-exec env -i HOME=${HOME} TERM=${TERM} PS1='\u:\w\$ ' /bin/bash
-EOF \
+exec env -i HOME=${HOME} TERM=${TERM} PS1='\u:\w\$ ' /bin/bash \
+EOF 
+
 set +h \
 umask 022 \
 CLFS=/mnt/clfs \
@@ -59,6 +61,21 @@ unset CFLAGS CXXFLAGS PKG_CONFIG_PATH > /home/lfs/.bashrc
 ## Now go in the LFS user
 su - clfs
 
+## initializing variable for cross-tools
+export CLFS_HOST=$(echo ${MACHTYPE} | sed -e 's/-[^-]*/-cross/') \
+export CLFS_TARGET="x86_64-unknown-linux-gnu" \
+export CLFS_TARGET32="i686-pc-linux-gnu" \
+export BUILD32="-m32" \
+export BUILD64="-m64" 
+
+cat >> ~/.bashrc << EOF \
+export CLFS_HOST="${CLFS_HOST}" \
+export CLFS_TARGET="${CLFS_TARGET}" \
+export CLFS_TARGET32="${CLFS_TARGET32}" \
+export BUILD32="${BUILD32}" \
+export BUILD64="${BUILD64}" \
+EOF \
+
 ## You are in the LFS user, now continue the installation with
 git clone https://github.com/Graknu/cross-base_sysD.git development \
 cd development \
@@ -66,6 +83,22 @@ scripts/runmebeforepass1
 
 ## Normally, all will be good with the message above
 "====> Successfull configured"
+## initializing variable for chroot
+export CC="${CLFS_TARGET}-gcc ${BUILD64}" \
+export CXX="${CLFS_TARGET}-g++ ${BUILD64}" \
+export AR="${CLFS_TARGET}-ar" \
+export AS="${CLFS_TARGET}-as" \
+export RANLIB="${CLFS_TARGET}-ranlib" \
+export LD="${CLFS_TARGET}-ld" \
+export STRIP="${CLFS_TARGET}-strip" 
+
+echo export CC=\""${CC}\"" >> ~/.bashrc \
+echo export CXX=\""${CXX}\"" >> ~/.bashrc \
+echo export AR=\""${AR}\"" >> ~/.bashrc \
+echo export AS=\""${AS}\"" >> ~/.bashrc \
+echo export RANLIB=\""${RANLIB}\"" >> ~/.bashrc \
+echo export LD=\""${LD}\"" >> ~/.bashrc \
+echo export STRIP=\""${STRIP}\"" >> ~/.bashrc \
 
 ## Do the first pass
 cd chroot \
@@ -88,10 +121,10 @@ echo $CLFS
 
 ## if the result is correct continue with
 chown -R root:root $CLFS \
-install -dv -m0750  $LFS/root \
-ln -sv development/scripts $LFS/root/bin \
-mv /home/lfs/development $LFS/root/ \
-cd $LFS/root/development/base/nutyx
+install -dv -m0750  $CLFS/root \
+ln -sv development/scripts $CLFS/root/bin \
+mv /home/clfs/development $CLFS/root/ \
+cd $CLFS/root/development/base/nutyx
 
 ## make the first package
 /tools/bin/pkgmk -cf ../../../bin/pkgmk.conf.passes
