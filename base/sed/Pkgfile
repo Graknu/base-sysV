@@ -15,7 +15,7 @@ CC="gcc ${BUILD64}" ./configure \
     --bindir=/bin \
     --docdir=/usr/share/doc/sed-4.4
 make
-make htlk
+make html
 make check
 make DESTDIR=$PKG install
 make DESTDIR=$PKG install-html-am
