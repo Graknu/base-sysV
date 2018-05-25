@@ -30,7 +30,7 @@ sed -i '/cross-compiling/s@ifeq@ifneq@g' ../glibc-2.25/localedata/Makefile
 touch $PKG/etc/ld.so.conf
 make DESTDIR=$PKG install &&
 rm -v $PKG/usr/include/rpcsvc/*.x
-rm -rf $PKG/{etc,sbin,usr/{bin,sbin,share},var}
+rm -rf $PKG/{etc,sbin,usr/{bin,sbin,share,include},var}
 rm -vf $PKG/etc/ld.so.conf
 }
 
