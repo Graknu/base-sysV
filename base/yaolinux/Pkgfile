@@ -1,8 +1,8 @@
 description="Base of the system"
-packager="Hugo <erondror@orange.fr>"
+packager="Hugo <graknu@techozor.fr>"
 
 name=yaolinux
-version=1.0
+version=0.1
 
 source=(http://mirror.yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
 
