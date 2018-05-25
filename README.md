@@ -58,9 +58,17 @@ set +h \
 umask 022 \
 CLFS=/mnt/clfs \
 LC_ALL=POSIX \
-PATH=/cross-tools/bin:/bin:/usr/bin \
+PATH=/home/clfs/bin:/cross-tools/bin:/bin:/usr/bin \
 export CLFS LC_ALL PATH \
 unset CFLAGS CXXFLAGS PKG_CONFIG_PATH > /home/clfs/.bashrc
+
+## You are in the LFS user, now continue the installation with
+git clone https://github.com/Graknu/cross-base_sysD.git development \
+cd development \
+scripts/runmebeforepass1 
+
+## Normally, all will be good with the message above
+"====> Successfull configured"
 
 ## initializing variable for cross-tools
 export CLFS_HOST=$(echo ${MACHTYPE} | sed -e 's/-[^-]*/-cross/') \
@@ -77,13 +85,10 @@ export BUILD32="${BUILD32}" \
 export BUILD64="${BUILD64}" \
 EOF
 
-## You are in the LFS user, now continue the installation with
-git clone https://github.com/Graknu/cross-base_sysD.git development \
-cd development \
-scripts/runmebeforepass1 
+## Go to compile cross-tools
+cd cross-tools
+pass
 
-## Normally, all will be good with the message above
-"====> Successfull configured"
 ## initializing variable for chroot
 export CC="${CLFS_TARGET}-gcc ${BUILD64}" \
 export CXX="${CLFS_TARGET}-g++ ${BUILD64}" \
@@ -168,8 +173,10 @@ sysfs on /mnt/lfs/sys type sysfs (rw,relatime) \
 tmpfs on /mnt/lfs/run type tmpfs (rw,relatime)"
 
 ## continue in chroot
-chroot "$LFS" /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \ \
-/bin/bash --login +h
+chroot "${CLFS}" /tools/bin/env -i \
+    HOME=/root TERM="${TERM}" PS1='\u:\w\$ ' \
+    PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
+    /tools/bin/bash --login +h
 
 ## Some "command not found" will appears, but not important here
 
