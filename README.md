@@ -4,8 +4,10 @@
 ```bash
 cards install cards.devel git 
 ```
+```bash
 wget http://rems.techozor.fr/sources/install-nutyx{,.md5sum} \
 md5sum -c install-nutyx.md5sum
+```
 
 ## if the commands says "install-nutyx: OK", you can continue
 chmod -v 755 install-nutyx \
