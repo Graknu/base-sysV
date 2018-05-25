@@ -30,6 +30,7 @@ CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" \
     --cache-file=config.cache
 
 make
+mkdir -pv $PKG/etc/
 touch $PKG/etc/ld.so.conf
 make install_root=$PKG install &&
 rm -v $PKG/usr/include/rpcsvc/*.x
