@@ -145,17 +145,19 @@ cd $CLFS/root/development/base/nutyx
 VERSION="development" install-nutyx -ic
 
 ## We mount the folders 
-mount -v --bind /dev $LFS/dev \
-mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620 \
-mount -vt proc proc $LFS/proc \
-mount -vt sysfs sysfs $LFS/sys \
-mount -vt tmpfs tmpfs $LFS/run \
-if [ -h /dev/shm ]; then mkdir -pv $LFS/$(readlink $LFS/dev/shm);fi \
-chmod 1777 /dev/shm \
+mkdir -pv ${CLFS}/{dev,proc,run,sys} \
+mknod -m 600 ${CLFS}/dev/console c 5 1 \
+mknod -m 666 ${CLFS}/dev/null c 1 3 \
+mount -v -o bind /dev ${CLFS}/dev \
+mount -vt devpts -o gid=5,mode=620 devpts ${CLFS}/dev/pts \
+mount -vt proc proc ${CLFS}/proc \
+mount -vt tmpfs tmpfs ${CLFS}/run \
+mount -vt sysfs sysfs ${CLFS}/sys \
+[ -h ${CLFS}/dev/shm ] && mkdir -pv ${CLFS}/$(readlink ${CLFS}/dev/shm) \
 cp -v /etc/resolv.conf $LFS/etc
 
 ## We check the correct mount
-mount|grep $LFS
+mount|grep $CLFS
 
 ## will normally return if it's on /dev/sda2
 "/dev/sda2 on /mnt/lfs type ext4 (rw) \
