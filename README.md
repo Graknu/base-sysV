@@ -5,27 +5,27 @@
 cards install cards.devel git 
 ```
 ```bash
-wget http://rems.techozor.fr/sources/install-nutyx{,.md5sum} \
+wget http://rems.techozor.fr/sources/install-nutyx{,.md5sum} 
 md5sum -c install-nutyx.md5sum
 ```
 
 ## if the commands says "install-nutyx: OK", you can continue
 ```bash
-chmod -v 755 install-nutyx \
+chmod -v 755 install-nutyx 
 mv -v install-nutyx /usr/bin/install-nutyx
 ```
 
 ## If you've already make the installation process, you have to remove the LFS user from the nutyx base by
 ```bash
-userdel clfs \
-rm -r /home/clfs \
-rm -r /mnt/clfs \
+userdel clfs 
+rm -r /home/clfs 
+rm -r /mnt/clfs 
 groupdel clfs
 ```
 
 ## After that or if you didn't make an installation process, you have to run these following commands
 ```bash
-export CLFS=/mnt/clfs \
+export CLFS=/mnt/clfs 
 mkdir -pv $CLFS
 ```
 
@@ -47,21 +47,21 @@ export CLFS=/mnt/clfs
 
 ## Now, create the directories
 ```bash
-mkdir -vp $CLFS/{sources,tools,cross-tools} \
-ln -svf $CLFS/tools / \
-ln -svf $CLFS/cross-tools / \
-ln -svf $CLFS/sources / 
+mkdir -vp $CLFS/{sources,tools,cross-tools} 
+ln -svf $CLFS/tools / 
+ln -svf $CLFS/cross-tools / 
+ln -svf $CLFS/sources /
 ```
 
 ## Create the CLFS user
 ```bash
-groupadd clfs \
-useradd -s /bin/bash -g clfs -d /home/clfs clfs \
-mkdir -pv /home/clfs \
-chown -v clfs:clfs /home/clfs \
-chown -v clfs ${CLFS}/tools \
-chown -v clfs ${CLFS}/cross-tools \
-chown -v clfs ${CLFS}/sources \
+groupadd clfs 
+useradd -s /bin/bash -g clfs -d /home/clfs clfs 
+mkdir -pv /home/clfs 
+chown -v clfs:clfs /home/clfs 
+chown -v clfs ${CLFS}/tools 
+chown -v clfs ${CLFS}/cross-tools 
+chown -v clfs ${CLFS}/sources 
 chown -v clfs $CLFS
 ```
 
@@ -72,23 +72,23 @@ su - clfs
 
 ## Create bashrc and bash-profile for clfs user
 ```bash
-cat > /home/clfs/.bash_profile << "EOF" \
-exec env -i HOME=${HOME} TERM=${TERM} PS1='\u:\w\$ ' /bin/bash \
+cat > /home/clfs/.bash_profile << "EOF" 
+exec env -i HOME=${HOME} TERM=${TERM} PS1='\u:\w\$ ' /bin/bash 
 EOF 
 ```
 ```bash
-set +h \
-umask 022 \
-CLFS=/mnt/clfs \
-LC_ALL=POSIX \
-PATH=/home/clfs/bin:/cross-tools/bin:/bin:/usr/bin \
-export CLFS LC_ALL PATH \
+set +h 
+umask 022 
+CLFS=/mnt/clfs 
+LC_ALL=POSIX 
+PATH=/home/clfs/bin:/cross-tools/bin:/bin:/usr/bin 
+export CLFS LC_ALL PATH 
 unset CFLAGS CXXFLAGS PKG_CONFIG_PATH > /home/clfs/.bashrc
 ```
 ## You are in the LFS user, now continue the installation with
 ```bash
-git clone https://github.com/Graknu/cross-base_sysD.git development \
-cd development \
+git clone https://github.com/Graknu/cross-base_sysD.git development 
+cd development 
 scripts/runmebeforepass1
 ```
 
@@ -99,19 +99,19 @@ scripts/runmebeforepass1
 
 ## initializing variable for cross-tools
 ```bash
-export CLFS_HOST=$(echo ${MACHTYPE} | sed -e 's/-[^-]*/-cross/') \
-export CLFS_TARGET="x86_64-unknown-linux-gnu" \
-export CLFS_TARGET32="i686-pc-linux-gnu" \
-export BUILD32="-m32" \
+export CLFS_HOST=$(echo ${MACHTYPE} | sed -e 's/-[^-]*/-cross/') 
+export CLFS_TARGET="x86_64-unknown-linux-gnu" 
+export CLFS_TARGET32="i686-pc-linux-gnu" 
+export BUILD32="-m32" 
 export BUILD64="-m64" 
 ```
 ```bash
-cat >> ~/.bashrc << EOF \
-export CLFS_HOST="${CLFS_HOST}" \
-export CLFS_TARGET="${CLFS_TARGET}" \
-export CLFS_TARGET32="${CLFS_TARGET32}" \
-export BUILD32="${BUILD32}" \
-export BUILD64="${BUILD64}" \
+cat >> ~/.bashrc << EOF 
+export CLFS_HOST="${CLFS_HOST}" 
+export CLFS_TARGET="${CLFS_TARGET}" 
+export CLFS_TARGET32="${CLFS_TARGET32}" 
+export BUILD32="${BUILD32}" 
+export BUILD64="${BUILD64}" 
 EOF
 ```
 
@@ -123,21 +123,21 @@ pass
 
 ## initializing variable for chroot
 ```bash
-export CC="${CLFS_TARGET}-gcc ${BUILD64}" \
-export CXX="${CLFS_TARGET}-g++ ${BUILD64}" \
-export AR="${CLFS_TARGET}-ar" \
-export AS="${CLFS_TARGET}-as" \
-export RANLIB="${CLFS_TARGET}-ranlib" \
-export LD="${CLFS_TARGET}-ld" \
+export CC="${CLFS_TARGET}-gcc ${BUILD64}" 
+export CXX="${CLFS_TARGET}-g++ ${BUILD64}" 
+export AR="${CLFS_TARGET}-ar" 
+export AS="${CLFS_TARGET}-as" 
+export RANLIB="${CLFS_TARGET}-ranlib" 
+export LD="${CLFS_TARGET}-ld" 
 export STRIP="${CLFS_TARGET}-strip" 
 ```
 ```bash
-echo export CC=\""${CC}\"" >> ~/.bashrc \
-echo export CXX=\""${CXX}\"" >> ~/.bashrc \
-echo export AR=\""${AR}\"" >> ~/.bashrc \
-echo export AS=\""${AS}\"" >> ~/.bashrc \
-echo export RANLIB=\""${RANLIB}\"" >> ~/.bashrc \
-echo export LD=\""${LD}\"" >> ~/.bashrc \
+echo export CC=\""${CC}\"" >> ~/.bashrc 
+echo export CXX=\""${CXX}\"" >> ~/.bashrc 
+echo export AR=\""${AR}\"" >> ~/.bashrc 
+echo export AS=\""${AS}\"" >> ~/.bashrc 
+echo export RANLIB=\""${RANLIB}\"" >> ~/.bashrc 
+echo export LD=\""${LD}\"" >> ~/.bashrc 
 echo export STRIP=\""${STRIP}\"" >> ~/.bashrc
 ``` 
 
@@ -149,7 +149,7 @@ pass
 
 ## All will be ok with the message after a long time, which depends of your machine
 ```bash
-"=======> Building '/home/clfs/development/chroot/cards/Pkgfile' succeeded. \
+"=======> Building '/home/clfs/development/chroot/cards/Pkgfile' succeeded. 
 /home/clfs/development/chroot"
 ```
 ## Go to pass2 :
@@ -171,10 +171,10 @@ echo $CLFS
 
 ## if the result is correct continue with
 ```bash
-chown -R root:root $CLFS \
-install -dv -m0750  $CLFS/root \
-ln -sv development/scripts $CLFS/root/bin \
-mv /home/clfs/development $CLFS/root/ \
+chown -R root:root $CLFS 
+install -dv -m0750  $CLFS/root 
+ln -sv development/scripts $CLFS/root/bin 
+mv /home/clfs/development $CLFS/root/ 
 cd $CLFS/root/development/base/nutyx
 ```
 
@@ -185,8 +185,8 @@ cd $CLFS/root/development/base/nutyx
 
 ## install it
 ```bash
-/tools/bin/pkgadd -r $CLFS nutyx1* \
-/tools/bin/pkgadd -r $CLFS nutyx.man1*
+/tools/bin/pkgadd -r $CLFS yaolinux1*
+/tools/bin/pkgadd -r $CLFS yaolinux.man1*
 ```
 
 ## check if it's present
@@ -196,8 +196,8 @@ cd $CLFS/root/development/base/nutyx
 
 ## It's have to return 
 ```bash
-"(base) nutyx 8.2-1... \
-(base) nutyx.man 8.2-1..."
+"(base) yaolinux 8.2-1...
+(base) yaolinux.man 8.2-1..."
 ```
 
 ## make the configuration
