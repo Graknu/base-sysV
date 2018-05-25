@@ -20,9 +20,9 @@ CC="gcc ${BUILD64}" \
     --enable-install-program=hostname
 make
 make DESTDIR=$PKG install
+mkdir -pv $PKG/{usr/sbin,bin}
 mv -v $PKG/usr/bin/{cat,chgrp,chmod,chown,cp,date} $PKG/bin
 mv -v $PKG/usr/bin/{dd,df,echo,false,hostname,ln,ls,mkdir,mknod} $PKG/bin
 mv -v $PKG/usr/bin/{mv,pwd,rm,rmdir,stty,true,uname} $PKG/bin
 mv -v $PKG/usr/bin/chroot $PKG/usr/sbin
 }
-
