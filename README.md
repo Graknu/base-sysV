@@ -351,9 +351,11 @@ exec /tools/bin/bash --login +h
 ## Some "command not found" will appears, but not important here
 
 ## continue with
-export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin:/root/bin \
+```bash
+export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/cross-tools/bin:/tools/bin:/root/bin \
 cd /root/development/base \
 pass
+```
 
 ## After a moment the scripts says you have to install bash manually, go with the commands
 exit \
