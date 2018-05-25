@@ -41,15 +41,20 @@ echo $CLFS
 ```
 
 ## If nothing is in the output, make
+```bash
 export CLFS=/mnt/clfs 
+```
 
 ## Now, create the directories
+```bash
 mkdir -vp $CLFS/{sources,tools,cross-tools} \
 ln -svf $CLFS/tools / \
 ln -svf $CLFS/cross-tools / \
 ln -svf $CLFS/sources / 
+```
 
 ## Create the CLFS user
+```bash
 groupadd clfs \
 useradd -s /bin/bash -g clfs -d /home/clfs clfs \
 mkdir -pv /home/clfs \
@@ -58,15 +63,20 @@ chown -v clfs ${CLFS}/tools \
 chown -v clfs ${CLFS}/cross-tools \
 chown -v clfs ${CLFS}/sources \
 chown -v clfs $CLFS
+```
 
 ## Now go in the LFS user
+```bash
 su - clfs
+```
 
 ## Create bashrc and bash-profile for clfs user
+```bash
 cat > /home/clfs/.bash_profile << "EOF" \
 exec env -i HOME=${HOME} TERM=${TERM} PS1='\u:\w\$ ' /bin/bash \
 EOF 
-
+```
+```bash
 set +h \
 umask 022 \
 CLFS=/mnt/clfs \
@@ -74,22 +84,28 @@ LC_ALL=POSIX \
 PATH=/home/clfs/bin:/cross-tools/bin:/bin:/usr/bin \
 export CLFS LC_ALL PATH \
 unset CFLAGS CXXFLAGS PKG_CONFIG_PATH > /home/clfs/.bashrc
-
+```
 ## You are in the LFS user, now continue the installation with
+```bash
 git clone https://github.com/Graknu/cross-base_sysD.git development \
 cd development \
-scripts/runmebeforepass1 
+scripts/runmebeforepass1
+```
 
 ## Normally, all will be good with the message above
+```bash
 "====> Successfull configured"
+```
 
 ## initializing variable for cross-tools
+```bash
 export CLFS_HOST=$(echo ${MACHTYPE} | sed -e 's/-[^-]*/-cross/') \
 export CLFS_TARGET="x86_64-unknown-linux-gnu" \
 export CLFS_TARGET32="i686-pc-linux-gnu" \
 export BUILD32="-m32" \
 export BUILD64="-m64" 
-
+```
+```bash
 cat >> ~/.bashrc << EOF \
 export CLFS_HOST="${CLFS_HOST}" \
 export CLFS_TARGET="${CLFS_TARGET}" \
@@ -97,12 +113,16 @@ export CLFS_TARGET32="${CLFS_TARGET32}" \
 export BUILD32="${BUILD32}" \
 export BUILD64="${BUILD64}" \
 EOF
+```
 
 ## Go to compile cross-tools
+```bash
 cd cross-tools
 pass
+```
 
 ## initializing variable for chroot
+```bash
 export CC="${CLFS_TARGET}-gcc ${BUILD64}" \
 export CXX="${CLFS_TARGET}-g++ ${BUILD64}" \
 export AR="${CLFS_TARGET}-ar" \
@@ -110,7 +130,8 @@ export AS="${CLFS_TARGET}-as" \
 export RANLIB="${CLFS_TARGET}-ranlib" \
 export LD="${CLFS_TARGET}-ld" \
 export STRIP="${CLFS_TARGET}-strip" 
-
+```
+```bash
 echo export CC=\""${CC}\"" >> ~/.bashrc \
 echo export CXX=\""${CXX}\"" >> ~/.bashrc \
 echo export AR=\""${AR}\"" >> ~/.bashrc \
@@ -118,22 +139,30 @@ echo export AS=\""${AS}\"" >> ~/.bashrc \
 echo export RANLIB=\""${RANLIB}\"" >> ~/.bashrc \
 echo export LD=\""${LD}\"" >> ~/.bashrc \
 echo export STRIP=\""${STRIP}\"" >> ~/.bashrc
+``` 
 
 ## Do the first pass
+```bash
 cd chroot \
 pass
+```
 
 ## All will be ok with the message after a long time, which depends of your machine
+```bash
 "=======> Building '/home/clfs/development/chroot/cards/Pkgfile' succeeded. \
 /home/clfs/development/chroot"
-
+```
 ## Go to pass2 :
 
 ## The rest of installation will be done in root
+```bash
 exit
+```
 
 ## check the LFS variable
+```bash
 echo $CLFS
+```
 
 ## will return 
 "/mnt/clfs"
