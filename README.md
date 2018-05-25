@@ -175,7 +175,7 @@ chown -R root:root $CLFS
 install -dv -m0750  $CLFS/root 
 ln -sv development/scripts $CLFS/root/bin 
 mv /home/clfs/development $CLFS/root/ 
-cd $CLFS/root/development/base/nutyx
+cd $CLFS/root/development/base/yaolinux
 ```
 
 ## make the first package
