@@ -21,8 +21,7 @@ make
 make check
 make DESTDIR=$PKG install
 mv -v $PKG/usr/lib/libprocps.so.* $PKG/lib
-ln -sfv ../../lib/$(readlink $PKG/usr/lib/libprocps.so) 
-$PKG/usr/lib/libprocps.so
+ln -sfv ../../lib/$(readlink $PKG/usr/lib/libprocps.so) $PKG/usr/lib/libprocps.so
 
 rm -r $PKG/bin
 rm -r $PKG/usr/{bin,include,share}
