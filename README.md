@@ -10,25 +10,35 @@ md5sum -c install-nutyx.md5sum
 ```
 
 ## if the commands says "install-nutyx: OK", you can continue
+```bash
 chmod -v 755 install-nutyx \
 mv -v install-nutyx /usr/bin/install-nutyx
+```
 
 ## If you've already make the installation process, you have to remove the LFS user from the nutyx base by
+```bash
 userdel clfs \
 rm -r /home/clfs \
 rm -r /mnt/clfs \
 groupdel clfs
+```
 
 ## After that or if you didn't make an installation process, you have to run these following commands
+```bash
 export CLFS=/mnt/clfs \
 mkdir -pv $CLFS
+```
 
 ## Please note that you have to choose your partition in the next command, here /dev/sda2
+```bash
 mount /dev/sda2 $CLFS
+```
 
 ## It's time to begin pass1
 ## make sure the LFS variable is set by
+```bash
 echo $CLFS 
+```
 
 ## If nothing is in the output, make
 export CLFS=/mnt/clfs 
