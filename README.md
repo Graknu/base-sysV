@@ -87,6 +87,9 @@ export CLFS LC_ALL PATH
 unset CFLAGS CXXFLAGS PKG_CONFIG_PATH
 EOF
 ```
+```bash
+source ~/.bash_profile
+```
 ## You are in the LFS user, now continue the installation with
 ```bash
 git clone https://github.com/Graknu/cross-base_sysD.git development 
