@@ -10,6 +10,8 @@ cd -$version
 CC="gcc ${BUILD64}" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 ./configure \
 --prefix=/usr \
+--libdir=/usr/lib64 \
+--libexecdir=/usr/lib64 \
 --enable-nls --bindir=/bin \
 --with-ncursesw \
 --mandir=/usr/share/man
@@ -22,7 +24,7 @@ devel() {
 cd $PKG
 bsdtar -cf \
 $PKGMK_PACKAGE_DIR/$name.devel${PKGMK_BUILDVER}`uname -m`.$PKGMK_PACKAGE_EXT \
-usr/lib
+usr/lib64
 
-rm -r usr/lib
+rm -r usr/lib64
 }
