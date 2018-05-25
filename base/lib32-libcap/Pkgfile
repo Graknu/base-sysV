@@ -16,6 +16,6 @@ chmod -v 755 $PKG/lib/libcap.so.2.25
 ln -sfv ../../lib/$(readlink $PKG/lib/libcap.so) $PKG/usr/lib/libcap.so
 rm -v $PKG/lib/libcap.so
 mv -v $PKG/lib/libcap.a /usr/lib
-rm -rf $PKG/usr/include"
+rm -rf $PKG/usr/include
 }
 
