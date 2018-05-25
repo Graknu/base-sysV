@@ -207,15 +207,15 @@ VERSION="development" install-nutyx -ic
 
 ## We mount the folders 
 ```bash
-mkdir -pv ${CLFS}/{dev,proc,run,sys} \
-mknod -m 600 ${CLFS}/dev/console c 5 1 \
-mknod -m 666 ${CLFS}/dev/null c 1 3 \
-mount -v -o bind /dev ${CLFS}/dev \
-mount -vt devpts -o gid=5,mode=620 devpts ${CLFS}/dev/pts \
-mount -vt proc proc ${CLFS}/proc \
-mount -vt tmpfs tmpfs ${CLFS}/run \
-mount -vt sysfs sysfs ${CLFS}/sys \
-[ -h ${CLFS}/dev/shm ] && mkdir -pv ${CLFS}/$(readlink ${CLFS}/dev/shm) \
+mkdir -pv ${CLFS}/{dev,proc,run,sys} 
+mknod -m 600 ${CLFS}/dev/console c 5 1 
+mknod -m 666 ${CLFS}/dev/null c 1 3 
+mount -v -o bind /dev ${CLFS}/dev 
+mount -vt devpts -o gid=5,mode=620 devpts ${CLFS}/dev/pts 
+mount -vt proc proc ${CLFS}/proc
+mount -vt tmpfs tmpfs ${CLFS}/run 
+mount -vt sysfs sysfs ${CLFS}/sys
+[ -h ${CLFS}/dev/shm ] && mkdir -pv ${CLFS}/$(readlink ${CLFS}/dev/shm) 
 cp -v /etc/resolv.conf $LFS/etc
 ```
 
@@ -226,11 +226,11 @@ mount|grep $CLFS
 
 ## will normally return if it's on /dev/sda2
 ```bash
-"/dev/sda2 on /mnt/lfs type ext4 (rw) \
-/devtmpfs on /mnt/lfs/dev type devtmpfs (rw,nosuid,relatime,size=16300988k,nr_inodes=4075247,mode=755) \
-devpts on /mnt/lfs/dev/pts type devpts (rw,relatime,gid=5,mode=620,ptmxmode=000) \
-proc on /mnt/lfs/proc type proc (rw,relatime) \
-sysfs on /mnt/lfs/sys type sysfs (rw,relatime) \
+"/dev/sda2 on /mnt/lfs type ext4 (rw) 
+/devtmpfs on /mnt/lfs/dev type devtmpfs (rw,nosuid,relatime,size=16300988k,nr_inodes=4075247,mode=755) 
+devpts on /mnt/lfs/dev/pts type devpts (rw,relatime,gid=5,mode=620,ptmxmode=000) 
+proc on /mnt/lfs/proc type proc (rw,relatime) 
+sysfs on /mnt/lfs/sys type sysfs (rw,relatime) 
 tmpfs on /mnt/lfs/run type tmpfs (rw,relatime)"
 ```
 
