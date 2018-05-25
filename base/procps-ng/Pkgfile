@@ -21,7 +21,6 @@ sed -i -r 's|(pmap_initname)\\\$|\1|' testsuite/pmap.test/pmap.exp
 make check
 make DESTDIR=$PKG install
 mv -v $PKG/usr/lib64/libprocps.so.* $PKG/lib64
-ln -sfv ../../lib64/$(readlink $PKG/usr/lib64/libprocps.so) 
-$PKG/usr/lib64/libprocps.so
+ln -sfv ../../lib64/$(readlink $PKG/usr/lib64/libprocps.so) $PKG/usr/lib64/libprocps.so
 }
 
