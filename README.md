@@ -1,8 +1,9 @@
 ## Yaolinux-cross-Systemd, please following these commands to install the base
 
 ## on a normal Nutyx in root
-
-cards install cards.devel git \
+```bash
+cards install cards.devel git 
+```
 wget http://rems.techozor.fr/sources/install-nutyx{,.md5sum} \
 md5sum -c install-nutyx.md5sum
 
