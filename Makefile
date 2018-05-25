@@ -6,8 +6,6 @@ DIRTOOLS = tools
 
 DIRSCRIPTS = scripts
 
-DIRSERVICES = services-scripts
-
 .PHONY: all
 
 
@@ -28,17 +26,14 @@ clean:
 	$(MAKE) -C $(DIRSCRIPTS) clean
 	$(MAKE) -C $(DIRMAN) clean
 
-install-%:
-	$(MAKE) -C $(DIRSERVICES) $@
-
 dist: distclean
 
 	git archive --format=tar --prefix=$(NAME)/ HEAD | tar -x
 	git log > $(NAME)/ChangeLog
 	tar cJvf $(NAME).tar.xz $(NAME)
 	rm -rf $(NAME)
-	sed -i "/nutyx-/d" scripts/wget_nutyx_list
-	md5sum $(NAME).tar.xz >> scripts/wget_nutyx_list
+	sed -i "/nutyx-/d" scripts/wget_yaolinux_list
+	md5sum $(NAME).tar.xz >> scripts/wget_yaolinux_list
 
 distclean:
 	rm -rf $(NAME).tar.xz
