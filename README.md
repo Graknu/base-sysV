@@ -46,6 +46,10 @@ chown -v clfs ${CLFS}/cross-tools \
 chown -v clfs ${CLFS}/sources \
 chown -v clfs $CLFS \
 
+## Now go in the LFS user
+su - clfs
+
+## Create bashrc and bash-profile for clfs user
 cat > /home/clfs/.bash_profile << "EOF" \
 exec env -i HOME=${HOME} TERM=${TERM} PS1='\u:\w\$ ' /bin/bash \
 EOF 
@@ -56,10 +60,7 @@ CLFS=/mnt/clfs \
 LC_ALL=POSIX \
 PATH=/cross-tools/bin:/bin:/usr/bin \
 export CLFS LC_ALL PATH \
-unset CFLAGS CXXFLAGS PKG_CONFIG_PATH > /home/lfs/.bashrc
-
-## Now go in the LFS user
-su - clfs
+unset CFLAGS CXXFLAGS PKG_CONFIG_PATH > /home/clfs/.bashrc
 
 ## initializing variable for cross-tools
 export CLFS_HOST=$(echo ${MACHTYPE} | sed -e 's/-[^-]*/-cross/') \
@@ -74,7 +75,7 @@ export CLFS_TARGET="${CLFS_TARGET}" \
 export CLFS_TARGET32="${CLFS_TARGET32}" \
 export BUILD32="${BUILD32}" \
 export BUILD64="${BUILD64}" \
-EOF \
+EOF
 
 ## You are in the LFS user, now continue the installation with
 git clone https://github.com/Graknu/cross-base_sysD.git development \
@@ -98,7 +99,7 @@ echo export AR=\""${AR}\"" >> ~/.bashrc \
 echo export AS=\""${AS}\"" >> ~/.bashrc \
 echo export RANLIB=\""${RANLIB}\"" >> ~/.bashrc \
 echo export LD=\""${LD}\"" >> ~/.bashrc \
-echo export STRIP=\""${STRIP}\"" >> ~/.bashrc \
+echo export STRIP=\""${STRIP}\"" >> ~/.bashrc
 
 ## Do the first pass
 cd chroot \
