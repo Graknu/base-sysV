@@ -69,6 +69,8 @@ do
             base)
                 PKGMK="pkgmk"
                 case $NAME in
+		    perl-temp)
+	                pkgmk.passes -cf ../../../bin/pkgmk.conf.passes -kw 2>&1|tee ${LOG}/$NAME.log || exit 1;;
 		    glibc)
 			mkdir -pv /usr/include
 			$PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
