@@ -165,33 +165,48 @@ echo $CLFS
 ```
 
 ## will return 
+```bash
 "/mnt/clfs"
+```
 
 ## if the result is correct continue with
+```bash
 chown -R root:root $CLFS \
 install -dv -m0750  $CLFS/root \
 ln -sv development/scripts $CLFS/root/bin \
 mv /home/clfs/development $CLFS/root/ \
 cd $CLFS/root/development/base/nutyx
+```
 
 ## make the first package
+```bash
 /tools/bin/pkgmk -cf ../../../bin/pkgmk.conf.passes
+```
 
 ## install it
+```bash
 /tools/bin/pkgadd -r $LFS nutyx1* \
 /tools/bin/pkgadd -r $LFS nutyx.man1*
+```
 
 ## check if it's present
+```bash
 /tools/bin/pkginfo -r $LFS -i
+```
 
 ## It's have to return 
+```bash
 "(base) nutyx 8.2-1... \
 (base) nutyx.man 8.2-1..."
+```
 
 ## make the configuration
+```bash
 VERSION="development" install-nutyx -ic
+```
 
 ## We mount the folders 
+```bash
 mkdir -pv ${CLFS}/{dev,proc,run,sys} \
 mknod -m 600 ${CLFS}/dev/console c 5 1 \
 mknod -m 666 ${CLFS}/dev/null c 1 3 \
@@ -202,23 +217,81 @@ mount -vt tmpfs tmpfs ${CLFS}/run \
 mount -vt sysfs sysfs ${CLFS}/sys \
 [ -h ${CLFS}/dev/shm ] && mkdir -pv ${CLFS}/$(readlink ${CLFS}/dev/shm) \
 cp -v /etc/resolv.conf $LFS/etc
+```
 
 ## We check the correct mount
+```bash
 mount|grep $CLFS
+```
 
 ## will normally return if it's on /dev/sda2
+```bash
 "/dev/sda2 on /mnt/lfs type ext4 (rw) \
 /devtmpfs on /mnt/lfs/dev type devtmpfs (rw,nosuid,relatime,size=16300988k,nr_inodes=4075247,mode=755) \
 devpts on /mnt/lfs/dev/pts type devpts (rw,relatime,gid=5,mode=620,ptmxmode=000) \
 proc on /mnt/lfs/proc type proc (rw,relatime) \
 sysfs on /mnt/lfs/sys type sysfs (rw,relatime) \
 tmpfs on /mnt/lfs/run type tmpfs (rw,relatime)"
+```
 
 ## continue in chroot
+```bash
 chroot "${CLFS}" /tools/bin/env -i \
     HOME=/root TERM="${TERM}" PS1='\u:\w\$ ' \
     PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
     /tools/bin/bash --login +h
+```
+## Changing ownership
+```bash
+chown -Rv 0:0 /tools
+chown -Rv 0:0 /cross-tools
+```
+
+## Creating directories
+```bash
+mkdir -pv /{bin,boot,dev,{etc/,}opt,home,lib{,64},mnt}
+mkdir -pv /{proc,media/{floppy,cdrom},run/{,shm},sbin,srv,sys}
+mkdir -pv /var/{lock,log,mail,spool}
+mkdir -pv /var/{opt,cache,lib{,64}/{misc,locate},local}
+install -dv /root -m 0750
+install -dv {/var,}/tmp -m 1777
+ln -sv ../run /var/run
+mkdir -pv /usr/{,local/}{bin,include,lib{,64},sbin,src}
+mkdir -pv /usr/{,local/}share/{doc,info,locale,man}
+mkdir -pv /usr/{,local/}share/{misc,terminfo,zoneinfo}
+mkdir -pv /usr/{,local/}share/man/man{1..8}
+install -dv /usr/lib/locale
+ln -sv ../lib/locale /usr/lib64
+```
+
+## Creating essential symlinks
+```bash
+ln -sv /tools/bin/{bash,cat,echo,grep,pwd,stty} /bin
+ln -sv /tools/bin/file /usr/bin
+ln -sv /tools/lib/libgcc_s.so{,.1} /usr/lib
+ln -sv /tools/lib64/libgcc_s.so{,.1} /usr/lib64
+ln -sv /tools/lib/libstd* /usr/lib
+ln -sv /tools/lib64/libstd* /usr/lib64
+ln -sv bash /bin/sh
+```
+
+## Add construction options
+```bash
+export BUILD32="-m32"
+export BUILD64="-m64"
+```
+
+```bash
+export CLFS_TARGET32="i686-pc-linux-gnu"
+```
+
+```bash
+cat >> ${CLFS}/root/.bash_profile << EOF
+export BUILD32="${BUILD32}"
+export BUILD64="${BUILD64}"
+export CLFS_TARGET32="${CLFS_TARGET32}"
+EOF
+```
 
 ## Some "command not found" will appears, but not important here
 
