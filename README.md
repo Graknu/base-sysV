@@ -44,7 +44,7 @@ chown -v clfs:clfs /home/clfs \
 chown -v clfs ${CLFS}/tools \
 chown -v clfs ${CLFS}/cross-tools \
 chown -v clfs ${CLFS}/sources \
-chown -v clfs $CLFS \
+chown -v clfs $CLFS
 
 ## Now go in the LFS user
 su - clfs
