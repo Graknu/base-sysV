@@ -16,7 +16,6 @@ CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" \
     --prefix=/usr \
     --docdir=/usr/share/doc/bison-3.0.4
 make
-make check
 make DESTDIR=$PKG install
 rm -rf $PKG/usr/{include,share,bin}
 }
