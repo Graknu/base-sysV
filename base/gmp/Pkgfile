@@ -26,22 +26,5 @@ make DESTDIR=$PKG install
 make DESTDIR=$PKG install-html
 mv -v $PKG/usr/include/gmp{,-64}.h
 install -m 0644 $SRC/gmp.h $PKG/usr/include/
-cat > $PKG/usr/include/gmp.h << "EOF"
-/* gmp.h - Stub Header  */
-#ifndef __STUB__GMP_H__
-#define __STUB__GMP_H__
-
-#if defined(__x86_64__) || \
-    defined(__sparc64__) || \
-    defined(__arch64__) || \
-    defined(__powerpc64__) || \
-    defined (__s390x__)
-# include "gmp-64.h"
-#else
-# include "gmp-32.h"
-#endif
-
-#endif /* __STUB__GMP_H__ */
-EOF
 }
 
