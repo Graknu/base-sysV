@@ -24,7 +24,6 @@ make html
 make check
 make DESTDIR=$PKG install
 make DESTDIR=$PKG install-html
-mv -v $PKG/usr/include/gmp{,-32}.h
 rm -rf $PKG/usr/{include,share,bin}
 }
 
