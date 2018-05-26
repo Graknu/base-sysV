@@ -11,7 +11,7 @@ source=(http://yaolinux.techozor.fr/sources-base/mpfr-$version.tar.xz
 
 
 build() {
-cd gmp-$version
+cd mpfr-$version
 patch -Np1 -i ../mpfr-3.1.5-fixes-1.patch
 CC="gcc -isystem /usr/include ${BUILD32}" \
     LDFLAGS="-Wl,-rpath-link,/usr/lib:/lib ${BUILD32}" \
