@@ -25,6 +25,7 @@ make check
 make DESTDIR=$PKG install
 make DESTDIR=$PKG install-html
 mv -v $PKG/usr/include/gmp{,-64}.h
+install -m 0644 $SRC/gmp.h $PKG/usr/include/
 cat > $PKG/usr/include/gmp.h << "EOF"
 /* gmp.h - Stub Header  */
 #ifndef __STUB__GMP_H__
