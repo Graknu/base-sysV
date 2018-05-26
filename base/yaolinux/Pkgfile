@@ -2,9 +2,9 @@ description="Base of the system"
 packager="Hugo <graknu@techozor.fr>"
 
 name=yaolinux
-version=0.1
+version=0.2
 
-source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
+source=(http://mirror.yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
 
 build () {
 cd $name-$version
