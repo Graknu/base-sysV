@@ -11,7 +11,6 @@ source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.bz2)
 
 build() {
 cd $name-$version
-expect -c "spawn ls"
 mkdir -v ../binutils-build
 cd ../binutils-build
 CC="gcc -isystem /usr/include ${BUILD64}" \
