@@ -46,7 +46,7 @@ mantxt: man $(MANPAGES:=.txt)
 
 
 install: all
-	install -D -m0644 nutyx.1 $(MANDIR)/man1/nutyx.1
+	install -D -m0644 yaolinux.1 $(MANDIR)/man1/yaolinux.1
 	install -D -m0644 ifup.8 $(MANDIR)/man8/ifup.8
 
 clean:
