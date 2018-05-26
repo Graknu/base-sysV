@@ -6,7 +6,8 @@ name=gmp
 version=6.1.2
 
 
-source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz
+        gmp.h)
 
 
 build() {
