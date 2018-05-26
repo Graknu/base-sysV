@@ -18,7 +18,6 @@ CXX="g++ ${BUILD64}" \
     --libdir=/usr/lib64 \
     --docdir=/usr/share/doc/bison-3.0.4
 make
-make check
 make DESTDIR=$PKG install
 }
 
