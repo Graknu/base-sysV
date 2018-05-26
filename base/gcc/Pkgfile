@@ -26,9 +26,6 @@ LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64:/usr/lib:/lib" \
     --enable-install-libiberty \
     --disable-bootstrap
 make
-ulimit -s 32768
-make -k check
-../gcc-7.1.0/contrib/test_summary
 make DESTDIR=$PKG install
 mkdir $PKG/lib
 ln -sv ../usr/bin/cpp $PKG/lib
