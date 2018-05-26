@@ -28,7 +28,7 @@ LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64:/usr/lib:/lib" \
 make
 make DESTDIR=$PKG install
 mkdir $PKG/lib
-ln -sv $PKG/usr/bin/cpp $PKG/lib
+ln -svf ../usr/bin/cpp $PKG/lib
 mv -v $PKG/usr/lib/libstdc++*gdb.py $PKG/usr/share/gdb/auto-load/usr/lib
 mv -v $PKG/usr/lib64/libstdc++*gdb.py $PKG/usr/share/gdb/auto-load/usr/lib64
 }
