@@ -21,7 +21,7 @@
 
 include ../Makefile.inc
 
-MANPAGES = nutyx.1 ifup.8
+MANPAGES = yaolinux.1 ifup.8
 
 all: man mantxt
 
