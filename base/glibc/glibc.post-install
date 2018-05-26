@@ -1,3 +1,8 @@
 if [ -f usr/lib/locale/locale-archive ]; then
   [ -z $LANG ] || localedef --replace -i ${LANG/.utf-8/} -f UTF-8 $LANG
 fi
+gcc -dumpspecs | \
+perl -p -e 's@/tools/lib/ld@/lib/ld@g;' \
+     -e 's@/tools/lib64/ld@/lib64/ld@g;' \
+     -e 's@\*startfile_prefix_spec:\n@$_/usr/lib/ @g;' > \
+     $(dirname $(gcc --print-libgcc-file-name))/specs
