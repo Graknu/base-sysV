@@ -25,6 +25,6 @@ LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64:/usr/lib:/lib ${BUILD64}" \
     --with-system-zlib \
     --enable-threads
 make tooldir=/usr
-make tooldir=/usr DESTDIR=$PKG install
+make DESTDIR=$PKG tooldir=/usr install
 }
 
