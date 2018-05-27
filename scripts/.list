@@ -2,7 +2,6 @@ tcl
 expect
 dejagnu
 perl-temp
-linux-headers
 man-pages
 lib32-glibc
 glibc
