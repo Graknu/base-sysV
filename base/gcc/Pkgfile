@@ -25,7 +25,7 @@ LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64:/usr/lib:/lib" \
     --with-system-zlib \
     --enable-install-libiberty \
     --disable-bootstrap
-make -j1
+make
 make DESTDIR=$PKG install
 mkdir $PKG/lib
 ln -svf ../usr/bin/cpp $PKG/lib
