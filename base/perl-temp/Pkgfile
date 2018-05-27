@@ -17,7 +17,6 @@ sed -i 's@/usr/include@/tools/include@g' ext/Errno/Errno_pm.PL
     -Dcc="gcc ${BUILD32}"
 make
 make DESDIR=$PKG install
-mkdir -pv $PKG/usr/bin
-ln -sfv $PKG/tools/bin/perl $PKG/usr/bin
+ln -sfv $PKG/tools/bin/perl /usr/bin
 }
 
