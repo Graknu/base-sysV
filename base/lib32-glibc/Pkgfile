@@ -6,11 +6,21 @@ name=lib32-glibc
 version=2.25
 
 
-source=(http://yaolinux.techozor.fr/sources-base/glibc-2.25.tar.xz)
+source=(http://yaolinux.techozor.fr/sources-base/glibc-2.25.tar.xz
+        http://yaolinux.techozor.fr/sources-base/linux-4.9.tar.xz
+        http://yaolinux.techozor.fr/sources-base/patch-4.9.21.xz)
 
 
 build() {
-cd glibc-$version
+#Headers
+cd linux-4.9
+xzcat ../patch-4.9.21.xz | patch -Np1 -i -
+make mrproper
+make headers_check
+make INSTALL_HDR_PATH=/usr headers_install
+find /usr/include -name .install -or -name ..install.cmd | xargs rm -fv
+
+cd ../glibc-$version
 LINKER=$(readelf -l /tools/bin/bash | sed -n 's@.*interpret.*/tools\(.*\)]$@\1@p')
 sed -i "s|libs -o|libs -L/usr/lib -Wl,-dynamic-linker=${LINKER} -o|" \
   scripts/test-installation.pl
