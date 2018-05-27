@@ -37,6 +37,6 @@ devel()
 cd $PKG
 bsdtar -cf \
 $PKGMK_PACKAGE_DIR/$name.devel${PKGMK_BUILDVER}`uname -m`.$PKGMK_PACKAGE_EXT \
-usr/include usr/share/gdb usr/lib/gcc usr/bin usr/libexec usr/share/gcc-$version
-rm -r usr/include usr/share/gdb usr/lib/gcc usr/bin usr/libexec usr/share/gcc-$version
+usr/include usr/share/gdb usr/lib/gcc usr/lib64/gcc usr/bin usr/libexec usr/share/gcc-$version
+rm -r usr/include usr/share/gdb usr/lib/gcc usr/lib64/gcc usr/bin usr/libexec usr/share/gcc-$version
 }
