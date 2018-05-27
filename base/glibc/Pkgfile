@@ -75,4 +75,10 @@ cat > $PKG/etc/ld.so.conf << "EOF"
 # End /etc/ld.so.conf
 EOF
 }
-
+devel() {
+cd $PKG
+bsdtar -r -f \
+$PKGMK_PACKAGE_DIR/${name}.${group}${PKGMK_BUILDVER}`uname -m`.$PKGMK_PACKAGE_EXT \
+usr/include
+rm -r usr/include
+}
