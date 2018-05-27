@@ -1,11 +1,16 @@
+description="Framework for testing other programs"
+packager="Hugo <graknu@techozor.fr>"
+
+name=dejagnu
 version=1.6
+
 source=(http://yaolinux.techozor.fr/sources-base/dejagnu-$version.tar.gz)
+
 build()
 {
 cd dejagnu-$version
 
-./configure --prefix=/tools 
-make install
-
-make check
+./configure \
+    --prefix=/tools
+make DESTDIR=$PKG install
 }
