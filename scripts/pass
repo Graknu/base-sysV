@@ -42,6 +42,11 @@ do
         cd $DIR
         case $PASS in
             cross-tools)
+	    	export CLFS_HOST=$(echo ${MACHTYPE} | sed -e 's/-[^-]*/-cross/') 
+		export CLFS_TARGET="x86_64-unknown-linux-gnu" 
+		export CLFS_TARGET32="i686-pc-linux-gnu" 
+		export BUILD32="-m32" 
+		export BUILD64="-m64" 
                 PKGMK="pkgmk.passes"
                 $PKGMK -cf ../../../bin/pkgmk.conf.passes -kw 2>&1|tee ${LOG}/$NAME.log || exit 1;;
             chroot)
@@ -55,6 +60,9 @@ do
                 PKGMK="pkgmk.passes"
                 $PKGMK -cf ../../../bin/pkgmk.conf.passes -kw 2>&1|tee ${LOG}/$NAME.log || exit 1;;
             base)
+	    	export BUILD32="-m32"
+		export BUILD64="-m64"
+		export CLFS_TARGET32="i686-pc-linux-gnu"
                 PKGMK="pkgmk"
                 case $NAME in
 		    glibc)
