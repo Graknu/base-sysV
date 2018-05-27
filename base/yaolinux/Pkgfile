@@ -4,7 +4,7 @@ packager="Hugo <graknu@techozor.fr>"
 name=yaolinux
 version=0.2
 
-source=(http://mirror.yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
+source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
 
 build () {
 cd $name-$version
