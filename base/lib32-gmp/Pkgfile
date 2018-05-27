@@ -22,6 +22,7 @@ make check
 make DESTDIR=$PKG install
 
 mv -v $PKG/usr/include/gmp{,-32}.h
+rm $PKG/usr/include/gmpxx.h
 rm -r $PKG/usr/share
 }
 
