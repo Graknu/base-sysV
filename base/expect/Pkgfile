@@ -1,5 +1,11 @@
+description="A tool for automating interactive applications"
+packager="Hugo <graknu@techozor.fr>"
+
+name=expect
 version=5.45
+
 source=(http://yaolinux.techozor.fr/sources-base/expect$version.tar.gz)
+
 build()
 {
 cd expect*
@@ -12,7 +18,5 @@ CC="gcc ${BUILD64}" \
     --libdir=/tools/lib64
 
 make
-
-
-make SCRIPTS="" install
+make DESTDIR=$PKG SCRIPTS="" install
 }
