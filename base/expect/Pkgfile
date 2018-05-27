@@ -1,0 +1,18 @@
+version=5.45
+source=(http://yaolinux.techozor.fr/sources-base/expect$version.tar.gz)
+build()
+{
+cd expect*
+
+CC="gcc ${BUILD64}" \
+./configure \
+    --prefix=/tools \
+    --with-tcl=/tools/lib64 \
+    --with-tclinclude=/tools/include \
+    --libdir=/tools/lib64
+
+make
+
+
+make SCRIPTS="" install
+}

@@ -1,0 +1,16 @@
+version=8.6.4
+source=(http://yaolinux.techozor.fr/sources-base/tcl-core$version-src.tar.gz)
+
+build()
+{
+cd tcl$version
+
+
+cd unix
+CC="gcc ${BUILD64}" ./configure \
+    --prefix=/tools \
+    --libdir=/tools/lib64
+make
+make install
+make install-private-headers
+}
