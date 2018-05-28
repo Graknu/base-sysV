@@ -46,7 +46,6 @@ cp $SRC/glibc.locales.supported \
 ../localedata/SUPPORTED
 
 make install_root=$PKG localedata/install-locales
-rm -f $PKG/etc/ld.so.{cache,conf}
 
 cat > $PKG/etc/nsswitch.conf << "EOF"
 passwd: files
