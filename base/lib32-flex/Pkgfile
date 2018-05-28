@@ -11,7 +11,7 @@ source=(http://yaolinux.techozor.fr/sources-base/flex-$version.tar.gz)
 
 build() {
 cd flex-$version
-CC="gcc ${BUILD32}" ./configure \
+CC="gcc -m32" ./configure \
     --prefix=/usr \
     --docdir=/usr/share/doc/flex-2.6.4
 make
