@@ -8,9 +8,6 @@ case "`uname -m`" in
                 PKGMK_GROUPS=(devel man doc service)
                 ;;
         "i686")
-                export CFLAGS="${CFLAGS} -m32"
-                export CXXFLAGS="${CXXFLAGS} -m32"
-                export LDFLAGS="${LDFLAGS} -m32"
                 PKGMK_GROUPS=(devel man doc service)
                 ;;
         *)
