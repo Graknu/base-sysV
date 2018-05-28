@@ -27,12 +27,12 @@ sed -i "s|libs -o|libs -L/usr/lib -Wl,-dynamic-linker=${LINKER} -o|" \
 unset LINKER
 mkdir -v ../glibc-build
 cd ../glibc-build
-CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" \
+CC="gcc -m32" CXX="g++ -m32" \
 ../glibc-2.25/configure \
     --prefix=/usr \
     --enable-kernel=3.12.0 \
     --libexecdir=/usr/lib/glibc \
-    --host=${CLFS_TARGET32} \
+    --host=i686-pc-linux-gnu \
     --enable-stack-protector=strong \
     --enable-obsolete-rpc
 make
