@@ -14,6 +14,7 @@ cd $name-$version
 sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in
 mkdir -v ../gcc-build
 cd ../gcc-build
+CPP=/usr/local/bin/cpp
 SED=sed CC="gcc -isystem /usr/include -m64" \
 CXX="g++ -isystem /usr/include -m64" \
 LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64:/usr/lib:/lib" \
