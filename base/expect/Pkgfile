@@ -10,7 +10,7 @@ build()
 {
 cd expect*
 
-CC="gcc ${BUILD64}" \
+CC="gcc -m64" \
 ./configure \
     --prefix=/tools \
     --with-tcl=/tools/lib64 \
