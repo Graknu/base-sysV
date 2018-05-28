@@ -12,9 +12,9 @@ source=(http://yaolinux.techozor.fr/sources-base/zlib-$version.tar.xz)
 
 build() {
 cd zlib-$version
-CC="gcc -isystem /usr/include ${BUILD32}" \
-CXX="g++ -isystem /usr/include ${BUILD32}" \
-LDFLAGS="-Wl,-rpath-link,/usr/lib:/lib ${BUILD32}" \
+CC="gcc -isystem /usr/include -m32" \
+CXX="g++ -isystem /usr/include -m32" \
+LDFLAGS="-Wl,-rpath-link,/usr/lib:/lib -m32" \
 ./configure \
     --prefix=/usr
 make
