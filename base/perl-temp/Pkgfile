@@ -14,7 +14,7 @@ cd perl-$version
 sed -i 's@/usr/include@/tools/include@g' ext/Errno/Errno_pm.PL
 ./configure.gnu \
     --prefix=/tools \
-    -Dcc="gcc ${BUILD32}"
+    -Dcc="gcc -m32"
 make
 make DESTDIR=$PKG install
 }
