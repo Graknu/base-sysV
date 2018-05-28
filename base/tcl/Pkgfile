@@ -11,7 +11,7 @@ build()
 cd tcl$version
 
 cd unix
-CC="gcc ${BUILD64}" ./configure \
+CC="gcc -m64" ./configure \
     --prefix=/tools \
     --libdir=/tools/lib64
 make
