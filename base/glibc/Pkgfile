@@ -19,7 +19,7 @@ unset LINKER
 mkdir -v ../glibc-build
 cd ../glibc-build
 echo "libc_cv_slibdir=/lib64" >> config.cache
-CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" \
+CC="gcc -m64" CXX="g++ -m64" \
 ../glibc-2.25/configure \
     --prefix=/usr \
     --enable-kernel=3.12.0 \
