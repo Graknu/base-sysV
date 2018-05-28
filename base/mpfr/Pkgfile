@@ -13,8 +13,8 @@ source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz
 build() {
 cd $name-$version
 patch -Np1 -i ../$name-$version-fixes-1.patch
-CC="gcc -isystem /usr/include ${BUILD64}" \
-    LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64 ${BUILD64}" \
+CC="gcc -isystem /usr/include -m64" \
+    LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64 -m64" \
 ./configure \
     --prefix=/usr \
     --libdir=/usr/lib64 \
