@@ -11,8 +11,8 @@ source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
 
 build() {
 cd $name-$version
-CC="gcc -m64 \
-CXX="g++ -m64 \
+CC="gcc -m64" \
+CXX="g++ -m64" \
 ./configure \
     --prefix=/usr \
     --libdir=/usr/lib64 \
