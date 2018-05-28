@@ -14,8 +14,8 @@ cd $name-$version
 sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in
 mkdir -v ../gcc-build
 cd ../gcc-build
-SED=sed CC="gcc -isystem /usr/include ${BUILD64}" \
-CXX="g++ -isystem /usr/include ${BUILD64}" \
+SED=sed CC="gcc -isystem /usr/include -m64 \
+CXX="g++ -isystem /usr/include -m64 \
 LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64:/usr/lib:/lib" \
 ../gcc-7.1.0/configure \
     --prefix=/usr \
