@@ -11,7 +11,7 @@ source=(http://yaolinux.techozor.fr/sources-base/bison-$version.tar.xz)
 
 build() {
 cd bison-$version
-CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" \
+CC="gcc -m32" CXX="g++ -m32" \
 ./configure \
     --prefix=/usr \
     --docdir=/usr/share/doc/bison-3.0.4
