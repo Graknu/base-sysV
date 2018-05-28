@@ -13,8 +13,8 @@ build() {
 cd $name-$version
 mkdir -v ../binutils-build
 cd ../binutils-build
-CC="gcc -isystem /usr/include ${BUILD64}" \
-LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64:/usr/lib:/lib ${BUILD64}" \
+CC="gcc -isystem /usr/include -m64 \
+LDFLAGS="-Wl,-rpath-link,/usr/lib64:/lib64:/usr/lib:/lib -m64 \
 ../binutils-2.28/configure \
     --prefix=/usr \
     --enable-shared \
