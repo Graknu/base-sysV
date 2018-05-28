@@ -41,7 +41,7 @@ mkdir -pv $PKG/etc/
 touch $PKG/etc/ld.so.conf
 make DESTDIR=$PKG install &&
 rm -v $PKG/usr/include/rpcsvc/*.x
-rm -rf $PKG/{etc,sbin,usr/{bin,sbin,share,include},var}
+rm -rf $PKG/{etc,sbin,usr/{bin,sbin,share},var}
 rm -vf $PKG/etc/ld.so.conf
 }
 
