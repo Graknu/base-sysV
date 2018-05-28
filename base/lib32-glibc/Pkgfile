@@ -42,6 +42,7 @@ touch $PKG/etc/ld.so.conf
 make DESTDIR=$PKG install &&
 rm -v $PKG/usr/include/rpcsvc/*.x
 rm -rf $PKG/{etc,sbin,usr/{bin,sbin,share},var}
+find $PKG/usr/include" -type f -not -name '*-32.h' -delete
 rm -vf $PKG/etc/ld.so.conf
 }
 
