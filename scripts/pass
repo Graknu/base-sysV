@@ -159,8 +159,8 @@ do
 			rm -vf /usr/lib64/pkgconfig
 			for pc in blkid mount uuid
 			do
-				rm -vf /usr/lib64/pkgconfig/${pc}.pc
-			done
+ 				rm -vf /usr/lib64/lib${lib}.so* 
+ 			done
 			$PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
 			;;
 			
