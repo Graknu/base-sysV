@@ -25,7 +25,6 @@ CC="gcc ${BUILD64}" \
     --disable-fsck \
     --disable-uuidd
 make
-make check
 make DESTDIR=$PKG install
 make DESTDIR=$PKG install-libs
 }
