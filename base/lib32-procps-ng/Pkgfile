@@ -19,6 +19,7 @@ CC="gcc ${BUILD32}" ./configure \
 sed -i -r 's|(pmap_initname)\\\$|\1|' testsuite/pmap.test/pmap.exp
 make
 make DESTDIR=$PKG install
+mkdir -pv $PKG/lib
 mv -v $PKG/usr/lib/libprocps.so.* $PKG/lib
 ln -sfv ../../lib/$(readlink $PKG/usr/lib/libprocps.so) $PKG/usr/lib/libprocps.so
 rm -r $PKG/bin
