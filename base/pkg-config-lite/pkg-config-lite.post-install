@@ -1,0 +1,4 @@
+cat >> $PKG/root/.bash_profile << EOF
+export PKG_CONFIG_PATH32="${PKG_CONFIG_PATH32}"
+export PKG_CONFIG_PATH64="${PKG_CONFIG_PATH64}"
+EOF
