@@ -11,7 +11,7 @@ source=(http://yaolinux.techozor.fr/sources-base/libcap-2.25.tar.xz)
 build() {
 cd libcap-$version
 make CC="gcc ${BUILD32}"
-make RAISE_SETFCAP=no lib=lib DESTDIR=$PKG install
+make DESTDIR=$PKG RAISE_SETFCAP=no lib=lib install
 chmod -v 755 $PKG/lib/libcap.so.2.25
 mkdir -pv $PKG/usr/lib
 ln -sfv ../../lib/$(readlink $PKG/lib/libcap.so) $PKG/usr/lib/libcap.so
