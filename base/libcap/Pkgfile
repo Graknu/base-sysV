@@ -14,8 +14,7 @@ make CC="gcc ${BUILD64}"
 make lib=lib64 DESTDIR=$PKG install
 chmod -v 755 $PKG/lib64/libcap.so.2.25
 mkdir -pv $PKG/lib64/
-ln -sfv ../../lib64/$(readlink $PKG/lib64/libcap.so) 
-$PKG/usr/lib64/libcap.so
+ln -sfv ../../lib64/$(readlink $PKG/lib64/libcap.so) $PKG/usr/lib64/libcap.so
 rm -v $PKG/lib64/libcap.so
 mv -v $PKG/lib64/libcap.a $PKG/usr/lib64
 }
