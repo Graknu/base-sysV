@@ -243,7 +243,7 @@ tmpfs on /mnt/lfs/run type tmpfs (rw,relatime)"
 ```bash
 chroot "${CLFS}" /tools/bin/env -i \
     HOME=/root TERM="${TERM}" PS1='\u:\w\$ ' \
-    PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
+    PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin:/root/bin \
     /tools/bin/bash --login +h
 ```
 ## Changing ownership
