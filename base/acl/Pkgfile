@@ -18,8 +18,8 @@ CC="gcc ${BUILD64}" \
     --libdir=/lib64 \
     --libexecdir=/usr/lib64
 make
-make test
 make DESTDIR=$PKG install install-dev install-lib
+mkdir -pv $PKG/usr/lib64/
 ln -sfv ../../lib64/$(readlink $PKG/lib64/libacl.so) $PKG/usr/lib64/libacl.so
 rm -v $PKG/lib64/libacl.so
 }
