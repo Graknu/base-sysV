@@ -13,7 +13,7 @@ cd $name-$version
 sed -i '/libdir.*=.*\/lib/s@/lib@/lib64@g' configure
 mkdir -v build
 cd build
-PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
+PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 CC="gcc ${BUILD64}" \
 ../configure \
     --prefix=/usr \
