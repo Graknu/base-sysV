@@ -18,7 +18,6 @@ CC="gcc ${BUILD32}" \
     --libdir=/lib \
     --libexecdir=/usr/lib
 make
-make -j1 tests root-tests
 make DESTDIR=$PKG  install install-dev install-lib
 ln -sfv ../../lib/$(readlink $PKG/lib/libattr.so) $PKG/usr/lib/libattr.so
 rm -v $PKG/lib/libattr.so
