@@ -30,7 +30,7 @@ acl
 lib32-libcap
 libcap
 sed
-pkkg-config-lite
+pkg-config-lite
 lib32-ncurses
 ncurses
 shadow
