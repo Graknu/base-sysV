@@ -149,19 +149,17 @@ do
                         ;;
 			
 		    util-linux)
-		    	for lib in blkid mount uuid
-			do
-			    rm -vf /usr/lib64/$lib
-			done
-			rm -vf /usr/include/blkid
-			rm -vf /usr/include/libmount
-			rm -vf /usr/include/uuid
-			rm -vf /usr/lib64/pkgconfig
+		    	rm -vf /usr/include/{blkid,libmount,uuid}
 			for pc in blkid mount uuid
 			do
- 				rm -vf /usr/lib64/lib${lib}.so* 
- 			done
-			$PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
+			    rm -vf /usr/lib64/pkgconfig/${pc}.pc
+			done
+			$PKGMK -cf ../../../bin/pkgmk.conf.passes -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
+			for lib in blkid mount uuid                                                                                               
+                        do                                                                                                                        
+                            rm -vf /usr/lib64/lib${lib}.so*                                                                                         
+                        done                                                                                                                      
+                        $PKGMK -d -cf ../../../bin/pkgmk.conf.passes -i 2>&1|tee ${LOG}/$NAME.log || exit 1 
 			;;
 			
                     cards)
