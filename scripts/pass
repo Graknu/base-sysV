@@ -133,11 +133,14 @@ do
                         ;;
 			
 		    util-linux)
-		    	rm -vf /usr/include/{blkid,libmount,uuid}
-			for lib in blkid mount uuid
-                        do
-                            rm -vf /usr/lib64/lib${lib}.so*
-                        done
+		    	for lib in blkid mount uuid
+			do
+			    rm -vf /usr/lib64/$lib
+			done
+			rm -vf /usr/include/blkid
+			rm -vf /usr/include/libmount
+			rm -vf /usr/include/uuid
+			rm -vf /usr/lib64/pkgconfig
 			for pc in blkid mount uuid
 			do
 			    rm -vf /usr/lib64/pkgconfig/${pc}.pc
