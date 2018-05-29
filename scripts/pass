@@ -80,6 +80,22 @@ do
                             echo "=======> Installing '$i' succeeded." >> ${LOG}/$NAME.log
                         done
                         ;;
+		    e2fsprog)
+		    	for lib in blkid lzma mount uuid
+			do
+			    ln -sv /tools/lib64/lib$lib.so* /usr/lib
+			done
+			ln -svf /tools/include/blkid    /usr/include
+			ln -svf /tools/include/libmount /usr/include
+			ln -svf /tools/include/uuid     /usr/include
+			install -vdm755 /usr/lib64/pkgconfig
+			for pc in blkid mount uuid
+			do
+			    sed 's@tools@usr@g' /tools/lib64/pkgconfig/${pc}.pc \
+				> /usr/lib64/pkgconfig/${pc}.pc
+			done
+			$PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
+			;;
                     bash)
                         $PKGMK -cf ../../../bin/pkgmk.conf.passes -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
                         rm /bin/bash
