@@ -17,9 +17,6 @@ CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" \
     --docdir=/usr/share/doc/bash-4.4
 
 make
-
-make test
-
 make DESTDIR=$PKG install
 mkdir -pv $PKG/bin
 mv -v $PKG/usr/bin/bash $PKG/bin
