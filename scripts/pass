@@ -80,7 +80,7 @@ do
                             echo "=======> Installing '$i' succeeded." >> ${LOG}/$NAME.log
                         done
                         ;;
-		    e2fsprog)
+		    e2fsprogs)
 		    	for lib in blkid lzma mount uuid
 			do
 			    ln -sv /tools/lib64/lib$lib.so* /usr/lib
