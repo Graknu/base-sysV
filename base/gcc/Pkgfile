@@ -34,11 +34,3 @@ ln -svf ../usr/bin/cpp $PKG/lib
 mv -v $PKG/usr/lib/libstdc++*gdb.py $PKG/usr/share/gdb/auto-load/usr/lib
 mv -v $PKG/usr/lib64/libstdc++*gdb.py $PKG/usr/share/gdb/auto-load/usr/lib64
 }
-devel()
-{
-cd $PKG
-bsdtar -cf \
-$PKGMK_PACKAGE_DIR/$name.devel${PKGMK_BUILDVER}`uname -m`.$PKGMK_PACKAGE_EXT \
-usr/include usr/share/gdb usr/lib/gcc usr/lib64/gcc usr/bin usr/libexec usr/share/gcc-$version
-rm -r usr/include usr/share/gdb usr/lib/gcc usr/lib64/gcc usr/bin usr/libexec usr/share/gcc-$version
-}
