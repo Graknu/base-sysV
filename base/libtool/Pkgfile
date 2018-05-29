@@ -16,7 +16,6 @@ CC="gcc ${BUILD64}" ./configure \
     --libdir=/usr/lib64 \
     --cache-file=config.cache
 make
-make check
 make DESTDIR=$PKG install
 mv -v $PKG/usr/bin/libtool{,-64}
 mkdir -pv $PKG/usr/bin/
