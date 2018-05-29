@@ -33,7 +33,6 @@ mkdir -pv $PKG/usr/share/gdb/auto-load/usr/lib
 ln -svf ../usr/bin/cpp $PKG/lib
 mv -v $PKG/usr/lib/libstdc++*gdb.py $PKG/usr/share/gdb/auto-load/usr/lib
 mv -v $PKG/usr/lib64/libstdc++*gdb.py $PKG/usr/share/gdb/auto-load/usr/lib64
-rm $PKG/usr/lib{,64}/libstdc++.so*
 }
 devel()
 {
