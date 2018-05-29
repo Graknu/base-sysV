@@ -19,6 +19,7 @@ CC="gcc ${BUILD32}" \
     --libexecdir=/usr/lib
 make
 make DESTDIR=$PKG  install install-dev install-lib
+mkdir -pv $PKG/usr/lib/
 ln -sfv ../../lib/$(readlink $PKG/lib/libattr.so) $PKG/usr/lib/libattr.so
 rm -v $PKG/lib/libattr.so
 chmod 755 -v $PKG/lib/libattr.so.1.1.0
