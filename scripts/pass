@@ -74,7 +74,6 @@ do
                         rm -fv /usr/lib{,64}/libgcc_s.so{,.1}
                         rm -fv /usr/lib{,64}/libstdc++.so{,.6}
                         rm -fv /usr/lib{,64}/libstdc++.la
-			rm -fv /usr/lib{,64}/libstdc++.so*
                         $PKGMK -d -cf ../../../bin/pkgmk.conf.passes -i || exit 1
                         for i in *cards.tar*
                         do
