@@ -26,8 +26,9 @@ sed -i $PKG/etc/login.defs \
     -e 's@#\(ENCRYPT_METHOD \).*@\1SHA512@' \
     -e 's@/var/spool/mail@/var/mail@'
 mv -v $PKG/usr/bin/passwd $PKG/bin
-touch $PKG/var/log/{fail,last}log
-chgrp -v utmp $PKG/var/log/{fail,last}log
-chmod -v 664 $PKG/var/log/{fail,last}log
+mkdir -pv $PKG/var/log/
+touch $PKG/var/log/{fail,last}.log
+chgrp -v utmp $PKG/var/log/{fail,last}.log
+chmod -v 664 $PKG/var/log/{fail,last}.log
 }
 
