@@ -157,7 +157,6 @@ do
 			rm -vf /usr/include/libmount
 			rm -vf /usr/include/uuid
 			rm -vf /usr/lib64/pkgconfig
-			rm -vf /usr/include/{blkid,libmount,uuid}
 			for pc in blkid mount uuid
 			do
 				rm -vf /usr/lib64/pkgconfig/${pc}.pc
