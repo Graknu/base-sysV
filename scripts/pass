@@ -84,13 +84,6 @@ do
                             echo "=======> Installing '$i' succeeded." >> ${LOG}/$NAME.log
                         done
                         ;;
-		    libcap)
-		    	rm -fv /sbin/capsh
-			rm -fv /sbin/getcap
-			rm -fv /sbin/getpcaps
-			rm -fv /sbin/setcap
-			$PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
-		    	;;
 		    e2fsprogs)
 		    	for lib in blkid lzma mount uuid
 			do
