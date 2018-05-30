@@ -3,7 +3,8 @@ description="A highly capable, feature-rich programming language"
 packager=rems
 version=5.26.0
 
-source=(http://www.cpan.org/src/5.0/perl-5.26.0.tar.xz)
+source=(http://www.cpan.org/src/5.0/perl-5.26.0.tar.xz
+        http://patches.clfs.org/dev/perl-5.26.0-Configure_multilib-1.patch)
 
 build() {
 cd $name-$version
