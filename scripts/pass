@@ -71,6 +71,9 @@ do
 			;;
                     gcc)
                         $PKGMK -cf ../../../bin/pkgmk.conf.passes -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
+			rm -fv /usr/lib{,64}/libgcc_s.so{,.1}
+                        rm -fv /usr/lib{,64}/libstdc++.so{,.6}
+                        rm -fv /usr/lib{,64}/libstdc++.la
                         rm -fv /usr/lib{,64}/libstdc++.so.6.0.23
 			rm -fv /usr/lib{,64}/libstdc++fs.la
 			rm -fv /usr/lib{,64}/libstdc++.a
