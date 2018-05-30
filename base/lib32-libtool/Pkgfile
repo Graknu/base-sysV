@@ -17,6 +17,6 @@ CC="gcc ${BUILD32}" ./configure \
 make
 make DESTDIR=$PKG install
 mv -v $PKG/usr/bin/libtool{,-32}
-rm -r $PKG/usr/{bin,include,man,share,lib32/libltdl.a}
+rm -r $PKG/usr/{bin,include,share,lib/libltdl.a}
 }
 
