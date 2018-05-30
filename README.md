@@ -63,6 +63,7 @@ chown -v clfs ${CLFS}/tools
 chown -v clfs ${CLFS}/cross-tools 
 chown -v clfs ${CLFS}/sources 
 chown -v clfs $CLFS
+passwd clfs
 ```
 
 ## Now go in the LFS user
@@ -74,7 +75,7 @@ su - clfs
 ```bash
 cat > /home/clfs/.bash_profile << "EOF" 
 exec env -i HOME=${HOME} TERM=${TERM} PS1='\u:\w\$ ' /bin/bash 
-EOF 
+EOF
 ```
 ```bash
 cat > ~/.bashrc << "EOF"
@@ -380,7 +381,7 @@ for PACK in *.xz; do /tools/bin/pkgadd -r $CLFS $PACK;done
 
 ## return in chroot
 ```bash
-chroot "$CLFS" /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \ 
+chroot "$CLFS" /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u:\w\$' \
 /bin/bash --login +h 
 export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin:/root/bin 
 cd /root/development/base 
