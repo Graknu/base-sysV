@@ -3,7 +3,8 @@ description="The internationalization tool collection"
 packager=rems
 version=0.51.0
 
-source=(http://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz)
+source=(http://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz
+        http://patches.clfs.org/dev/intltool-0.51.0-perl-5.22-compatibility.patch)
 
 build() {
 cd intltool-$version
