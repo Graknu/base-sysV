@@ -21,4 +21,5 @@ make
 make DESTDIR=$PKG install
 mkdir -pv $PKG/bin
 mv -v $PKG/usr/bin/bash $PKG/bin
+ln -s bash $PKG/bin/sh
 }
