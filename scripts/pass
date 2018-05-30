@@ -87,7 +87,7 @@ do
 		    e2fsprogs)
 		    	for lib in blkid lzma mount uuid
 			do
-			    ln -sv /tools/lib64/lib$lib.so* /usr/lib
+			    ln -svf /tools/lib64/lib$lib.so* /usr/lib
 			done
 			ln -svf /tools/include/blkid    /usr/include
 			ln -svf /tools/include/libmount /usr/include
