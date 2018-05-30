@@ -14,7 +14,6 @@ sed -i '/{OLDSUFF}/c:' support/shlib-install
 
 CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" \
 ./configure \
-./configure \
     --prefix=/usr \
     --libdir=/lib \
     --docdir=/usr/share/doc/readline-7.0
