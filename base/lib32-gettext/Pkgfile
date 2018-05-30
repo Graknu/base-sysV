@@ -7,7 +7,7 @@ source=(http://ftp.gnu.org/gnu/gettext/gettext-0.19.8.1.tar.xz)
 
 build() {
 cd gettext-$version
-CC="gcc -m32" CXX="g++ -m32"./configure \
+CC="gcc -m32" CXX="g++ -m32" ./configure \
     --prefix=/usr \
     --docdir=/usr/share/doc/gettext-0.19.8.1
 
