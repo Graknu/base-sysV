@@ -18,6 +18,7 @@ mkdir -pv $PKG/bin
 mkdir -pv $PKG/lib64
 cp -v bzip2-shared $PKG/bin/bzip2
 cp -av libbz2.so* $PKG/lib64
+mkdir -pv $PKG/usr/lib64/
 ln -svf ../../lib64/libbz2.so.1.0 $PKG/usr/lib64/libbz2.so
 rm -v $PKG/usr/bin/{bunzip2,bzcat,bzip2}
 ln -sv bzip2 $PKG/bin/bunzip2
