@@ -18,5 +18,9 @@ ln -sfv ../../lib/$(readlink $PKG/lib/libcap.so) $PKG/usr/lib/libcap.so
 rm -v $PKG/lib/libcap.so
 mv -v $PKG/lib/libcap.a $PKG/usr/lib
 rm -rf $PKG/usr/include
+rm -v $PKG/sbin/capsh
+rm -v $PKG/sbin/getcap
+rm -v $PKG/sbin/getpcaps
+rm -v $PKG/sbin/setcap
 }
 
