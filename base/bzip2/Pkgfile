@@ -13,7 +13,7 @@ sed -i 's@/lib\(/\| \|$\)@/lib64\1@g' Makefile
 make -f Makefile-libbz2_so CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}"
 make clean
 make CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}"
-make DESTDIR=$PKG CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" PREFIX=/usr install
+make DESTDIR=$PKG CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" PREFIX=$PKG/usr install
 mkdir -pv $PKG/bin
 mkdir -pv $PKG/lib64
 cp -v bzip2-shared $PKG/bin/bzip2
