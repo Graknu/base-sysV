@@ -20,5 +20,5 @@ cp -v libbz2.a $PKG/usr/lib
 cp -av libbz2.so* $PKG/lib
 ln -sv ../../lib/libbz2.so.1.0 $PKG/usr/lib/libbz2.so
 cp -v libbz2.a $PKG/usr/lib
-
+rm -rf $PKG/usr/{bin,include,man}
 }
