@@ -21,7 +21,6 @@ echo "127.0.0.1 localhost $(hostname)" > /etc/hosts
     -Duseshrplib
 
 make
-make test
 make DESTDIR=$PKG install
 unset BUILD_ZLIB BUILD_BZIP2
 mv -v $PKG/usr/bin/perl{,-32}
