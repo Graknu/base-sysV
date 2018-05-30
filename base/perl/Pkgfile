@@ -27,7 +27,6 @@ echo 'installstyle="lib64/perl5"' >> hints/linux.sh
     -Duseshrplib
 
 make
-make test
 make DESTDIR=$PKG install
 
 unset BUILD_ZLIB BUILD_BZIP2
