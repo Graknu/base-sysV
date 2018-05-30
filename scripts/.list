@@ -92,6 +92,8 @@ dbus
 tar
 texinfo
 util-linux
+libarchive
+cards
 vim
 lib32-libgpg-error
 libgpg-error
