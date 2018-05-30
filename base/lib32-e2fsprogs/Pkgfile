@@ -25,5 +25,8 @@ CC="gcc ${BUILD32}" \
     --disable-uuidd
 make libs
 make DESTDIR=$PKG install-libs
+
+rm -rf $PKG/bin/{compile_et,mk_cmds}
+rm -rf $PKG/usr/{bin,include,share}
 }
 
