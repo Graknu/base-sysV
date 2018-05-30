@@ -357,32 +357,35 @@ exec /tools/bin/bash --login +h
 
 ## continue with
 ```bash
-export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/cross-tools/bin:/tools/bin:/root/bin \
-cd /root/development/base \
+cd /root/development/base 
 pass
 ```
 
 ## After a moment the scripts says you have to install bash manually, go with the commands
-exit \
-cd $LFS/root/development/base/bash \
-for PACK in *.xz; do /tools/bin/pkgadd -r $LFS $PACK;done \
+```bash
+exit 
+cd $LFS/root/development/base/bash 
+for PACK in *.xz; do /tools/bin/pkgadd -r $CLFS $PACK;done 
 /tools/bin/pkginfo -r $LFS -i|grep bash
-
+```
 ## The last command will return that if succeeds
-"(base) bash 4.4-1 \
-(base) bash.da 4.4-1 \
-(base) bash.de 4.4-1 \
-(base) bash.devel 4.4-1 \
-(base) bash.doc 4.4-1 \
+```bash
+"(base) bash 4.4-1 
+(base) bash.da 4.4-1 
+(base) bash.de 4.4-1 
+(base) bash.devel 4.4-1 
+(base) bash.doc 4.4-1 
 ..."
+```
 
 ## return in chroot
-chroot "$LFS" /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \ \
-/bin/bash --login +h \
-export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin:/root/bin \
-cd /root/development/base \
+```bash
+chroot "$CLFS" /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \ 
+/bin/bash --login +h 
+export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin:/root/bin 
+cd /root/development/base 
 pass
-
+```
 ## The last pass will return at end
 "ADD: ca-certificates-20150725, 1282 files: 100% \
 =======> Installing 'ca-certificates1418739487x86_64.cards.tar' succeeded. \
