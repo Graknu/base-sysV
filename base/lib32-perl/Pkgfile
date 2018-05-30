@@ -25,5 +25,8 @@ make DESTDIR=$PKG install
 unset BUILD_ZLIB BUILD_BZIP2
 mv -v $PKG/usr/bin/perl{,-32}
 mv -v $PKG/usr/bin/perl5.26.0{,-32}
-  rm -rf $PKG/usr/{include,share}
+rm -rf $PKG/usr/{include,share}
+rm -rf $PKG/usr/bin/{corelist,cpan,enc2xs,encguess,h2ph,h2xs,instmodsh,json_pp,libnetcfg,perlbug,perldoc,perlivp,perlthanks}
+rm -rf $PKG/usr/bin/{piconv,pl2pm,pod2html,pod2man,pod2text,pod2usage,podchecker,podselect,prove,ptar,ptardiff,ptargrep}
+rm -rf $PKG/usr/bin/{shasum,splain,xsubpp,zipdetails}
 }
