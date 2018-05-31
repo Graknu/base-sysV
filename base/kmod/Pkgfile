@@ -7,7 +7,7 @@ source=(http://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-24.tar.xz)
 
 build() {
 cd kmod-$version
-CC="gcc ${BUILD64}" PKG_CONFIG_PATH=${PKG_CONFIG_PATH64} \
+CC="gcc ${BUILD64}" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 ./configure \
     --prefix=/usr \
     --bindir=/bin \
