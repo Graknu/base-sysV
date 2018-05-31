@@ -77,8 +77,8 @@ lib32-xz
 xz
 lib32-expat
 expat
-lib32-xml-parser
-xml-parser
+lib32-xmlparser
+xmlparser
 intltool
 lib32-kmod
 kmod
