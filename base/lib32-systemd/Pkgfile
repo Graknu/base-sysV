@@ -21,6 +21,7 @@ CC="gcc ${BUILD32}" PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
     --disable-ldconfig \
     --disable-lto \
     --disable-sysusers \
+    --disable-manpages \
     --with-default-dnssec=no \
     --with-kbd-loadkeys=/bin/loadkeys \
     --with-kbd-setfont=/bin/setfont \
