@@ -13,6 +13,7 @@ CC="gcc ${BUILD64}" ./configure \
 make
 
 make DESTDIR=$PKG install
+mkdir -pv $PKG/bin
 mv -v $PKG/usr/bin/fuser $PKG/bin
 mv -v $PKG/usr/bin/killall $PKG/bin
 }
