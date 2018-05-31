@@ -1,5 +1,3 @@
-    --prefix=/usr \
-    --libdir=/usr/lib64name=groff
 description="GNU troff text-formatting system"
 packager=rems
 version=1.22.3
