@@ -7,7 +7,7 @@ source=(http://www.linuxfromscratch.org/~krejzi/systemd/systemd-233.tar.xz)
 
 build() {
 cd systemd-$version
-CC="gcc ${BUILD32}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH32}" \
+CC="gcc ${BUILD32}" PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
 ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
