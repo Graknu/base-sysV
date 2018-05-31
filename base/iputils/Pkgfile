@@ -9,7 +9,7 @@ source=(http://clfs.org/files/packages/git/iputils-s20150815.tar.xz
 build() {
 cd iputils-$version
 patch -Np1 -i ../iputils-s20150815-build-1.patch
-make CC="gcc ${BUILD64}" \
+make USE_NETTLE=no USE_GNUTLS=no CC="gcc ${BUILD64}" \
     TARGETS="clockdiff ping rdisc tracepath tracepath6 traceroute6"
 mkdir -pv $PKG/bin
 mkdir -pv $PKG/usr/bin
