@@ -19,7 +19,7 @@ XSLTPROC="/usr/bin/xsltproc"
 cc_cv_LDFLAGS__Wl__fuse_ld_gold=no
 EOF
 
-CC="gcc ${BUILD64}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
+CC="gcc ${BUILD64}" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \
