@@ -1,4 +1,5 @@
-name=groff
+    --prefix=/usr \
+    --libdir=/usr/lib64name=groff
 description="GNU troff text-formatting system"
 packager=rems
 version=1.22.3
@@ -11,7 +12,8 @@ build() {
 cd groff-$version
 PAGE=A4 CC="gcc ${BUILD64}" \
 CXX="g++ ${BUILD64}" ./configure \
-
+    --prefix=/usr \
+    --libdir=/usr/lib64
 make -j1
 
 make DESTDIR=$PKG install
