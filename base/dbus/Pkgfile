@@ -21,7 +21,7 @@ CC="gcc ${BUILD64}" USE_ARCH=64 PKG_CONFIG_PATH=${PKG_CONFIG_PATH64} \
 make
 
 make DESTDIR=$PKG install
-mkdir -pv PKG/lib64
+mkdir -pv $PKG/lib64
 mv -v $PKG/usr/lib64/libdbus-1.so.* $PKG/lib64
 ln -sfv ../../lib64/$(readlink $PKG/usr/lib64/libdbus-1.so) $PKG/usr/lib64/libdbus-1.so
 ln -sfv /etc/machine-id $PKG/var/lib/dbus
