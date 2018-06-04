@@ -1,4 +1,5 @@
 PKGMK_GROUPS=(devel doc man)
+
 name=libarchive
 description="Library that can create and read several streaming archive formats."
 packager=rems
@@ -11,7 +12,6 @@ cd $name-$version
 CC="gcc ${BUILD64}" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 ./configure --prefix=/usr \
 --libdir=/usr/lib64 \
---libexecdir=/usr/lib64 \
 --enable-bsdtar \
 --enable-bsdcpio \
 --mandir=/usr/share/man \ 
