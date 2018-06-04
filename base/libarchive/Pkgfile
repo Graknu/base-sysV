@@ -19,3 +19,4 @@ CC="gcc ${BUILD64}" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 
 make
 make DESTDIR=$PKG install
+}
