@@ -92,6 +92,7 @@ tar
 texinfo
 util-linux
 libarchive
+openssl
 curl
 cards
 vim
