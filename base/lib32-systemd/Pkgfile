@@ -33,6 +33,6 @@ CC="gcc ${BUILD32}" PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
 make
 
 make DESTDIR=$PKG install
-  rm -rf "${pkgdir}"/{etc,var}
-  rm -rf "${pkgdir}"/usr/{bin,include,share}
+rm -rf $PKG/{etc,var}
+rm -rf $PKG/usr/{bin,include,share}
 }
