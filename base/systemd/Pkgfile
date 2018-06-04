@@ -47,6 +47,7 @@ make
 make DESTDIR=$PKG install
 install -v -m644 man/*.html $PKG/usr/share/doc/systemd-233
 rm -rfv $PKG/usr/lib/rpm
+mkdir -pv $PKG/sbin/
 for tool in runlevel reboot shutdown poweroff halt telinit; do
   ln -sfv ../bin/systemctl $PKG/sbin/$tool
 done
