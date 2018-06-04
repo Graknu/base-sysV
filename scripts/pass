@@ -141,7 +141,7 @@ do
                         ln -svf /tools/bin/true /usr/bin/xsltproc
 			for lib in blkid lzma mount uuid
                         do
-                            ln -sv /tools/lib/lib$lib.so* /usr/lib
+                            ln -sfv /tools/lib64/lib$lib.so* /usr/lib64
                         done
 			ln -svf /tools/include/blkid    /usr/include
 			ln -svf /tools/include/libmount /usr/include
