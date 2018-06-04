@@ -44,11 +44,6 @@ CC="gcc ${BUILD64}" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
     --with-dbussystemservicedir=/usr/share/dbus-1/system-services \
     --config-cache
 make
-sed -e 's@test/udev-test.pl @@'  \
-        -e 's@test-copy$(EXEEXT) @@' \
-        -i Makefile.in
-sed -i "s:minix:ext4:g" src/test/test-path-util.c
-make check
 make DESTDIR=$PKG install
 install -v -m644 man/*.html $PKG/usr/share/doc/systemd-233
 rm -rfv $PKG/usr/lib/rpm
