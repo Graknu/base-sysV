@@ -6,7 +6,7 @@ version=1.10.8
 source=(http://dbus.freedesktop.org/releases/dbus/dbus-1.10.18.tar.gz)
 
 build() {
-cd -$version
+cd dbus-$version
 CC="gcc ${BUILD64}" USE_ARCH=64 PKG_CONFIG_PATH=${PKG_CONFIG_PATH64} \
 ./configure \
     --prefix=/usr \
