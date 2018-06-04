@@ -10,7 +10,7 @@ build() {
 cd $name-$version
 patch -p0 -i ../ca-dir.patch
 CC="gcc ${BUILD64}" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
-./Configure --prefix=/usr --openssldir=/etc/ssl --libdir=lib64 shared linux-x86_64
+./Configure --prefix=/usr --openssldir=/etc/ssl --libdir=lib64 shared zlib-dynamic linux-x86_64
 
 make
 
