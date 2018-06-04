@@ -26,7 +26,7 @@ cp -v -R docs/*     $PKG/usr/share/doc/curl-7.59.0
 
 # reorganise the libs
 mkdir $PKG/lib64
-mv $PKG/usr/lib/libcurl.so.4.5.0 \
+mv $PKG/usr/lib64/libcurl.so.4.5.0 \
 $PKG/lib64/
 for LIB in libcurl.so{,.4}
     do 
