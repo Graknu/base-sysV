@@ -6,7 +6,7 @@ version=7.59.0
 source=(http://yaolinux.techozor.fr/sources-base/curl-7.59.0.tar.xz)
 
 build() {
-cd -$version
+cd $name-$version
 CC="gcc ${BUILD64}" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 ./configure \
 --prefix=/usr \
