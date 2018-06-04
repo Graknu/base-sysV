@@ -92,6 +92,7 @@ tar
 texinfo
 util-linux
 libarchive
+curl
 cards
 vim
 lib32-libgpg-error
