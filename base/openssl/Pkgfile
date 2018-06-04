@@ -3,10 +3,12 @@ description="The Open Source toolkit for Secure Sockets Layer and Transport Laye
 packager=rems
 version=1.1.0h
 
-source=(http://yaolinux.techozor.fr/sources-base/openssl-1.1.0h.tar.gz)
+source=(http://yaolinux.techozor.fr/sources-base/openssl-1.1.0h.tar.gz
+        ca-dir.patch)
 
 build() {
 cd $name-$version
+patch -p0 -i ../ca-dir.patch
 CC="gcc ${BUILD64}" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 ./Configure --prefix=/usr --openssldir=/etc/ssl --libdir=lib64 shared
 
