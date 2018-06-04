@@ -28,3 +28,4 @@
 +dir		= /etc/ssl		# TSA root directory
  serial		= $dir/tsaserial	# The current serial number (mandatory)
  crypto_device	= builtin		# OpenSSL engine to use for signing
+ signer_cert	= $dir/tsacert.pem 	# The TSA signing certificate
