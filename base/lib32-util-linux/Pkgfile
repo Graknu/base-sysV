@@ -23,5 +23,9 @@ CC="gcc ${BUILD32}" ./configure \
     --docdir=/usr/share/doc/util-linux-2.29.2
 make
 make DESTDIR=$PKG install
+rm -r \
+$PKG/{bin,sbin} \
+$PKG/usr/{bin,sbin,share/man,include} \
+$PKG/usr/share/{bash-completion,doc}
 }
 
