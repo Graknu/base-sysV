@@ -11,6 +11,7 @@ build() {
 cd LVM2.$version
 CC="gcc -m64" \
 CXX="g++ -m64" \
+ PKG_CONFIG_PATH="/usr/lib64/pkgconfig \
 ./configure \
 --prefix=/usr \
 --exec-prefix= \
@@ -18,8 +19,7 @@ CXX="g++ -m64" \
 --mandir=/usr/share/man \
 --enable-applib \
 --enable-cmdlib \
---enable-pkgconfig \
---enable-udev_sync
+--enable-pkgconfig 
 make
 make DESTDIR=$PKG install
 }
