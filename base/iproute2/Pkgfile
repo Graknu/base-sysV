@@ -19,3 +19,12 @@ make LIBDIR=/usr/lib64 \
     DOCDIR=/usr/share/doc/iproute2-4.9.0 DESTDIR=$PKG install
 }
 
+devel()
+{
+cd $PKG
+bsdtar -cf \
+$PKGMK_PACKAGE_DIR/${name}.devel${PKGMK_BUILDVER}any.$PKGMK_PACKAGE_EXT \
+usr/lib64
+
+rm -r usr/lib64
+}
