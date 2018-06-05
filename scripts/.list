@@ -98,12 +98,3 @@ pam
 rsync
 lvm2
 cards
-lib32-libgpg-error
-libgpg-error
-libgcrypt
-make-ca
-libffi
-libtasn1
-p11-kit
-libedit
-openssh
