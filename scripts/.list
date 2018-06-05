@@ -98,7 +98,6 @@ pam
 rsync
 lvm2
 cards
-vim
 lib32-libgpg-error
 libgpg-error
 libgcrypt
