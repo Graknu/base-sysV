@@ -11,7 +11,7 @@ build() {
 cd LVM2.$version
 CC="gcc -m64" \
 CXX="g++ -m64" \
- PKG_CONFIG_PATH="/usr/lib64/pkgconfig \
+PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 ./configure \
 --prefix=/usr \
 --exec-prefix= \
