@@ -95,6 +95,7 @@ libarchive
 openssl
 curl
 pam
+rsync
 cards
 vim
 lib32-libgpg-error
