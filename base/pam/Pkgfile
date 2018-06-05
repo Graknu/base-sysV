@@ -13,9 +13,9 @@ build() {
 mkdir -p $PKG/etc/pam.d
 cd Linux-PAM-$version
 CC="gcc ${BUILD64}" ./configure --prefix=/usr --sysconfdir=/etc \
---enable-securedir=/lib/security \
+--enable-securedir=/lib64/security \
 --docdir=/usr/share/doc/Linux-PAM-$version \
---disable-nis --libdir=/usr/lib
+--disable-nis --libdir=/usr/lib64
 make
 make DESTDIR=$PKG install
 chmod -v 4755 $PKG/sbin/unix_chkpwd
