@@ -94,6 +94,7 @@ util-linux
 libarchive
 openssl
 curl
+pam
 cards
 vim
 lib32-libgpg-error
