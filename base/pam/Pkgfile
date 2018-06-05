@@ -19,11 +19,10 @@ CC="gcc ${BUILD64}" ./configure --prefix=/usr --sysconfdir=/etc \
 make
 make DESTDIR=$PKG install
 chmod -v 4755 $PKG/sbin/unix_chkpwd
-mkdir -pv $PKG/usr/lib64
 
 for file in pam pam_misc pamc
 do
-  mv -v $PKG/usr/lib64/lib${file}.so.* $PKG/lib &&
+  mv -v $PKG/usr/lib64/lib${file}.so.* $PKG/lib64 &&
   ln -sfv ../../lib64/$(readlink $PKG/usr/lib64/lib${file}.so) $PKG/usr/lib64/lib${file}.so
 done
 }
