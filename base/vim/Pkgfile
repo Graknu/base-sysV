@@ -5,7 +5,7 @@ version=8.0
 release=1
 
 source=(http://yaolinux.techozor.fr/sources-base/vim-8.0.tar.bz2
-	http://yaolinux.techozor.fr/sources-base/vim-8.0-branch_update-1.patch)
+	vim-8.0-branch_update-1.patch)
 
 build(){
 cd $name80
