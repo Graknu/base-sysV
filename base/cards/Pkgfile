@@ -15,7 +15,7 @@ ncurses.devel openssl.devel pam.devel perl procps-ng.devel \
 readline.devel rsync lvm2.devel libtool texinfo \
 groff make patch pkg-config-lite \
 glibc.devel gcc.devel libarchive.devel \
-util-linux.devel xz.devel lzo.devel \
+ xz.devel lzo.devel \
 dialog.devel tar wget zlib.devel perl-xml-parser)
 
 PKGMK_GROUPS=(devel doc man)
