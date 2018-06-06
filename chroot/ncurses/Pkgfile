@@ -4,7 +4,7 @@ source=(http://yaolinux.techozor.fr/sources-base/ncurses-$version.tar.gz)
 
 build() {
 cd ncurses-$version
-./configure \
+CPPFLAGS=-P ./configure \
     --prefix=/tools \
     --with-shared \
     --build=${CLFS_HOST} \
