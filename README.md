@@ -5,8 +5,8 @@
 cards install cards.devel git 
 ```
 ```bash
-wget http://rems.techozor.fr/sources/install-nutyx{,.md5sum} 
-md5sum -c install-nutyx.md5sum
+wget http://rems.techozor.fr/sources/install-nutyx{,.md5} 
+md5sum -c install-nutyx.md5
 ```
 
 ## if the commands says "install-nutyx: OK", you can continue
