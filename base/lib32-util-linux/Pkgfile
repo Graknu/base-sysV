@@ -10,8 +10,7 @@ source=(http://yaolinux.techozor.fr/sources-base/util-linux-$version.tar.xz)
 
 build() {
 cd util-linux-$version
-CC="gcc ${BUILD32}" PKG_CONFIG_PATH="/usr/lib/pkgconfig" \ 
-./configure \
+CC="gcc ${BUILD32}" PKG_CONFIG_PATH="/usr/lib/pkgconfig" ./configure \
     ADJTIME_PATH=/var/lib/hwclock/adjtime \
     --libdir=/lib \
     --enable-write \
