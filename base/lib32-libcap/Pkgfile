@@ -22,6 +22,6 @@ rm -v $PKG/sbin/capsh
 rm -v $PKG/sbin/getcap
 rm -v $PKG/sbin/getpcaps
 rm -v $PKG/sbin/setcap
-rm -rv $PKg/usr/share/man
+rm -rv $PKG/usr/share/man
 }
 
