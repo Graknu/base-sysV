@@ -17,7 +17,5 @@ CC="gcc ${BUILD64}" ./configure \
 make
 make check
 make DESTDIR=$PKG install
-export PKG_CONFIG_PATH32="/usr/lib/pkgconfig"
-export PKG_CONFIG_PATH64="/usr/lib64/pkgconfig"
 }
 
