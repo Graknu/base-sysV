@@ -21,11 +21,10 @@ CC="gcc ${BUILD32}" PKG_CONFIG_PATH="/usr/lib/pkgconfig" ./configure \
     --disable-setpriv \
     --disable-runuser \
     --docdir=/usr/share/doc/util-linux-2.29.2
-make
-make DESTDIR=$PKG install
-rm -r \
-$PKG/{bin,sbin} \
-$PKG/usr/{bin,sbin,share/man,include} \
-$PKG/usr/share/{bash-completion,doc}
+make lib{uuid,blkid,fdisk,mount,smartcols}.la
+make -C "util-linux-2.29.2" \
+    DESTDIR=$PKG \
+    install-usrlib_execLTLIBRARIES \
+    install-pkgconfigDATA
 }
 
