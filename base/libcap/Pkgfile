@@ -4,8 +4,6 @@ packager="Hugo <graknu@techozor.fr>"
 name=libcap
 version=2.25
 
-PKGMK_GROUPS=(devel)
-
 source=(http://yaolinux.techozor.fr/sources-base/libcap-2.25.tar.xz)
 
 
