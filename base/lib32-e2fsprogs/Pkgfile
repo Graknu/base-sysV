@@ -12,7 +12,7 @@ build() {
 cd e2fsprogs-$version
 mkdir -v build
 cd build
-PKG_CONFIG_PATH="${PKG_CONFIG_PATH32}" \
+PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
 CC="gcc ${BUILD32}" \
 ../configure \
     --prefix=/usr \
