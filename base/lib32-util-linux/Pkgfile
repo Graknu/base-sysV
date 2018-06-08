@@ -25,7 +25,7 @@ make
 make DESTDIR=$PKG install
 rm -r \
 $PKG/{bin,sbin} \
-$PKG/usr/{bin,sbin,share/man,include} \
+$PKG/usr/{bin,sbin,share/man} \
 $PKG/usr/share/{bash-completion,doc}
 }
 
