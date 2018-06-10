@@ -21,9 +21,5 @@ ADJTIME_PATH=/var/lib/hwclock/adjtime \
 make
 
 make DESTDIR=$PKG install
-for lang in it pl nl fr de fi es sv tr ru da ja
-do
-    rm -fv $PKG/usr/share/locale/$lang/LC_MESSAGES/util-linux.mo
-done
 
 }
