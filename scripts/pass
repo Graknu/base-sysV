@@ -153,7 +153,6 @@ do
 			done
 			$PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
                         rm -vf /usr/bin/xsltproc
-                        systemd-machine-id-setup
                         ;;
 			
 		    util-linux)
