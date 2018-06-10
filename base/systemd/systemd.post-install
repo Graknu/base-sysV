@@ -1,6 +1,6 @@
 if [ -e /etc/machine-id ]
 then
-    echo "Nothing to do"
+    echo "[SETUP] The machine ID is already set !"
 else
     systemd-machine-id-setup
 fi
