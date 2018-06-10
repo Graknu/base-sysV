@@ -22,4 +22,6 @@ make
 
 make DESTDIR=$PKG install
 rm -fv $PKG/usr/share/locale/pl/LC_MESSAGES/util-linux.mo
+rm -fv $PKG/usr/share/locale/fr/LC_MESSAGES/util-linux.mo
+
 }
