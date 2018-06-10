@@ -1,4 +1,3 @@
-. lib/lsb/init-functions
 VERSION=$(grep version var/lib/pkg/nutyx-version |cut -d " " -f2)
 [ ! -d etc/ports ] && mkdir -p etc/ports
 for i in base cli gui \
