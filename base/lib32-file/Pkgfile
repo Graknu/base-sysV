@@ -14,5 +14,4 @@ make
 
 make DESTDIR=$PKG install
 rm -rfv $PKG/usr/{bin,include,share}
-rm -v $PKG/usr/bin/file
 }
