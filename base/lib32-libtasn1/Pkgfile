@@ -6,7 +6,7 @@ url=(ftp://ftp.gnu.org/gnu/libtasn1/libtasn1-$version.tar.gz)
 prepare(){
     cd libtasn1-$version
         CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" \
-        PKG_CONFIG_PATH="${PKG_CONFIG_PATH32}" \
+        PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
         USE_ARCH=32 \
         ./configure --prefix=/usr \
         --disable-static
