@@ -37,4 +37,5 @@ rm -rfv $PKG/bin
 rm -rfv $PKG/{etc,var}
 rm -rfv $PKG/lib/{systemd,udev}
 rm -rfv $PKG/usr/{bin,include,share}
+rm -rfv $PKG/usr/lib/tmpfiles.d
 }
