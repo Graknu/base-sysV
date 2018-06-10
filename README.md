@@ -416,7 +416,7 @@ ports -u
 ```
 ## To boot, you have to compile the kernel with 
 ```bash
-cd /usr/ports/base/base/kernel-lts \
+cd /usr/ports/base/kernel-lts \
 pkgmk -d -i
 ```
 ## make a grub, if you don't have a working linux on an other partition or harddrive, with 
