@@ -36,5 +36,5 @@ make DESTDIR=$PKG install
 rm -rfv $PKG/bin
 rm -rfv $PKG/{etc,var}
 rm -rfv $PKG/lib/{systemd,udev}
-rm -rfv $PKG/usr/{bin,include,lib,share}
+rm -rfv $PKG/usr/{bin,include,lib/{binftm.d,environment.d,kernel,modules-load.d,rpm,sysctl.d,systemd,tmpfiles.d},share}
 }
