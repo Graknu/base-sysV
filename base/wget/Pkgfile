@@ -12,7 +12,7 @@ prepare(){
     --prefix=/usr \
     --sysconfdir=/etc \
     --libdir=/usr/lib64 \
-    --with-ssl=gnutls 
+    --with-ssl=openssl 
 }
 build(){
 cd $name-$version
