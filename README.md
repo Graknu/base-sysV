@@ -401,7 +401,7 @@ echo $LFS
 
 ## Go back in chroot
 ```bash
-chroot $CLFS /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u: \w\$' \ 
+chroot $CLFS /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u: \w\$' \
 /bin/bash --login
 ```
 
