@@ -10,6 +10,7 @@ cd util-linux-$version
 CC="gcc ${BUILD64}" ./configure \
 ADJTIME_PATH=/var/lib/hwclock/adjtime \
     --libdir=/lib64 \
+    --libdir=/usr/lib64 \
     --enable-write \
     --disable-chfn-chsh \
     --disable-login \
