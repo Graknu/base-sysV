@@ -407,11 +407,11 @@ chroot $CLFS /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u: \w\$' \
 
 ## No "command not found" have to appears here
 ```bash
-cat > /etc/cards.conf << "EOF" \
-dir /usr/ports/base \
-locale fr \
-base /usr/ports/base \
-EOF \
+cat > /etc/cards.conf << "EOF"
+dir /usr/ports/base
+locale fr
+base /usr/ports/base
+EOF
 ports -u
 ```
 ## To boot, you have to compile the kernel with 
