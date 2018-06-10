@@ -393,28 +393,32 @@ pass
 =======> compress ca-certificates1418739487x86_64.cards.tar" 
 
 ## Now, follow few commands to configure your nutyx-systemd
-exit \
+```bash
+exit
 echo $LFS
-
+```
 ## The ouptput have to be "/mnt/lfs "
 
 ## Go back in chroot
-chroot $LFS /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u: \w\$' \ \
+```bash
+chroot $CLFS /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u: \w\$' \ 
 /bin/bash --login
+```
 
 ## No "command not found" have to appears here
-
+```bash
 cat > /etc/cards.conf << "EOF" \
 dir /usr/ports/base \
 locale fr \
 base /usr/ports/base \
 EOF \
 ports -u
-
+```
 ## To boot, you have to compile the kernel with 
-cd /usr/ports/base-systemd/base/kernel-lts \
+```bash
+cd /usr/ports/base/base/kernel-lts \
 pkgmk -d -i
-
+```
 ## make a grub, if you don't have a working linux on an other partition or harddrive, with 
 cards depcreate grub \
 grub-install /dev/sda \
