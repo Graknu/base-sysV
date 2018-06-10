@@ -17,7 +17,7 @@ collection=$i" > etc/ports/$i.cards
       echo -e "${WARNING} /etc/ports/$i.cards created ${NORMAL}"
       echo -e "${WARNING} Double check /etc/ports/$i and adapted to your needs ${NORMAL}"
    else
-      log_warning_msg "${WARNING} Double check /etc/ports/$i and adapted to this version of NuTyX ${NORMAL}"
+      echo -e "${WARNING} Double check /etc/ports/$i and adapted to this version of NuTyX ${NORMAL}"
    fi
 done
 if [ ! -f etc/pkgmk.conf ]; then
