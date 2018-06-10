@@ -159,7 +159,7 @@ do
 		    	rm -vf /usr/include/{blkid,libmount,uuid}
 			for lib in blkid libfdisk libmount libsmartcols uuid
 			do
-			    rm -vrf usr/include/$lib/$lib.h
+			    rm -vf /usr/include/$lib/$lib.h
 			done
 			for pc in blkid mount uuid
 			do
