@@ -19,7 +19,7 @@ build() {
 	      --systemdsystemunitdir=/lib/systemd/system \
 	      --bashcompletiondir=/usr/share/bash-completion/completions \
 	      --sysconfdir=/etc --loginstalldir=/var/log/dracut
-	make prefix=/usr \
+	CC="gcc -m64" CXX="g++ -m64" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" make prefix=/usr \
   	bindir=/usr/bin sbindir=/usr/bin \
   	libdir=/usr/lib libexecdir=/usr/lib \
 	systemdsystemunitdir=/lib/systemd/system \
