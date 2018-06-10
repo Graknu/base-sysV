@@ -1,7 +1,7 @@
 name=wget
 description="Network utility to retrieve files from the Web"
 packager=rems
-version=1.19.4
+version=1.19.5
 source=(https://ftp.gnu.org/gnu/wget/$name-$version.tar.gz)
 
 prepare(){
