@@ -10,7 +10,7 @@ source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.gz)
 
 build() {
 cd $name-$version
-PKG_CONFIG_PATH=${PKG_CONFIG_PATH64} \
+PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" ./configure \
     --prefix=/usr \
     --libdir=/usr/lib64 \
