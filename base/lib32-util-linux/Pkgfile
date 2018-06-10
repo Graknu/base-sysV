@@ -27,5 +27,10 @@ rm -r \
 $PKG/{bin,sbin} \
 $PKG/usr/{bin,sbin,share/man} \
 $PKG/usr/share/{bash-completion,doc}
+for lang in it pl nl fr de fi es sv tr ru da ja
+do
+    rm -fv $PKG/usr/share/locale/$lang/LC_MESSAGES/util-linux.mo
+done
+
 }
 
