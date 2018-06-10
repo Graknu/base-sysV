@@ -26,8 +26,5 @@ for lang in it pl nl fr de fi es sv tr ru da ja zh_CN
 do
     rm -fv $PKG/usr/share/locale/$lang/LC_MESSAGES/util-linux.mo
 done
-for lib in blkid libfdisk libmount libsmartcols uuid
-do
-	rm -vf $PKG/usr/include/$lib/$lib.h
-done
+
 }
