@@ -1,11 +1,11 @@
-#depends=libgpg-error-32
-name=libgcrypt-32
+#depends=lib32-libgpg-error
+name=lib32-libgcrypt
 dexcription="General purpose cryptographic library based on the code from GnuPG"
 packager=rems
 version=1.8.2
 source=(ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-$version.tar.gz)
 
-prepare(){
+prepare() {
     cd libgcrypt-$version
 sed 's:path="amd64":path="i586 i386":' -i mpi/config.links
         CC="gcc ${BUILD32}" USE_ARCH=32 \
@@ -18,7 +18,7 @@ sed 's:path="amd64":path="i586 i386":' -i mpi/config.links
         --disable-padlock-support
 }
 
-build(){
+build() {
 cd libgcrypt-$version
     make
     make DESTDIR=$PKG install
