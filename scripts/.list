@@ -99,5 +99,6 @@ pam
 rsync
 lvm2
 cards
+ca-certificates
 cpio
 dracut
