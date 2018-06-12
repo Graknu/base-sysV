@@ -5,15 +5,16 @@ version=1.27
 
 source=(ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-$version.tar.gz)
 
-prepare(){
+prepare() {
     cd libgpg-error-$version
         CC="gcc -m32" CXX="g++ -m32" USE_ARCH=32 PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
         ./configure --prefix=/usr 
 }
 
-build(){
+build() {
 cd libgpg-error-$version
     make
     make DESTDIR=$PKG install
     rm -rf $PKG/usr/{include,share}
     mv -v $PKG/usr/bin/gpg-error-config{,-32}
+}
