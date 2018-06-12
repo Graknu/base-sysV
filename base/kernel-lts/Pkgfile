@@ -1,4 +1,4 @@
-# Depends on: nutyx
+# Depends on: yaolinux
 
 url="http://www.kernel.org"
 description="The long term stable kernel version with virtualbox modules"
