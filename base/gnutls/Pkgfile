@@ -6,7 +6,7 @@ sources=(https://www.gnupg.org/ftp/gcrypt/$name/v3.6/$name-$version.tar.xz)
 
 prepare(){
     cd $name-$version
-        export USE_ARCH=64 && CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
+        export USE_ARCH=64 && CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
         ./configure --prefix=/usr \
         --libdir=/usr/lib64
         --with-included-unistring \

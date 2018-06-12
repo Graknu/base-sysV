@@ -54,7 +54,7 @@ done
 
 ln -sfv ../lib/systemd/systemd $PKG/sbin/init
 
-cat > /etc/os-release << "EOF"
+cat > $PKG/etc/os-release << "EOF"
 # Begin /etc/os-release
 
 NAME=Yaolinux

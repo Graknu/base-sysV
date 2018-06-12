@@ -99,3 +99,5 @@ pam
 rsync
 lvm2
 cards
+cpio
+dracut

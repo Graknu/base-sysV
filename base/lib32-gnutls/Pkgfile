@@ -7,7 +7,7 @@ source=(https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-$version.tar.xz)
 
 prepare(){
     cd gnutls-$version
-        export USE_ARCH=32 && CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH32}" \
+        export USE_ARCH=32 && CC="gcc ${BUILD32}" CXX="g++ ${BUILD32}" PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
         ./configure --prefix=/usr \
         --build=$CLFS_TARGET32 \
         --host=$CLFS_TARGET32 \

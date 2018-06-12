@@ -7,7 +7,7 @@ source=(http://dbus.freedesktop.org/releases/dbus/dbus-1.10.18.tar.gz)
 
 build() {
 cd dbus-$version
-CC="gcc ${BUILD32}" USE_ARCH=32 PKG_CONFIG_PATH=${PKG_CONFIG_PATH32} \
+CC="gcc ${BUILD32}" USE_ARCH=32 PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
 ./configure \
     --prefix=/usr \
     --sysconfdir=/etc \

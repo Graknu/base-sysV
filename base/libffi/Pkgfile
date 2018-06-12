@@ -8,7 +8,7 @@ prepare(){
     cd $name-$version
         sed -e '/^includesdir/ s/$(libdir).*$/$(includedir)/'     -i include/Makefile.in
         sed -e '/^includedir/ s/=.*$/=@includedir@/'     -e 's/^Cflags: -I${includedir}/Cflags:/'     -i libffi.pc.in
-        CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" PKG_CONFIG_PATH="${PKG_CONFIG_PATH64}" \
+        CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
         ./configure --prefix=/usr \
         --disable-static \
         --libdir=/usr/lib64 \
