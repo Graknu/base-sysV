@@ -4,14 +4,14 @@ packager=rems
 version=0.170
 url=(https://sourceware.org/ftp/elfutils/$version/elfutils-$version.tar.bz2)
 
-prepare(){
+prepare() {
     cd elfutils-$version
         CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
         ./configure --prefix=/usr \
         --libdir=/usr/lib64 \
 }
 
-build(){
+build() {
 cd elfutils-$version
     make
     make -C libelf DESTDIR=$PKG install
