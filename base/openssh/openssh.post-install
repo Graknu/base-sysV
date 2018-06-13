@@ -1,0 +1,4 @@
+groupadd -g 48 sshd &&
+useradd -c 'sshd PrivSep' -d /var/lib/sshd -g sshd -s /bin/false -u 48 sshd &&
+install -v -m700 -d /var/lib/sshd &&
+chown -v root:sys /var/lib/sshd
