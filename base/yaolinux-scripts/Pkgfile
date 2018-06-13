@@ -6,6 +6,7 @@ version=1.0
 release=1
 
 build() {
+mkdir -pv $PKG/etc
 cat > $PKG/etc/profile << "EOF"
 # Begin /etc/profile
 
