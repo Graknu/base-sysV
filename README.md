@@ -428,7 +428,7 @@ cat > /boot/grub/grub.cfg << "EOF"
 set default=0 \
 set timeout=5 
 insmod ext2 
-set root=(hd0,2) 
+set root=(hd0,1) 
 menuentry "GNU/Linux, YaoLINUX-Hello-systemd" { 
         linux   /boot/kernel root=/dev/sda1 ro quiet
         initrd  /boot/initrd
@@ -563,13 +563,12 @@ cat > /etc/shells << "EOF"
 #End /etc/shells 
 EOF
 ```
-## make a /etc/os-release
+## Define password for root
 ```
-cat > /etc/os-release << "EOF" 
-NAME="Linux From Scratch" 
-VERSION="nutyx-systemd" 
-ID=lfs 
-PRETTY_NAME="nutyx-systemd" 
-VERSION_CODENAME="<your name here>" 
-EOF 
+passwd root
+```
+## FINISH
+```
+exit
+umount -R $CLFS
 ```
