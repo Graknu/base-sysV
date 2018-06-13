@@ -571,47 +571,48 @@ if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
    return
 fi
 cat > ${FOLDER}/etc/$FILE << "EOF"
-# Begin /etc/inputrc
-# Modified by Chris Lynn <roryo@roryo.dynup.net>
+#Début de /etc/inputrc 
+#Modifié par Chris Lynn <roryo@roryo.dynup.net> 
 
-# Allow the command prompt to wrap to the next line
-set horizontal-scroll-mode Off
+#Permettre à l'invite de commande d'aller à la ligne 
+set horizontal-scroll-mode Off 
 
-# Enable 8bit input
-set meta-flag On
-set input-meta On
+#Activer l'entrée sur 8 bits 
+set meta-flag On 
+set input-meta On 
 
-# Turns off 8th bit stripping
-set convert-meta Off
+#Ne pas supprimer le 8ème bit 
+set convert-meta Off 
 
-# Keep the 8th bit for display
-set output-meta On
+#Conserver le 8ème bit à l'affichage 
+set output-meta On 
 
-# none, visible or audible
-set bell-style none
+#none, visible ou audible 
+set bell-style none 
 
-# All of the following map the escape sequence of the value
-# contained in the 1st argument to the readline specific functions
-"\eOd": backward-word
-"\eOc": forward-word
+#Toutes les indications qui suivent font correspondre la séquence 
+#d'échappement contenue dans le 1er argument à la fonction 
+#spécifique de readline 
+"\eOd": backward-word 
+"\eOc": forward-word 
 
-# for linux console
-"\e[1~": beginning-of-line
-"\e[4~": end-of-line
-"\e[5~": beginning-of-history
-"\e[6~": end-of-history
-"\e[3~": delete-char
-"\e[2~": quoted-insert
+#Pour la console linux \
+"\e[1~": beginning-of-line 
+"\e[4~": end-of-line 
+"\e[5~": beginning-of-history 
+"\e[6~": end-of-history 
+"\e[3~": delete-char 
+"\e[2~": quoted-insert 
 
-# for xorg-term
-"\eOH": beginning-of-line
-"\eOF": end-of-line
+#pour xterm \
+"\eOH": beginning-of-line 
+"\eOF": end-of-line 
 
-# for Konsole
-"\e[H": beginning-of-line
-"\e[F": end-of-line
+#pour Konsole 
+"\e[H": beginning-of-line 
+"\e[F": end-of-line 
 
-# End /etc/inputrc 
+#Fin de /etc/inputrc 
 EOF
 }
 generate_hosts() {
@@ -628,7 +629,7 @@ cat > ${FOLDER}/etc/$FILE << "EOF"
 # Begin /etc/hosts
 
 127.0.0.1 localhost.localdomain localhost
-127.0.0.1 nutyx
+127.0.0.1 yaolinux
 
 # End /etc/hosts
 EOF
@@ -654,7 +655,7 @@ EOF
 }
 generate_umask_sh() {
 local FILE
-FILE="umask.sh"
+FILE="50-umask.sh"
 [ -f ${FOLDER}/etc/profile.d/$FILE ] && return
 [ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
 if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
@@ -663,17 +664,20 @@ if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
    return
 fi
 cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
-# By default we want the umask to get set.
-if [ "$(id -gn)" = "$(id -un)" -a $EUID -gt 99 ] ; then
+# Begin /etc/profile.d/50-umask.sh
+
+if [ "`id -un`" = "`id -gn`" -a $EUID -gt 99 ]; then
   umask 002
 else
   umask 022
 fi
+
+# End /etc/profile.d/50-umask.sh
 EOF
 }
 generate_readline_sh() {
 local FILE
-FILE="readline.sh"
+FILE="50-readline.sh"
 [ -f ${FOLDER}/etc/profile.d/$FILE ] && return
 [ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
 if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
@@ -682,11 +686,19 @@ if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
    return
 fi
 cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
-# Setup the INPUTRC environment variable.
-if [ -z "$INPUTRC" -a ! -f "$HOME/.inputrc" ] ; then
-        INPUTRC=/etc/inputrc
+# Begin /etc/profile.d/50-readline.sh
+
+if [ -z "$INPUTRC" ]; then
+  if [ -f "$HOME/.inputrc" ]; then
+    export INPUTRC="$HOME/.inputrc"
+  else
+    if [ -f "/etc/inputrc" ]; then
+      export INPUTRC="/etc/inputrc"
+    fi
+  fi
 fi
-export INPUTRC
+
+# End /etc/profile.d/50-readline.sh
 EOF
 }
 generate_extrapaths_sh() {
@@ -720,7 +732,7 @@ EOF
 }
 generate_dircolors_sh() {
 local FILE
-FILE="dircolors.sh"
+FILE="50-dircolors.sh"
 [ -f ${FOLDER}/etc/profile.d/$FILE ] && return
 [ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
 if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
@@ -729,15 +741,151 @@ if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
    return
 fi
 cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
-# Setup for /bin/ls to support color, the alias is in /etc/bashrc.
-if [ -f "/etc/dircolors" ] ; then
-        eval $(dircolors -b /etc/dircolors)
+# Begin /etc/profile.d/50-dircolors.sh
 
-        if [ -f "$HOME/.dircolors" ] ; then
-                eval $(dircolors -b $HOME/.dircolors)
-        fi
-fi
 alias ls='ls --color=auto'
+if [ -f "$HOME/.dircolors" ]; then
+  eval `dircolors -b "$HOME/.dircolors"`
+else
+  if [ -f "/etc/dircolors" ]; then
+    eval `dircolors -b "/etc/dircolors"`
+  fi
+fi
+
+# End /etc/profile.d/50-dircolors.sh
+EOF
+}
+generate_i18n() {
+local FILE
+FILE="05-i18n.sh"
+[ -f ${FOLDER}/etc/profile.d/$FILE ] && return
+[ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
+if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
+   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
+   ${FOLDER}/etc/profile.d/$FILE
+   return
+fi
+cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
+# Begin /etc/profile.d/05-i18n.sh
+
+export LANG=[ll]_[CC].[charset]
+export G_FILENAME_ENCODING=@locale
+ 
+# End /etc/profile.d/05-i18n.sh
+EOF
+}
+generate_path() {
+local FILE
+FILE="10-path.sh"
+[ -f ${FOLDER}/etc/profile.d/$FILE ] && return
+[ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
+if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
+   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
+   ${FOLDER}/etc/profile.d/$FILE
+   return
+fi
+cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
+# Begin /etc/profile.d/10-path.sh
+
+if [ "$EUID" -eq 0 ]; then
+  export PATH="/sbin:/bin:/usr/sbin:/usr/bin"
+  if [ -d "/usr/local/sbin" ]; then
+    export PATH="$PATH:/usr/local/sbin"
+  fi
+else
+  export PATH="/bin:/usr/bin"
+fi
+
+if [ -d "/usr/local/bin" ]; then
+  export PATH="$PATH:/usr/local/bin"
+fi
+
+if [ -d "$HOME/bin" ]; then
+  export PATH="$HOME/bin:$PATH"
+fi
+
+# End /etc/profile.d/10-path.sh
+EOF
+}
+generate_pkg_config_path() {
+local FILE
+FILE="10-pkg_config_path.sh"
+[ -f ${FOLDER}/etc/profile.d/$FILE ] && return
+[ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
+if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
+   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
+   ${FOLDER}/etc/profile.d/$FILE
+   return
+fi
+cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
+# Begin /etc/profile.d/10-pkg_config_path.sh
+
+export PKG_CONFIG_PATH32="/usr/lib/pkgconfig"
+export PKG_CONFIG_PATH64="/usr/lib64/pkgconfig"
+
+# End /etc/profile.d/10-pkg_config_path.sh
+EOF
+}
+generate_xdg() {
+local FILE
+FILE="10-xdg.sh"
+[ -f ${FOLDER}/etc/profile.d/$FILE ] && return
+[ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
+if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
+   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
+   ${FOLDER}/etc/profile.d/$FILE
+   return
+fi
+cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
+# Begin /etc/profild.d/10-xdg.sh
+
+export XDG_DATA_DIRS="/usr/share"
+export XDG_CONFIG_DIRS="/etc/xdg:/usr/share"
+
+# End /etc/profild.d/10-xdg.sh
+EOF
+}
+generate_xorg() {
+local FILE
+FILE="15-xorg.sh"
+[ -f ${FOLDER}/etc/profile.d/$FILE ] && return
+[ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
+if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
+   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
+   ${FOLDER}/etc/profile.d/$FILE
+   return
+fi
+cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
+# Begin /etc/profile.d/15-xorg.sh
+
+export XORG_PREFIX=/usr/X11R7
+
+export PATH="${PATH}:${XORG_PREFIX}/bin"
+export PKG_CONFIG_PATH32="${PKG_CONFIG_PATH32}${PKG_CONFIG_PATH32+:}${XORG_PREFIX}/lib/pkgconfig"
+export PKG_CONFIG_PATHN32="${PKG_CONFIG_PATHN32}${PKG_CONFIG_PATHN32+:}${XORG_PREFIX}/lib32/pkgconfig"
+export PKG_CONFIG_PATH64="${PKG_CONFIG_PATH64}${PKG_CONFIG_PATH64+:}${XORG_PREFIX}/lib64/pkgconfig"
+export ACLOCAL="aclocal -I $XORG_PREFIX/share/aclocal"
+
+# End /etc/profile.d/15-xorg.sh
+EOF
+}
+generate_history() {
+local FILE
+FILE="50-history.sh"
+[ -f ${FOLDER}/etc/profile.d/$FILE ] && return
+[ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
+if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
+   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
+   ${FOLDER}/etc/profile.d/$FILE
+   return
+fi
+cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
+# Begin /etc/profile.d/50-history.sh
+
+export HISTSIZE=1000
+export HISTIGNORE="&:[bf]g:exit"
+
+# End /etc/profile.d/50-history.sh
 EOF
 }
 generate_profile() {
@@ -752,81 +900,12 @@ if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
 fi
 cat > ${FOLDER}/etc/$FILE << "EOF"
 # Begin /etc/profile
-# Written for Beyond Linux From Scratch
-# by James Robertson <jameswrobertson@earthlink.net>
-# modifications by Dagmar d'Surreal <rivyqntzne@pbzpnfg.arg>
 
-# System wide environment variables and startup programs.
-
-# System wide aliases and functions should go in /etc/bashrc.  Personal
-# environment variables and startup programs should go into
-# ~/.bash_profile.  Personal aliases and functions should go into
-# ~/.bashrc.
-
-# Functions to help us manage paths.  Second argument is the name of the
-# path variable to be modified (default: PATH)
-pathremove () {
-        local IFS=':'
-        local NEWPATH
-        local DIR
-        local PATHVARIABLE=${2:-PATH}
-        for DIR in ${!PATHVARIABLE} ; do
-                if [ "$DIR" != "$1" ] ; then
-                  NEWPATH=${NEWPATH:+$NEWPATH:}$DIR
-                fi
-        done
-        export $PATHVARIABLE="$NEWPATH"
-}
-
-pathprepend () {
-        pathremove $1 $2
-        local PATHVARIABLE=${2:-PATH}
-        export $PATHVARIABLE="$1${!PATHVARIABLE:+:${!PATHVARIABLE}}"
-}
-
-pathappend () {
-        pathremove $1 $2
-        local PATHVARIABLE=${2:-PATH}
-        export $PATHVARIABLE="${!PATHVARIABLE:+${!PATHVARIABLE}:}$1"
-}
-
-export -f pathremove pathprepend pathappend
-
-# Set the initial path
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin
-
-if [ $EUID -eq 0 ] ; then
-        unset HISTFILE
-fi
-
-# Setup some environment variables.
-export HISTSIZE=1000
-export HISTIGNORE="&:[bf]g:exit"
-
-# Set some defaults for graphical systems
-export XDG_DATA_DIRS=/usr/share/
-export XDG_CONFIG_DIRS=/etc/xdg/
-
-# Set some defaults for certificates
-export GIO_USE_TLS=gnutls-pkcs11
-
-# Setup a red prompt for root and a green one for users.
-NORMAL="\[\e[0m\]"
-RED="\[\e[1;31m\]"
-GREEN="\[\e[1;32m\]"
-if [[ $EUID == 0 ]] ; then
-  PS1="$RED\u [ $NORMAL\w$RED ]# $NORMAL"
-else
-  PS1="$GREEN\u [ $NORMAL\w$GREEN ]\$ $NORMAL"
-fi
-
-for script in /etc/profile.d/*.sh ; do
-        if [ -r $script ] ; then
-                . $script
-        fi
+for script in /etc/profile.d/*.sh
+do
+  source $script
 done
-
-unset script RED GREEN NORMAL
+unset script
 
 # End /etc/profile
 EOF
@@ -839,60 +918,24 @@ root:x:0:
 bin:x:1:
 sys:x:2:
 kmem:x:3:
-tape:x:4:
 tty:x:5:
+tape:x:4:
 daemon:x:6:
 floppy:x:7:
 disk:x:8:
 lp:x:9:
 dialout:x:10:
-audio:x:11:gdm
-video:x:12:gdm
+audio:x:11:
+video:x:12:
 utmp:x:13:
 usb:x:14:
 cdrom:x:15:
 adm:x:16:
-atd:x:17:
-messagebus:x:18:
-lpadmin:x:19:
-named:x:20:
-gdm:x:21:
-fcron:x:22:
-systemd-journal:x:23:
-input:x:24:
-apache:x:25:
-smmsp:x:26:
-polkitd:x:27:
-wheel:x:30:root
-exim:x:31:
-postfix:x:32:
-postdrop:x:33:
-mail:x:34:
-vmailman:x:35:
-news:x:36:
-kdm:x:37:
-mysql:x:40:
-postgres:x:41:
-dovecot:x:42:
-dovenull:x:43:
-ftp:x:45:
-proftpd:x:46:
-vsftpd:x:47:
-rsyncd:x:48:
-sshd:x:50:
-stunnel:x:51:
-svn:x:56:
-svntest:x:57:
-pulse:x:58:
-pulse-access:x:59:
-games:x:60:
-kvm:x:61:
-wireshark:x:62:
-lightdm:x:63:
-sddm:x:64:
-scanner:x:70:
-colord:x:71:
+mail:x:30:
+messagebus:x:27:
+nogroup:x:65533:
 systemd-bus-proxy:x:72:
+systemd-journal:x:28:
 systemd-journal-gateway:x:73:
 systemd-journal-remote:x:74:
 systemd-journal-upload:x:75:
@@ -900,55 +943,18 @@ systemd-network:x:76:
 systemd-resolve:x:77:
 systemd-timesync:x:78:
 systemd-coredump:x:79:
-vboxusers:x:80:
-ldap:x:83:
-avahi:x:84:
-avahi-autoipd:x:85:
-netdev:x:86:
-ntp:x:87:
-unbound:x:88:
-nogroup:x:99:
-users:x:999:
+wheel:x:39:
 EOF
 }
 generate_passwd() {
 [ -f ${FOLDER}/etc/passwd ] && return
 [ ! -d ${FOLDER}/etc ] && mkdir -pv ${FOLDER}/etc
 cat > ${FOLDER}/etc/passwd << "EOF"
-root::0:0:root:/root:/bin/bash
-bin:x:1:1:bin:/dev/null:/bin/false
-lp:x:9:9:Print Service User:/dev/null:/bin/false
-atd:x:17:17:add daemon:/dev/null:/bin/false
-messagebus:x:18:18:D-Bus Message Daemon User:/dev/null:/bin/false
-named:x:20:20:BIND Owner:/home/named:/bin/false
-gdm:x:21:21:GDM Daemon User:/var/lib/gdm:/bin/false
-fcron:x:22:22:Fcron User:/dev/null:/bin/false
-www:x:24:24:Nginx Server:/dev/null:bin/false
-apache:x:25:25:Apache Server:/dev/null:/bin/false
-smmsp:x:26:26:Sendmail Daemon:/dev/null:/bin/false
-polkitd:x:27:27:Policy Kit Daemon User:/etc/polkit-1:/bin/false
-exim:x:31:31:Exim Daemon:/dev/null:/bin/false
-postfix:x:32:32:Postfix Daemon User:/var/spool/postfix:/bin/false
-sendmail:x:34:34:Sendmail Daemon:/dev/null:/bin/false
-vmailman:x:35:35:Vmail Daemon:/dev/null:/bin/false
-news:x:36:36:News Daemon:/dev/null:/bin/false
-kdm:x:37:37:KDM Daemon Owner:/var/lib/kdm:/bin/false
-mysql:x:40:40:MySQL Server:/dev/null:/bin/false
-postgres:x:41:41:PostgreSQL Server:/srv/pgsql/data:/bin/bash
-dovecot:x:42:42:Dovecot unprivileged user:/dev/null:/bin/false
-dovenull:x:43:43:Dovecot login user:/dev/null:/bin/false
-ftp:x:45:45:anonymous_user:/home/ftp:/bin/false
-proftpd:x:46:46:proftpd:/srv/ftp:/usr/bin/proftpdshell
-vsftpd:x:47:47:vsftpd User:/dev/null:/bin/false
-rsyncd:x:48:48:rsyncd Daemon:/home/rsync:/bin/false
-sshd:x:50:50:sshd PrivSep:/var/lib/sshd:/bin/false
-stunnel:x:51:51:stunnel Daemon:/var/lib/stunnel:/bin/false
-svn:x:56:56:SVN Owner:/home/svn:/bin/false
-games:x:60:60:Games High Score Owner:/var/games:/bin/false
-lightdm:x:63:63:Light Display Manager:/var/lib/lightdm:/sbin/nologin
-sddm:x:64:64:Simple Desktop Display Manager:/var/lib/sddm:/bin/false
-colord:x:71:71:Color Daemon Owner:/var/lib/colord:/bin/false
-systemd-bus-proxy:x:72:72:systemd Bus Proxy:/:/bin/false
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:/bin:/bin/false
+daemon:x:2:6:/sbin:/bin/false
+messagebus:x:27:27:D-Bus Message Daemon User:/dev/null:/bin/false
+systemd-bus-proxy:x:71:72:systemd Bus Proxy:/:/bin/false
 systemd-journal-gateway:x:73:73:systemd Journal Gateway:/:/bin/false
 systemd-journal-remote:x:74:74:systemd Journal Remote:/:/bin/false
 systemd-journal-upload:x:75:75:systemd Journal Upload:/:/bin/false
@@ -956,13 +962,7 @@ systemd-network:x:76:76:systemd Network Management:/:/bin/false
 systemd-resolve:x:77:77:systemd Resolver:/:/bin/false
 systemd-timesync:x:78:78:systemd Time Synchronization:/:/bin/false
 systemd-coredump:x:79:79:systemd Core Dumper:/:/bin/false
-ldap:x:83:83:OpenLDAP Daemon Owner:/var/lib/openldap:/bin/false
-avahi:x:84:84:Avahi Daemon Owner:/var/run/avahi-daemon:/bin/false
-avahi-autoipd:x:85:85:Avahi autoip Daemon:/:/var/run/avahi-autoipd:/bin/false
-ntp:x:87:87:Network Time Protocol:/var/lib/ntp:/bin/false
-unbound:x:88:88:Unbound DNS resolver:/var/lib/unbound:/bin/false
-anonymous:x:98:99:Unprivileged User:/dev/null:/bin/false
-nobody:x:99:99:Unprivileged User:/dev/null:/bin/false
+nobody:x:65534:65533:Unprivileged User:/dev/null:/bin/false
 EOF
 }
 generate_fstab() {
@@ -1026,20 +1026,6 @@ cat > ${FOLDER}/etc/skel/$FILE << "EOF"
 if [ -f "/etc/bashrc" ] ; then
   source /etc/bashrc
 fi
-if [ $EUID -eq 0 ] ; then
-        alias nu='setup-nutyx -cu'
-        alias del='cards remove'
-        alias get='cards install'
-        alias up='cards install -u'
-        alias check='cards sync;cards diff'
-else
-        alias nu='sudo setup-nutyx -cu'
-        alias del='sudo cards remove'
-        alias get='sudo cards install'
-        alias up='sudo cards install -u'
-        alias check='sudo cards sync;sudo cards diff'
-fi
-alias search='cards search'
 alias ll='ls -l'
 alias l='ls -alh'
 alias duh='du -h --max-depth=1'
@@ -1191,7 +1177,7 @@ base ${DEPOT}/base
 # base ${DEPOT}/gui-extra
 # base ${DEPOT}/..." > ${FOLDER}/etc/cards.conf
 }
-generate_nutyx_version() {
+generate_yaolinux_version() {
 local FILE
 FILE="nutyx-version"
 [ -f ${FOLDER}/var/lib/pkg/$FILE ] && return
@@ -1200,8 +1186,8 @@ echo "name ${CODE_NAME}
 version $VERSION" > ${FOLDER}/var/lib/pkg/$FILE
 }
 generate_lsb() {
-echo "DISTRIB_ID=\"NuTyX\"
-DISTRIB_DESCRIPTION=\"NuTyX GNU/Linux\"
+echo "DISTRIB_ID=\"YaoLINUX\"
+DISTRIB_DESCRIPTION=\"YaoLINUX GNU/Linux\"
 DISTRIB_CODENAME=\"${CODE_NAME}\"
 DISTRIB_RELEASE=\"$VERSION\"
 LSB_VERSION=\"1.4-1\"" > ${FOLDER}/etc/lsb-release
@@ -1213,7 +1199,7 @@ successfull_installation () {
 echo "
 ****************************************************
       Installation of NuTyX $VERSION installed
-      in $LFS sucessfully
+      in $CLFS sucessfully
 ****************************************************
 
 ****************************************************
@@ -1238,7 +1224,7 @@ expat gcc readline ncurses lzo glibc gmp xz zlib \
 libarchive mpc mpfr openssl cards"
    [ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ] && CHROOT_LIST="$CHROOT_LIST util-linux"
 fi
-[ -z "$URL" ] && URL="http://downloads.nutyx.org"
+[ -z "$URL" ] && URL="http://yaolinux.techozor.fr"
 [ -z "$VERSION" ] && VERSION="#VERSION#"
 if [ "$VERSION" == "development" ]; then
 	CODE_NAME="`date +%Y%m%d`"
@@ -1258,7 +1244,7 @@ fi
 [ "$KERNEL" == "NONE" ] && KERNEL=""
 [ "$KERNEL" == "none" ] && KERNEL=""
 
-[ -z $LFS ] && LFS=$FOLDER
+[ -z $CLFS ] && LFS=$FOLDER
 
 HOMEPAGE="${URL}"                      ## http://downloads.nutyx.org
 INSTALL_BASE="$ARCH/$VERSION"          ## x86_64/8.2
@@ -1331,9 +1317,9 @@ STRING_LENGTH="0"   # the length of the current message
 }
 check_lfs() {
 # LFS is set ?
-if [ ! -z "${LFS}" ]; then
-        DEVICE=${LFS}
-	FOLDER=${LFS}
+if [ ! -z "${CLFS}" ]; then
+        DEVICE=${CLFS}
+	FOLDER=${CLFS}
 else
 
         DEVICE=${FOLDER}
@@ -1437,12 +1423,11 @@ diffutils file grep bc \
 libpipeline util-linux \
 findutils flex libcap \
 gettext procps-ng psmisc \
-sed sudo tzdata inetutils \
+sed sudo \
 iproute2 iana-etc \
-eudev kmod less groff man-db \
-cards.fr cards.man nutyx.man \
-lvm2 dialog cpio squashfs \
-ca-certificates lsb-release \
+kmod less groff man-db \
+cards.fr cards.man yaolinux.man \
+lvm2 cpio ca-certificates 
 $KERNEL \
 $DEVEL
 exit" > $FOLDER/$SETUP_FILE
@@ -1468,6 +1453,12 @@ install_configuration_files() {
 	generate_readline_sh
 	generate_umask_sh
 	generate_profile
+	generate_i18n
+	generate_path
+	generate_pkg_config_path
+	generate_xdg
+	generate_xorg
+	generate_history
 	generate_hosts
 	generate_inputrc
 	generate_modules
@@ -1477,7 +1468,7 @@ install_configuration_files() {
 	generate_rc_site
 	generate_etc_bashrc
 	generate_lsb
-	generate_nutyx_version
+	generate_yaolinux_version
 }
 print_help() {
 	echo "
@@ -1541,7 +1532,7 @@ main() {
 	check_lfs "$@"
 	mount_depot
 
-	echo "LFS        : $LFS
+	echo "LFS        : $CLFS
 DEVICE     : $DEVICE
 URL        : $URL
 VERSION    : $VERSION
