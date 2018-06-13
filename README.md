@@ -420,140 +420,156 @@ cd /usr/ports/base/kernel-lts \
 pkgmk -d -i
 ```
 ## make a grub, if you don't have a working linux on an other partition or harddrive, with 
-cards depcreate grub \
-grub-install /dev/sda \
-cat > /boot/grub/grub.cfg << "EOF" \
-#Begin /boot/grub/grub.cfg \
+```bash
+cards depcreate grub 
+grub-install /dev/sda 
+cat > /boot/grub/grub.cfg << "EOF" 
+#Begin /boot/grub/grub.cfg 
 set default=0 \
-set timeout=5 \
-insmod ext2 \
-set root=(hd0,2) \
-menuentry "GNU/Linux, Linux 4.16.8-lfs-20180511-systemd" { \
-        linux   /boot/vmlinuz-4.16.8-lfs-20180511-systemd root=/dev/sda2 ro \
-} \
+set timeout=5 
+insmod ext2 
+set root=(hd0,2) 
+menuentry "GNU/Linux, YaoLINUX-Hello-systemd" { 
+        linux   /boot/kernel root=/dev/sda1 ro quiet
+        initrd  /boot/initrd
+} 
 EOF
-
+```
 ## make a link for /etc/resolv.conf
+```
 ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf
-
+```
 ## make a /etc/hostname
-echo "nutyx-systemd" > /etc/hostname
-
+```
+echo "YAOLINUX" > /etc/hostname
+```
 ## make a /etc/hosts like that if you have a network with DHCP
-cat > /etc/hosts << "EOF" \
-#Begin /etc/hosts \
-\
-127.0.0.1 localhost \
-127.0.1.1 nutyx-systemd.home nutyx-systemd \
-::1       localhost ip6-localhost ip6-loopback \
-ff02::1   ip6-allnodes \
-ff02::2   ip6-allrouters \
-\
-#End /etc/hosts \
+```
+cat > /etc/hosts << "EOF" 
+#Begin /etc/hosts 
+
+127.0.0.1 localhost 
+127.0.1.1 YAOLINUX.home YAOLINUX 
+::1       localhost ip6-localhost ip6-loopback 
+ff02::1   ip6-allnodes 
+ff02::2   ip6-allrouters 
+
+#End /etc/hosts 
 EOF
-  
+```
 ## make a working network with dhcpcd
+```
 cards depcreate dhcpcd
-
+```
 ## after compiling dhcpcd, you have to enable a systemd service. you have to know your network interface with
-ip a \
+```
+ip a 
 systemctl enable dhcpcd@"your network interface"
-
+```
 ## make a text editor
-cards depcreate vim \
-
+```
+cards depcreate vim
+```
 ## make a fstab like that if you have your partition in /dev/sda2
-cat > /etc/fstab << "EOF" \
-#Begin /etc/fstab \
-\
-#file system  mount-point  type     options             dump  fsck order \
-\
-/dev/sda2     /            ext4    defaults            1     1 \
-#/dev/<yyy>     swap         swap     pri=1               0     0 \
-\
-#End /etc/fstab \
-EOF 
+```
+cat > /etc/fstab << "EOF" 
+#Begin /etc/fstab 
 
+#file system  mount-point  type     options             dump  fsck order 
+
+/dev/sda2     /            ext4    defaults            1     1 
+#/dev/<yyy>     swap         swap     pri=1               0     0 
+
+#End /etc/fstab 
+EOF 
+```
 ## make a file for time
-cat > /etc/adjtime << "EOF" \
-0.0 0 0.0 \
-0 \
-LOCAL \
+```
+cat > /etc/adjtime << "EOF" 
+0.0 0 0.0 
+0 
+LOCAL 
 EOF
-
+```
 ## make a /etc/vconsole.conf like that il you're french
-cat > /etc/vconsole.conf << "EOF" \
-KEYMAP=fr-latin9 \
-FONT=Lat2-Terminus16 \
+```
+cat > /etc/vconsole.conf << "EOF" 
+KEYMAP=fr-latin9 
+FONT=Lat2-Terminus16
 EOF 
-
+```
 ## make a /etc/locale.conf for example in french
-cat > /etc/locale.conf << "EOF" \
-LANG=fr_FR.utf8 \
+```
+cat > /etc/locale.conf << "EOF" 
+LANG=fr_FR.utf8 
 EOF
-
+```
 ## make a /etc/inputrc
+```
+cat > /etc/inputrc << "EOF" 
+#Début de /etc/inputrc 
+#Modifié par Chris Lynn <roryo@roryo.dynup.net> 
 
-cat > /etc/inputrc << "EOF" \
-#Début de /etc/inputrc \
-#Modifié par Chris Lynn <roryo@roryo.dynup.net> \
-\
-#Permettre à l'invite de commande d'aller à la ligne \
-set horizontal-scroll-mode Off \
-\
-#Activer l'entrée sur 8 bits \
-set meta-flag On \
-set input-meta On \
-\
-#Ne pas supprimer le 8ème bit \
-set convert-meta Off \
-\
-#Conserver le 8ème bit à l'affichage \
-set output-meta On \
-\
-#none, visible ou audible \
-set bell-style none \
-\
-#Toutes les indications qui suivent font correspondre la séquence \
-#d'échappement contenue dans le 1er argument à la fonction \
-#spécifique de readline \
-"\eOd": backward-word \
-"\eOc": forward-word \
-\
+#Permettre à l'invite de commande d'aller à la ligne 
+set horizontal-scroll-mode Off 
+
+#Activer l'entrée sur 8 bits 
+set meta-flag On 
+set input-meta On 
+
+#Ne pas supprimer le 8ème bit 
+set convert-meta Off 
+
+#Conserver le 8ème bit à l'affichage 
+set output-meta On 
+
+#none, visible ou audible 
+set bell-style none 
+
+#Toutes les indications qui suivent font correspondre la séquence 
+#d'échappement contenue dans le 1er argument à la fonction 
+#spécifique de readline 
+"\eOd": backward-word 
+"\eOc": forward-word 
+
 #Pour la console linux \
-"\e[1~": beginning-of-line \
-"\e[4~": end-of-line \
-"\e[5~": beginning-of-history \
-"\e[6~": end-of-history \
-"\e[3~": delete-char \
-"\e[2~": quoted-insert \
-\
-#pour xterm \
-"\eOH": beginning-of-line \
-"\eOF": end-of-line \
-\
-#pour Konsole \
-"\e[H": beginning-of-line \
-"\e[F": end-of-line \
-\
-#Fin de /etc/inputrc \
-EOF \
-]
-## make a /etc/shells
-cat > /etc/shells << "EOF" \
-#Begin /etc/shells \
-\
-/bin/sh \
-/bin/bash \
-\
-#End /etc/shells \
-EOF
+"\e[1~": beginning-of-line 
+"\e[4~": end-of-line 
+"\e[5~": beginning-of-history 
+"\e[6~": end-of-history 
+"\e[3~": delete-char 
+"\e[2~": quoted-insert 
 
-## make a /etc/os-release
-cat > /etc/os-release << "EOF" \
-NAME="Linux From Scratch" \
-VERSION="nutyx-systemd" \
-ID=lfs \
-PRETTY_NAME="nutyx-systemd" \
-VERSION_CODENAME="<your name here>" \
+#pour xterm \
+"\eOH": beginning-of-line 
+"\eOF": end-of-line 
+
+#pour Konsole 
+"\e[H": beginning-of-line 
+"\e[F": end-of-line 
+
+#Fin de /etc/inputrc 
 EOF 
+]
+```
+## make a /etc/shells
+```
+cat > /etc/shells << "EOF" 
+#Begin /etc/shells 
+
+/bin/sh 
+/bin/bash 
+
+#End /etc/shells 
+EOF
+```
+## make a /etc/os-release
+```
+cat > /etc/os-release << "EOF" 
+NAME="Linux From Scratch" 
+VERSION="nutyx-systemd" 
+ID=lfs 
+PRETTY_NAME="nutyx-systemd" 
+VERSION_CODENAME="<your name here>" 
+EOF 
+```
