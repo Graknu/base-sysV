@@ -1,7 +1,7 @@
 description="Essentials scripts for the base for yaolinux"
 packager="Hugo <graknu@techozor.fr>"
 
-name=yaolinux-script
+name=yaolinux-scripts
 version=1.0
 release=1
 
