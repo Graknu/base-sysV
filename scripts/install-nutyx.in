@@ -571,47 +571,48 @@ if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
    return
 fi
 cat > ${FOLDER}/etc/$FILE << "EOF"
-# Begin /etc/inputrc
-# Modified by Chris Lynn <roryo@roryo.dynup.net>
+#Début de /etc/inputrc 
+#Modifié par Chris Lynn <roryo@roryo.dynup.net> 
 
-# Allow the command prompt to wrap to the next line
-set horizontal-scroll-mode Off
+#Permettre à l'invite de commande d'aller à la ligne 
+set horizontal-scroll-mode Off 
 
-# Enable 8bit input
-set meta-flag On
-set input-meta On
+#Activer l'entrée sur 8 bits 
+set meta-flag On 
+set input-meta On 
 
-# Turns off 8th bit stripping
-set convert-meta Off
+#Ne pas supprimer le 8ème bit 
+set convert-meta Off 
 
-# Keep the 8th bit for display
-set output-meta On
+#Conserver le 8ème bit à l'affichage 
+set output-meta On 
 
-# none, visible or audible
-set bell-style none
+#none, visible ou audible 
+set bell-style none 
 
-# All of the following map the escape sequence of the value
-# contained in the 1st argument to the readline specific functions
-"\eOd": backward-word
-"\eOc": forward-word
+#Toutes les indications qui suivent font correspondre la séquence 
+#d'échappement contenue dans le 1er argument à la fonction 
+#spécifique de readline 
+"\eOd": backward-word 
+"\eOc": forward-word 
 
-# for linux console
-"\e[1~": beginning-of-line
-"\e[4~": end-of-line
-"\e[5~": beginning-of-history
-"\e[6~": end-of-history
-"\e[3~": delete-char
-"\e[2~": quoted-insert
+#Pour la console linux \
+"\e[1~": beginning-of-line 
+"\e[4~": end-of-line 
+"\e[5~": beginning-of-history 
+"\e[6~": end-of-history 
+"\e[3~": delete-char 
+"\e[2~": quoted-insert 
 
-# for xorg-term
-"\eOH": beginning-of-line
-"\eOF": end-of-line
+#pour xterm \
+"\eOH": beginning-of-line 
+"\eOF": end-of-line 
 
-# for Konsole
-"\e[H": beginning-of-line
-"\e[F": end-of-line
+#pour Konsole 
+"\e[H": beginning-of-line 
+"\e[F": end-of-line 
 
-# End /etc/inputrc 
+#Fin de /etc/inputrc 
 EOF
 }
 generate_hosts() {
@@ -628,7 +629,7 @@ cat > ${FOLDER}/etc/$FILE << "EOF"
 # Begin /etc/hosts
 
 127.0.0.1 localhost.localdomain localhost
-127.0.0.1 nutyx
+127.0.0.1 yaolinux
 
 # End /etc/hosts
 EOF
@@ -654,7 +655,7 @@ EOF
 }
 generate_umask_sh() {
 local FILE
-FILE="umask.sh"
+FILE="50-umask.sh"
 [ -f ${FOLDER}/etc/profile.d/$FILE ] && return
 [ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
 if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
@@ -663,17 +664,20 @@ if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
    return
 fi
 cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
-# By default we want the umask to get set.
-if [ "$(id -gn)" = "$(id -un)" -a $EUID -gt 99 ] ; then
+# Begin /etc/profile.d/50-umask.sh
+
+if [ "`id -un`" = "`id -gn`" -a $EUID -gt 99 ]; then
   umask 002
 else
   umask 022
 fi
+
+# End /etc/profile.d/50-umask.sh
 EOF
 }
 generate_readline_sh() {
 local FILE
-FILE="readline.sh"
+FILE="50-readline.sh"
 [ -f ${FOLDER}/etc/profile.d/$FILE ] && return
 [ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
 if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
@@ -682,11 +686,19 @@ if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
    return
 fi
 cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
-# Setup the INPUTRC environment variable.
-if [ -z "$INPUTRC" -a ! -f "$HOME/.inputrc" ] ; then
-        INPUTRC=/etc/inputrc
+# Begin /etc/profile.d/50-readline.sh
+
+if [ -z "$INPUTRC" ]; then
+  if [ -f "$HOME/.inputrc" ]; then
+    export INPUTRC="$HOME/.inputrc"
+  else
+    if [ -f "/etc/inputrc" ]; then
+      export INPUTRC="/etc/inputrc"
+    fi
+  fi
 fi
-export INPUTRC
+
+# End /etc/profile.d/50-readline.sh
 EOF
 }
 generate_extrapaths_sh() {
@@ -720,7 +732,7 @@ EOF
 }
 generate_dircolors_sh() {
 local FILE
-FILE="dircolors.sh"
+FILE="50-dircolors.sh"
 [ -f ${FOLDER}/etc/profile.d/$FILE ] && return
 [ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
 if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
@@ -729,108 +741,154 @@ if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
    return
 fi
 cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
-# Setup for /bin/ls to support color, the alias is in /etc/bashrc.
-if [ -f "/etc/dircolors" ] ; then
-        eval $(dircolors -b /etc/dircolors)
+# Begin /etc/profile.d/50-dircolors.sh
 
-        if [ -f "$HOME/.dircolors" ] ; then
-                eval $(dircolors -b $HOME/.dircolors)
-        fi
-fi
 alias ls='ls --color=auto'
+if [ -f "$HOME/.dircolors" ]; then
+  eval `dircolors -b "$HOME/.dircolors"`
+else
+  if [ -f "/etc/dircolors" ]; then
+    eval `dircolors -b "/etc/dircolors"`
+  fi
+fi
+
+# End /etc/profile.d/50-dircolors.sh
 EOF
 }
-generate_profile() {
+generate_i18n() {
 local FILE
-FILE="profile"
-[ -f ${FOLDER}/etc/$FILE ] && return
-[ ! -d ${FOLDER}/etc ] && mkdir -pv ${FOLDER}/etc
+FILE="05-i18n.sh"
+[ -f ${FOLDER}/etc/profile.d/$FILE ] && return
+[ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
 if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
    cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
-   ${FOLDER}/etc/$FILE
+   ${FOLDER}/etc/profile.d/$FILE
    return
 fi
-cat > ${FOLDER}/etc/$FILE << "EOF"
-# Begin /etc/profile
-# Written for Beyond Linux From Scratch
-# by James Robertson <jameswrobertson@earthlink.net>
-# modifications by Dagmar d'Surreal <rivyqntzne@pbzpnfg.arg>
+cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
+# Begin /etc/profile.d/05-i18n.sh
 
-# System wide environment variables and startup programs.
-
-# System wide aliases and functions should go in /etc/bashrc.  Personal
-# environment variables and startup programs should go into
-# ~/.bash_profile.  Personal aliases and functions should go into
-# ~/.bashrc.
-
-# Functions to help us manage paths.  Second argument is the name of the
-# path variable to be modified (default: PATH)
-pathremove () {
-        local IFS=':'
-        local NEWPATH
-        local DIR
-        local PATHVARIABLE=${2:-PATH}
-        for DIR in ${!PATHVARIABLE} ; do
-                if [ "$DIR" != "$1" ] ; then
-                  NEWPATH=${NEWPATH:+$NEWPATH:}$DIR
-                fi
-        done
-        export $PATHVARIABLE="$NEWPATH"
+export LANG=[ll]_[CC].[charset]
+export G_FILENAME_ENCODING=@locale
+ 
+# End /etc/profile.d/05-i18n.sh
+EOF
 }
+generate_path() {
+local FILE
+FILE="10-path.sh"
+[ -f ${FOLDER}/etc/profile.d/$FILE ] && return
+[ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
+if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
+   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
+   ${FOLDER}/etc/profile.d/$FILE
+   return
+fi
+cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
+# Begin /etc/profile.d/10-path.sh
 
-pathprepend () {
-        pathremove $1 $2
-        local PATHVARIABLE=${2:-PATH}
-        export $PATHVARIABLE="$1${!PATHVARIABLE:+:${!PATHVARIABLE}}"
-}
-
-pathappend () {
-        pathremove $1 $2
-        local PATHVARIABLE=${2:-PATH}
-        export $PATHVARIABLE="${!PATHVARIABLE:+${!PATHVARIABLE}:}$1"
-}
-
-export -f pathremove pathprepend pathappend
-
-# Set the initial path
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin
-
-if [ $EUID -eq 0 ] ; then
-        unset HISTFILE
+if [ "$EUID" -eq 0 ]; then
+  export PATH="/sbin:/bin:/usr/sbin:/usr/bin"
+  if [ -d "/usr/local/sbin" ]; then
+    export PATH="$PATH:/usr/local/sbin"
+  fi
+else
+  export PATH="/bin:/usr/bin"
 fi
 
-# Setup some environment variables.
+if [ -d "/usr/local/bin" ]; then
+  export PATH="$PATH:/usr/local/bin"
+fi
+
+if [ -d "$HOME/bin" ]; then
+  export PATH="$HOME/bin:$PATH"
+fi
+
+# End /etc/profile.d/10-path.sh
+EOF
+}
+generate_pkg_config_path() {
+local FILE
+FILE="10-pkg_config_path.sh"
+[ -f ${FOLDER}/etc/profile.d/$FILE ] && return
+[ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
+if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
+   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
+   ${FOLDER}/etc/profile.d/$FILE
+   return
+fi
+cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
+# Begin /etc/profile.d/10-pkg_config_path.sh
+
+export PKG_CONFIG_PATH32="/usr/lib/pkgconfig"
+export PKG_CONFIG_PATH64="/usr/lib64/pkgconfig"
+
+# End /etc/profile.d/10-pkg_config_path.sh
+EOF
+}
+generate_xdg() {
+local FILE
+FILE="10-xdg.sh"
+[ -f ${FOLDER}/etc/profile.d/$FILE ] && return
+[ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
+if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
+   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
+   ${FOLDER}/etc/profile.d/$FILE
+   return
+fi
+cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
+# Begin /etc/profild.d/10-xdg.sh
+
+export XDG_DATA_DIRS="/usr/share"
+export XDG_CONFIG_DIRS="/etc/xdg:/usr/share"
+
+# End /etc/profild.d/10-xdg.sh
+EOF
+}
+generate_xorg() {
+local FILE
+FILE="15-xorg.sh"
+[ -f ${FOLDER}/etc/profile.d/$FILE ] && return
+[ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
+if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
+   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
+   ${FOLDER}/etc/profile.d/$FILE
+   return
+fi
+cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
+# Begin /etc/profile.d/15-xorg.sh
+
+export XORG_PREFIX=/usr/X11R7
+
+export PATH="${PATH}:${XORG_PREFIX}/bin"
+export PKG_CONFIG_PATH32="${PKG_CONFIG_PATH32}${PKG_CONFIG_PATH32+:}${XORG_PREFIX}/lib/pkgconfig"
+export PKG_CONFIG_PATHN32="${PKG_CONFIG_PATHN32}${PKG_CONFIG_PATHN32+:}${XORG_PREFIX}/lib32/pkgconfig"
+export PKG_CONFIG_PATH64="${PKG_CONFIG_PATH64}${PKG_CONFIG_PATH64+:}${XORG_PREFIX}/lib64/pkgconfig"
+export ACLOCAL="aclocal -I $XORG_PREFIX/share/aclocal"
+
+# End /etc/profile.d/15-xorg.sh
+EOF
+}
+generate_history() {
+local FILE
+FILE="50-history.sh"
+[ -f ${FOLDER}/etc/profile.d/$FILE ] && return
+[ ! -d ${FOLDER}/etc/profile.d ] && mkdir -pv ${FOLDER}/etc/profile.d
+if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
+   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
+   ${FOLDER}/etc/profile.d/$FILE
+   return
+fi
+cat > ${FOLDER}/etc/profile.d/$FILE << "EOF"
+# Begin /etc/profile.d/50-history.sh
+
 export HISTSIZE=1000
 export HISTIGNORE="&:[bf]g:exit"
 
-# Set some defaults for graphical systems
-export XDG_DATA_DIRS=/usr/share/
-export XDG_CONFIG_DIRS=/etc/xdg/
-
-# Set some defaults for certificates
-export GIO_USE_TLS=gnutls-pkcs11
-
-# Setup a red prompt for root and a green one for users.
-NORMAL="\[\e[0m\]"
-RED="\[\e[1;31m\]"
-GREEN="\[\e[1;32m\]"
-if [[ $EUID == 0 ]] ; then
-  PS1="$RED\u [ $NORMAL\w$RED ]# $NORMAL"
-else
-  PS1="$GREEN\u [ $NORMAL\w$GREEN ]\$ $NORMAL"
-fi
-
-for script in /etc/profile.d/*.sh ; do
-        if [ -r $script ] ; then
-                . $script
-        fi
-done
-
-unset script RED GREEN NORMAL
-
-# End /etc/profile
+# End /etc/profile.d/50-history.sh
 EOF
 }
+generate_profile() {
 generate_group() {
 [ -f ${FOLDER}/etc/group ] && return
 [ ! -d ${FOLDER}/etc ] && mkdir -pv ${FOLDER}/etc
@@ -1468,6 +1526,12 @@ install_configuration_files() {
 	generate_readline_sh
 	generate_umask_sh
 	generate_profile
+	generate_i18n
+	generate_path
+	generate_pkg_config_path
+	generate_xdg
+	generate_xorg
+	generate_history
 	generate_hosts
 	generate_inputrc
 	generate_modules
