@@ -1219,7 +1219,7 @@ check_root() {
 }
 check_variables() {
 if [ -z "$CHROOT_LIST" ]; then
-	CHROOT_LIST="nutyx acl attr bash bzip2 coreutils curl \
+	CHROOT_LIST="yaolinux acl attr bash bzip2 coreutils curl \
 expat gcc readline ncurses lzo glibc gmp xz zlib \
 libarchive mpc mpfr openssl cards"
    [ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ] && CHROOT_LIST="$CHROOT_LIST util-linux"
