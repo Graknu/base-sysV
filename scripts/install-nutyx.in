@@ -889,6 +889,27 @@ export HISTIGNORE="&:[bf]g:exit"
 EOF
 }
 generate_profile() {
+local FILE
+FILE="profile"
+[ -f ${FOLDER}/etc/$FILE ] && return
+[ ! -d ${FOLDER}/etc ] && mkdir -pv ${FOLDER}/etc
+if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
+   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
+   ${FOLDER}/etc/$FILE
+   return
+fi
+cat > ${FOLDER}/etc/$FILE << "EOF"
+# Begin /etc/profile
+
+for script in /etc/profile.d/*.sh
+do
+  source $script
+done
+unset script
+
+# End /etc/profile
+EOF
+}
 generate_group() {
 [ -f ${FOLDER}/etc/group ] && return
 [ ! -d ${FOLDER}/etc ] && mkdir -pv ${FOLDER}/etc
