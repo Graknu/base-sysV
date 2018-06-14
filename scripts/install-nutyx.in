@@ -1495,12 +1495,10 @@ diffutils file grep bc \
 libpipeline util-linux \
 findutils flex libcap \
 gettext procps-ng psmisc \
-sed sudo tzdata inetutils \
-iproute2 iana-etc \
-eudev kmod less groff man-db \
-cards.fr cards.man nutyx.man \
-lvm2 dialog cpio squashfs \
-ca-certificates lsb-release \
+sed sudo iproute2 iana-etc \
+kmod less groff man-db \
+cards.fr cards.man yaolinux.man \
+lvm2 ca-certificates \
 $KERNEL \
 $DEVEL
 exit" > $FOLDER/$SETUP_FILE
