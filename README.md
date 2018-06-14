@@ -93,7 +93,7 @@ source ~/.bash_profile
 ```
 ## You are in the LFS user, now continue the installation with
 ```bash
-git clone https://github.com/Graknu/cross-base_sysD.git development 
+git clone https://github.com/YaoLinux/cross-base_sysD.git development 
 cd development 
 scripts/runmebeforepass1
 ```
