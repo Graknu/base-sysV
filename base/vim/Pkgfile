@@ -9,7 +9,7 @@ source=(http://yaolinux.techozor.fr/sources-base/vim-8.0.tar.bz2
 
 build(){
 cd vim80
-patch -Np1 -i ../vim-8.0-branch_update-1.patch
+#patch -Np1 -i ../vim-8.0-branch_update-1.patch
 echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
 CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" \
 ./configure \
@@ -17,6 +17,7 @@ CC="gcc ${BUILD64}" CXX="g++ ${BUILD64}" \
 make
 make -j1 DESTDIR=$PKG install
 ln -sv vim $PKG/usr/bin/vi
+mkdir -pv $PKG/usr/share/doc/vim-8.0
 ln -sv ../vim/vim0597/doc $PKG/usr/share/doc/vim-8.0
 
 }
