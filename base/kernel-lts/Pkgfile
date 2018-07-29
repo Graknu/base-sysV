@@ -62,24 +62,24 @@ make INSTALL_MOD_PATH=$PKG modules_install
 KERNEL_VERSION="${version}-YaoLinux-lts"
 
 # Module virtualbox
-#cd $SRC
-#sh VirtualBox-${vb_version}-${buildrelease}-Linux_${_VBARCH}.run --target vb --keep --noexec
-#cd vb
-#tar xfj VirtualBox.tar.bz2
-#cd src/vboxhost/
+cd $SRC
+sh VirtualBox-${vb_version}-${buildrelease}-Linux_${_VBARCH}.run --target vb --keep --noexec
+cd vb
+tar xfj VirtualBox.tar.bz2
+cd src/vboxhost/
 
-#for i in `find . -name Makefile.include.header`
-#do
-#  sed -i "s@/lib/modules/@$PKG/lib/modules/@" $i
-#done
+for i in `find . -name Makefile.include.header`
+do
+  sed -i "s@/lib/modules/@$PKG/lib/modules/@" $i
+done
 
-#KERN_VER=${KERNEL_VERSION} make
+KERN_VER=${KERNEL_VERSION} make
 
-#for i in *.ko
-#do
-#	install -D -m0644 $i \
-#	$PKG/lib/modules/${KERNEL_VERSION}/misc/$i
-#done
+for i in *.ko
+do
+	install -D -m0644 $i \
+	$PKG/lib/modules/${KERNEL_VERSION}/misc/$i
+done
 
 # depmod needed
 depmod -b $PKG -a ${KERNEL_VERSION}
