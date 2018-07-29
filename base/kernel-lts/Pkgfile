@@ -59,27 +59,27 @@ cp .config $SRC/$name.config_64
 cd $SRC/linux-${_version}
 make INSTALL_MOD_PATH=$PKG modules_install
 
-KERNEL_VERSION="${version}-NuTyX-lts"
+KERNEL_VERSION="${version}-YaoLinux-lts"
 
 # Module virtualbox
-cd $SRC
-sh VirtualBox-${vb_version}-${buildrelease}-Linux_${_VBARCH}.run --target vb --keep --noexec
-cd vb
-tar xfj VirtualBox.tar.bz2
-cd src/vboxhost/
+#cd $SRC
+#sh VirtualBox-${vb_version}-${buildrelease}-Linux_${_VBARCH}.run --target vb --keep --noexec
+#cd vb
+#tar xfj VirtualBox.tar.bz2
+#cd src/vboxhost/
 
-for i in `find . -name Makefile.include.header`
-do
-  sed -i "s@/lib/modules/@$PKG/lib/modules/@" $i
-done
+#for i in `find . -name Makefile.include.header`
+#do
+#  sed -i "s@/lib/modules/@$PKG/lib/modules/@" $i
+#done
 
-KERN_VER=${KERNEL_VERSION} make
+#KERN_VER=${KERNEL_VERSION} make
 
-for i in *.ko
-do
-	install -D -m0644 $i \
-	$PKG/lib/modules/${KERNEL_VERSION}/misc/$i
-done
+#for i in *.ko
+#do
+#	install -D -m0644 $i \
+#	$PKG/lib/modules/${KERNEL_VERSION}/misc/$i
+#done
 
 # depmod needed
 depmod -b $PKG -a ${KERNEL_VERSION}
@@ -94,7 +94,7 @@ $PKG/boot/System_64.map-$version
 cp  .config    \
 $PKG/boot/config_64-$version
 cp  arch/x86_64/boot/bzImage \
-$PKG/boot/kernel-$version-NuTyX-lts
+$PKG/boot/kernel-$version-YaoLinux-lts
 
 # Reorgenise the sources
 cd $PKG/lib/modules/${KERNEL_VERSION}/
@@ -121,18 +121,18 @@ if [ "`dirname $LK`" != "." ]; then
   echo "This is a efi installation"
   ln -sf $LK boot/kernel
   if [ -f boot/$LK ]; then' > $PKGMK_ROOT/$name.post-install
-echo "    mv boot/kernel-$version-NuTyX-lts boot/\$LK 2>/dev/null
-    ln -sf \$LK boot/kernel-$version-NuTyX-lts
+echo "    mv boot/kernel-$version-YaoLinux-lts boot/\$LK 2>/dev/null
+    ln -sf \$LK boot/kernel-$version-YaoLinux-lts
   else
     echo \"EFI Partition not found, mount EFI Partition and re-install the kernel\"
   fi
 else
   echo \"This is a bios installation\"
   if [ -L boot/initrd ]; then
-    mkinitramfs $version-NuTyX-lts
-    ln -sf initrd-$version-NuTyX-lts boot/initrd
+    mkinitramfs $version-YaoLinux-lts
+    ln -sf initrd-$version-YaoLinux-lts boot/initrd
   fi
-  ln -sf kernel-$version-NuTyX-lts boot/kernel
+  ln -sf kernel-$version-YaoLinux-lts boot/kernel
 fi" >> $PKGMK_ROOT/$name.post-install
 
 # pre-install autogen
