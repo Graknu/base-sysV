@@ -365,9 +365,9 @@ pass
 ## After a moment the scripts says you have to install bash manually, go with the commands
 ```bash
 exit 
-cd $LFS/root/development/base/bash 
+cd $CLFS/root/development/base/bash 
 for PACK in *.xz; do /tools/bin/pkgadd -r $CLFS $PACK;done 
-/tools/bin/pkginfo -r $LFS -i|grep bash
+/tools/bin/pkginfo -r $CLFS -i|grep bash
 ```
 ## The last command will return that if succeeds
 ```bash
@@ -395,7 +395,7 @@ pass
 ## Now, follow few commands to configure your nutyx-systemd
 ```bash
 exit
-echo $LFS
+echo $CLFS
 ```
 ## The ouptput have to be "/mnt/lfs "
 
