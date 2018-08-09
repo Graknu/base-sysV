@@ -18,7 +18,7 @@ sed -e '1   s/^/{"/' \
 sed -e '$ s/$/0}/' \
 -i libmath.h
 EOF
-echo $CC
+
 CC="gcc ${BUILD64}" ./configure \
     --prefix=/usr \
     --mandir=/usr/share/man \
