@@ -1,0 +1,2 @@
+ln -sv multiarch_wrapper /usr/bin/perl
+ln -sv multiarch_wrapper /usr/bin/perl5.26.0
