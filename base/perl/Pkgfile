@@ -34,8 +34,4 @@ unset BUILD_ZLIB BUILD_BZIP2
 
 mv -v $PKG/usr/bin/perl{,-64}
 mv -v $PKG/usr/bin/perl5.26.0{,-64}
-
-ln -sv multiarch_wrapper $PKG/usr/bin/perl
-ln -sv multiarch_wrapper $PKG/usr/bin/perl5.26.0
-
 }
