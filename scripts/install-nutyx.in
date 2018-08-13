@@ -1535,7 +1535,7 @@ generate_setupfile() {
 echo "#!/bin/bash
 source /etc/profile
 cards sync
-cards install kbd pam \
+cards install pam \
 shadow gdbm e2fsprogs \
 gzip binutils \
 diffutils file grep bc \
