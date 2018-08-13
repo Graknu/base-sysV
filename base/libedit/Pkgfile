@@ -17,6 +17,6 @@ build() {
 
 make
 
-make DESTDIR=$PKG/usr install
+make DESTDIR=$PKG install
 rm $PKG/usr/share/man/man3/history.3 #Conflict with readline
 }
