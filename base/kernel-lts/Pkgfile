@@ -15,7 +15,7 @@ alias=(linux-lts)
 version=4.14.48
 _version=${version:0:4}
 
-run=(nutyx)
+run=(yaolinux)
 
 # Virtualbox
 vb_version=5.2.10
