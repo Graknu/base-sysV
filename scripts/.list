@@ -55,7 +55,6 @@ readline
 autoconf
 automake
 bash
-bc
 diffutils
 lib32-file
 file
@@ -103,3 +102,4 @@ ca-certificates
 cpio
 dracut
 vim
+bc
