@@ -1,5 +1,3 @@
-#Depends on : lib
-
 name=lib32-libgpg-error
 description="Support library for libgcrypt"
 packager=rems
