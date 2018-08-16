@@ -3,7 +3,7 @@ description="Support library for libgcrypt"
 packager=rems
 version=1.11
 
-source=(ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-$version.tar.gz)
+source=(ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-$version.tar.bz2)
 
 prepare() {
     cd libgpg-error-$version
