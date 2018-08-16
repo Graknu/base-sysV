@@ -1,3 +1,5 @@
+#Depends on : lib
+
 name=lib32-libgpg-error
 description="Support library for libgcrypt"
 packager=rems
@@ -8,7 +10,7 @@ source=(ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-$version.tar.gz)
 prepare() {
     cd libgpg-error-$version
         CC="gcc -m32" CXX="g++ -m32" USE_ARCH=32 PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
-        ./configure --prefix=/usr --host --host-alias
+        ./configure --prefix=/usr --libdir=/usr/lib --host --host-alias
 }
 
 build() {
