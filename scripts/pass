@@ -69,6 +69,10 @@ do
 		    	rm -vf /usr/lib64/liblzma.so
 			$PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
 			;;
+		    file)
+		    	rm -vf /usr/bin/file
+			$PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
+			;;
 		    glibc)
 			mkdir -pv /usr/include
 			$PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
