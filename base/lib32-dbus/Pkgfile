@@ -24,6 +24,11 @@ make DESTDIR=$PKG install
 mkdir -pv $PKG/lib
 mv -v $PKG/usr/lib/libdbus-1.so.* $PKG/lib
 ln -sfv ../../lib/$(readlink $PKG/usr/lib/libdbus-1.so) $PKG/usr/lib/libdbus-1.so
+rm -rfv $PKG/lib/systemd/system/dbus.service
+rm -rfv $PKG/lib/systemd/system/dbus.socket
+rm -rfv $PKG/lib/systemd/system/dbus.target.wants/dbus.socket
+rm -rfv $PKG/lib/systemd/system/multi-user.target.wants/dbus.service
+rm -rfv $PKG/lib/systemd/system/sockets.target.wants/dbus.socket
 rm -r $PKG/usr/{bin,include,share}
 rm -r $PKG/{etc,var}
 }
