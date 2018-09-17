@@ -13,6 +13,5 @@ CC="gcc ${BUILD32}" ./configure \
 make
 
 make DESTDIR=$PKG install
-rm -rfv $PKG/usr/bin/file
 rm -rfv $PKG/usr/{bin,include,share}
 }
