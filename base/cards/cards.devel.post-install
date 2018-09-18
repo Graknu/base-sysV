@@ -10,7 +10,7 @@ lxqt lxqt-extra \
 lxde lxde-extra
 do
    if [ ! -f etc/ports/$i.cards ]; then
-      echo "host=yaolinux.techozor.fr
+      echo "host=download.yaolinux.org
 destination=/usr/ports/$i
 version=$VERSION
 collection=$i" > etc/ports/$i.cards
