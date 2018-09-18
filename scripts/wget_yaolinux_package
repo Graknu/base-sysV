@@ -95,3 +95,7 @@ da4b2289b7cfb19583d54e9eaaef1c3a  Linux-PAM-1.3.0.tar.bz2
 1581a588fde9d89f6bc6201e8129afaf  rsync-3.1.3.tar.gz
 ee6cfbc5a0c5696ffae79dac04ee7a2b  LVM2.2.02.177.tgz
 2db6f03d655041f82eb64b8c8a1fa7da  wget-1.19.5.tar.gz
+1f0176c4fa89274971b2826a97f303f7  make-ca-0.8.tar.gz
+bb9b8ecbc4eb99fe97f1d320f2efd00e  certdata.txt
+95c1c1820c0ed1de88d512cb10e25182  class3.crt
+fb262d55709427e2e9acadf2c1298c99  root.crt
