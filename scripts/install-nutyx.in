@@ -1338,9 +1338,9 @@ check_root() {
 }
 check_variables() {
 if [ -z "$CHROOT_LIST" ]; then
-	CHROOT_LIST="yaolinux acl lib32-acl attr lib32-attr bash bzip2 lib32-bzip2 coreutils curl \
-expat lib32-expat gcc readline lib32-readline ncurses lib32-ncurses glibc lib32-glibc gmp lib32-gmp xz lib32-xz zlib lib32-zlib \
-libarchive mpc lib32-mpc mpfr lib32-mpfr openssl cards"
+	CHROOT_LIST="lib32-acl lib32-mpfr lib32-mpc lib32-xz lib32-attr lib32-bzip2 lib32-expat lib32-readline lib32-ncurses lib32-glibc lib32-gmp lib32-zlib \
+expat gcc readline ncurses glibc gmp xz zlib yaolinux acl attr bash bzip2 coreutils curl \
+libarchive mpc mpfr openssl cards"
    [ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ] && CHROOT_LIST="$CHROOT_LIST util-linux"
 fi
 [ -z "$URL" ] && URL="http://download.yaolinux.org"
@@ -1535,13 +1535,13 @@ generate_setupfile() {
 echo "#!/bin/bash
 source /etc/profile
 cards sync
-cards install kbd pam \
+cards install lib32-util-linux lib32-file lib32-libcap lib32-procps-ng lib32-gettext lib32-libpipeline kbd pam \
 shadow gdbm e2fsprogs \
 gzip binutils \
-diffutils file lib32-file grep bc \
-libpipeline lib32-libpipeline util-linux lib32-util-linux \
-findutils flex libcap lib32-libcap \
-gettext lib32-gettext procps-ng lib32-procps-ng psmisc \
+diffutils file grep bc \
+libpipeline util-linux \
+findutils flex libcap \
+gettext procps-ng psmisc \
 sed iproute2 iana-etc \
 kmod less groff man-db \
 cards.fr cards.man yaolinux.man \
