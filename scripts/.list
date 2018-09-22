@@ -56,6 +56,7 @@ readline
 autoconf
 automake
 bash
+yaolinux-scripts
 diffutils
 lib32-file
 file
