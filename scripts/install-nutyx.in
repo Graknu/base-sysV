@@ -1088,7 +1088,7 @@ if [ -z "$CHROOT_LIST" ]; then
 	CHROOT_LIST="lib32-acl lib32-mpfr lib32-mpc lib32-xz lib32-attr lib32-bzip2 lib32-expat lib32-readline lib32-ncurses lib32-glibc lib32-gmp lib32-zlib \
 expat gcc readline ncurses glibc gmp xz zlib yaolinux acl attr bash bzip2 coreutils curl \
 libarchive mpc mpfr openssl cards"
-   [ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ] && CHROOT_LIST="$CHROOT_LIST util-linux"
+   [ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ] && CHROOT_LIST="$CHROOT_LIST util-linux lib32-util-linux"
 fi
 [ -z "$URL" ] && URL="http://download.yaolinux.org"
 [ -z "$VERSION" ] && VERSION="#VERSION#"
@@ -1101,9 +1101,9 @@ fi
 [ -z "$FOLDER" ] && FOLDER="/mnt/hd"
 if [ -z "$KERNEL" ]; then
    if [ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ]; then
-      KERNEL="systemd"
+      KERNEL="systemd lib32-systemd"
    else
-      KERNEL="linux-firmware systemd reiserfsprogs e3 \
+      KERNEL="linux-firmware systemd lib32-systemd reiserfsprogs e3 \
 grub lz4 mdadm jfsutils xfsprogs btrfs-progs dhcpcd kernel-lts"
    fi
 fi
