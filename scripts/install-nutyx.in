@@ -682,31 +682,6 @@ fi
 #fi
 EOF
 }
-generate_profile() {
-local FILE
-FILE="profile"
-[ -f ${FOLDER}/etc/$FILE ] && return
-[ ! -d ${FOLDER}/etc ] && mkdir -pv ${FOLDER}/etc
-if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
-   cp /etc/${INSTALL_COMMAND}.conf.d/$FILE \
-   ${FOLDER}/etc/$FILE
-   return
-fi
-cat > ${FOLDER}/etc/$FILE << "EOF"
-# Begin /etc/profile
-pathremove () {
-        local IFS=':'
-        local NEWPATH
-        local DIR
-        local PATHVARIABLE=${2:-PATH}
-        for DIR in ${!PATHVARIABLE} ; do
-                if [ "$DIR" != "$1" ] ; then
-                  NEWPATH=${NEWPATH:+$NEWPATH:}$DIR
-                fi
-        done
-        export $PATHVARIABLE="$NEWPATH"
-}
-
 pathprepend () {
         pathremove $1 $2
         local PATHVARIABLE=${2:-PATH}
@@ -1361,7 +1336,6 @@ install_configuration_files() {
 	generate_inputrc
 	generate_shells
 	generate_extrapaths_sh
-	generate_profile
 	generate_hosts
 	generate_inputrc
 	generate_modules
