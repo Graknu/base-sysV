@@ -682,6 +682,18 @@ fi
 #fi
 EOF
 }
+pathremove () {
+        local IFS=':'
+        local NEWPATH
+        local DIR
+        local PATHVARIABLE=${2:-PATH}
+        for DIR in ${!PATHVARIABLE} ; do
+                if [ "$DIR" != "$1" ] ; then
+                  NEWPATH=${NEWPATH:+$NEWPATH:}$DIR
+                fi
+        done
+        export $PATHVARIABLE="$NEWPATH"
+}
 pathprepend () {
         pathremove $1 $2
         local PATHVARIABLE=${2:-PATH}
@@ -694,16 +706,6 @@ pathappend () {
         export $PATHVARIABLE="${!PATHVARIABLE:+${!PATHVARIABLE}:}$1"
 }
 
-export -f pathremove pathprepend pathappend
-
-for script in /etc/profile.d/*.sh
-do
-  source $script
-done
-unset script
-
-# End /etc/profile
-EOF
 }
 generate_group() {
 [ -f ${FOLDER}/etc/group ] && return
