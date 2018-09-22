@@ -1338,7 +1338,7 @@ findutils flex libcap \
 gettext procps-ng psmisc \
 sed iproute2 iana-etc \
 kmod less groff man-db \
-cards.fr cards.man yaolinux.man \
+cards.fr cards.man yaolinux.man yaolinux-scripts \
 lvm2 ca-certificates pkg-config-lite \
 $KERNEL \
 $DEVEL
