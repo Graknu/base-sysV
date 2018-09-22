@@ -1339,7 +1339,7 @@ check_root() {
 check_variables() {
 if [ -z "$CHROOT_LIST" ]; then
 	CHROOT_LIST="yaolinux acl lib32-acl attr lib32-attr bash bzip2 lib32-bzip2 coreutils curl \
-expat lib32-expat gcc readline lib32-readline ncurses lib32-ncurses lzo glibc lib32-glibc gmp lib32-gmp xz lib32-xz zlib lib32-zlib\
+expat lib32-expat gcc readline lib32-readline ncurses lib32-ncurses glibc lib32-glibc gmp lib32-gmp xz lib32-xz zlib lib32-zlib \
 libarchive mpc lib32-mpc mpfr lib32-mpfr openssl cards"
    [ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ] && CHROOT_LIST="$CHROOT_LIST util-linux"
 fi
@@ -1538,14 +1538,14 @@ cards sync
 cards install kdb pam \
 shadow gdbm e2fsprogs \
 gzip binutils \
-diffutils file grep bc \
-libpipeline util-linux \
-findutils flex libcap \
-gettext procps-ng psmisc \
+diffutils file lib32-file grep bc \
+libpipeline lib32-libpipeline util-linux lib32-util-linux \
+findutils flex libcap lib32-libcap \
+gettext lib32-gettext procps-ng lib32-procps-ng psmisc \
 sed iproute2 iana-etc \
 kmod less groff man-db \
 cards.fr cards.man yaolinux.man \
-lvm2 ca-certificates \
+lvm2 ca-certificates pkg-config-lite \
 $KERNEL \
 $DEVEL
 exit" > $FOLDER/$SETUP_FILE
