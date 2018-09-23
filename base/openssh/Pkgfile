@@ -1,3 +1,5 @@
+#Depends on: libedit
+
 name=openssh
 description="Free version of the SSH connectivity tools"
 packager=rems
