@@ -1,7 +1,7 @@
 name=make-ca
 description="Certificate Authority certificates, the Public Key Infrastructure."
 packager=rems
-version=0.7
+version=0.8
 source=(http://download.yaolinux.org/sources-base/make-ca-0.8.tar.gz
         http://download.yaolinux.org/sources-base/certdata.txt
         http://download.yaolinux.org/sources-base/root.crt
