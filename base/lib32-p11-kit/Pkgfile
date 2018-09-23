@@ -1,4 +1,4 @@
-#Depends on: lib32-libffi make-ca lib32-libtasn1
+#Depends on: lib32-libffi ca-certificates lib32-libtasn1
 name=lib32-p11-kit
 description="Provides a way to load and enumerate PKCS#11 modules"
 packager=rems
