@@ -1,9 +1,9 @@
-# depends="libffi-32 make-ca libtasn1-32"
+#Depens on: lib32-libffi make-ca lib32-libtasn1
 name=lib32-p11-kit
 description="Provides a way to load and enumerate PKCS#11 modules"
 packager=rems
 version=0.23.9
-source=(https://github.com/p11-glue/p11-kit/releases/download/$version/p11-kit-$version.tar.gz)
+source=(http://download.yaolinux.org/sources-base/p11-kit-0.23.9.tar.gz)
 
 prepare(){
     cd p11-kit-$version
