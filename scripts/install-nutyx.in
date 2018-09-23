@@ -1085,9 +1085,8 @@ check_root() {
 }
 check_variables() {
 if [ -z "$CHROOT_LIST" ]; then
-	CHROOT_LIST="lib32-acl lib32-mpfr lib32-mpc lib32-xz lib32-attr lib32-bzip2 lib32-expat lib32-readline lib32-ncurses lib32-glibc lib32-gmp lib32-zlib \
-expat gcc readline ncurses glibc gmp xz zlib yaolinux acl attr bash bzip2 coreutils curl \
-libarchive mpc mpfr openssl cards"
+	CHROOT_LIST="gmp mpfr mpc isl zlib binutils gcc ncurses bzip2 check coreutils diffutils gawk gettext \
+	grep gzip make patch sed tar texinfo util-linux vim xz libarchive cards openssl yaolinux-scripts"
    [ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ] && CHROOT_LIST="$CHROOT_LIST util-linux lib32-util-linux"
 fi
 [ -z "$URL" ] && URL="http://download.yaolinux.org"
@@ -1282,16 +1281,14 @@ generate_setupfile() {
 echo "#!/bin/bash
 source /etc/profile
 cards sync
-cards install lib32-util-linux lib32-file lib32-libcap lib32-procps-ng lib32-gettext lib32-libpipeline kbd pam \
+cards install lib32-libcap lib32-procps-ng lib32-libpipeline kbd pam \
 shadow gdbm e2fsprogs \
-gzip binutils \
-diffutils file grep bc \
-libpipeline util-linux \
-findutils flex libcap \
+bc libpipeline \
+flex libcap \
 gettext procps-ng psmisc \
-sed iproute2 iana-etc \
+iproute2 iana-etc \
 kmod less groff man-db \
-cards.fr cards.man yaolinux.man yaolinux-scripts \
+cards.fr cards.man yaolinux.man \
 lvm2 ca-certificates pkg-config-lite \
 $KERNEL \
 $DEVEL
