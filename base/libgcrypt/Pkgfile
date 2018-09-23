@@ -1,9 +1,9 @@
-#depends=libgpg-error
+#Depends on: libgpg-error
 name=libgcrypt
 description="General purpose cryptographic library based on the code from GnuPG"
 packager=rems
 version=1.8.2
-url=(ftp://ftp.gnupg.org/gcrypt/libgcrypt/$name-$version.tar.gz)
+source=(ftp://ftp.gnupg.org/gcrypt/libgcrypt/$name-$version.tar.gz)
 
 prepare(){
     cd $name-$version
