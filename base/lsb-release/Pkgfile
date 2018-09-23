@@ -15,7 +15,8 @@ cd ${name}-${version}
 sed -i "s|n/a|unavailable|" lsb_release
 CC="gcc -m64" CXX="g++ -m64" USE_ARCH=64 PKG_CONFIG_PATH="/usr/lib64/pkgconfig" \
 ./help2man -N --include ./lsb_release.examples \
-              --alt_version_key=program_version ./lsb_release > lsb_release.1
+              --alt_version_key=program_version ./lsb_release > lsb_release.1 \
+              --random-file
 mkdir -p $PKG/usr/{bin,share/man/man1}
 install -v -m 644 lsb_release.1 $PKG/usr/share/man/man1/lsb_release.1 
 install -v -m 755 lsb_release $PKG/usr/bin/lsb_release
