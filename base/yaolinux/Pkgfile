@@ -2,7 +2,7 @@ description="Base of the system"
 packager="Hugo <graknu@techozor.fr>"
 
 name=yaolinux
-version=0.3
+version=0.4
 
 source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
 
