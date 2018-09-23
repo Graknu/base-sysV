@@ -8,7 +8,7 @@ name=lsb-release
 version=1.4
 release=1
 alias=(lsb_release)
-source=(http://sourceforge.net/projects/lsb/files/${alias}/${version}/${name}-${version}.tar.gz)
+source=(http://download.yaolinux.org/sources-base/lsb-release-1.4.tar.gz)
 
 build() {
 cd ${name}-${version}
