@@ -1,6 +1,6 @@
 version=6.3
 
-source=(http://yaolinux.techozor.fr/sources-base/texinfo-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/texinfo-$version.tar.xz)
 
 build() {
 cd texinfo-$version
