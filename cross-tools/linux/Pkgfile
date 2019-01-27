@@ -1,7 +1,7 @@
 version=4.9.21
 
-source=(http://yaolinux.techozor.fr/sources-base/linux-4.9.tar.xz
-	http://yaolinux.techozor.fr/sources-base/patch-$version.xz)
+source=(http://download.yaolinux.org/sources/linux-4.9.tar.xz
+	http://download.yaolinux.org/sources/patch-$version.xz)
 
 build() {
 cd linux-4.9
