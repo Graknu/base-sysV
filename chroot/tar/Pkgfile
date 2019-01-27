@@ -1,6 +1,6 @@
 version=1.29
 
-source=(http://yaolinux.techozor.fr/sources-base/tar-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/tar-$version.tar.xz)
 
 build() {
 cd tar-$version
