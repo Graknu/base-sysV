@@ -1,6 +1,6 @@
 version=0.11.0
 
-source=(http://yaolinux.techozor.fr/sources-base/check-$version.tar.gz)
+source=(http://download.yaolinux.org/sources/check-$version.tar.gz)
 
 build() {
 cd check-$version
