@@ -1,6 +1,6 @@
 version=5.2.3
 
-source=(http://yaolinux.techozor.fr/sources-base/xz-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/xz-$version.tar.xz)
 
 build() {
 cd xz-$version
