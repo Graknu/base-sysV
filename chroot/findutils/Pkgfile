@@ -1,6 +1,6 @@
 version=4.6.0
 
-source=(http://yaolinux.techozor.fr/sources-base/findutils-$version.tar.gz)
+source=(http://download.yaolinux.org/sources/findutils-$version.tar.gz)
 
 build() {
 cd findutils-$version
