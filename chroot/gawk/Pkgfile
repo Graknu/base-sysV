@@ -1,6 +1,6 @@
 version=4.1.4
 
-source=(http://yaolinux.techozor.fr/sources-base/gawk-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/gawk-$version.tar.xz)
 
 build() {
 cd gawk-$version
