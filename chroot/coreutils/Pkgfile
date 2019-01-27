@@ -1,6 +1,6 @@
 version=8.27
 
-source=(http://yaolinux.techozor.fr/sources-base/coreutils-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/coreutils-$version.tar.xz)
 
 build() {
 cd coreutils-$version
