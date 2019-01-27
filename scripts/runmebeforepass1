@@ -5,7 +5,7 @@ trap "interrupted" SIGHUP SIGINT SIGQUIT SIGTERM
 color_mesg
 
 version="development"
-[ -z "${URL}" ] && URL="http://download.yaolinux.org/sources-base"
+[ -z "${URL}" ] && URL="http://download.yaolinux.org/sources"
 echo
 msg "$(gettext "This script will run some pre-checks and")"
 msg "$(gettext "download missing sources...")"
