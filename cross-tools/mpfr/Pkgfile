@@ -1,6 +1,6 @@
 version=3.1.5
-source=(http://yaolinux.techozor.fr/sources-base/mpfr-3.1.5.tar.xz
-	http://yaolinux.techozor.fr/sources-base/mpfr-3.1.5-fixes-1.patch)
+source=(http://download.yaolinux.org/sources/mpfr-3.1.5.tar.xz
+	http://download.yaolinux.org/sources/mpfr-3.1.5-fixes-1.patch)
 
 build() {
 cd mpfr-$version
