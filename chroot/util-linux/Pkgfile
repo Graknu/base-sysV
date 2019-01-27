@@ -1,6 +1,6 @@
 version=2.29.2
 
-source=(http://yaolinux.techozor.fr/sources-base/util-linux-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/util-linux-$version.tar.xz)
 
 build() {
 cd util-linux-$version
