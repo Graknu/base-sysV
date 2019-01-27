@@ -1,6 +1,6 @@
 version=6.0
 
-source=(http://yaolinux.techozor.fr/sources-base/ncurses-$version.tar.gz)
+source=(http://download.yaolinux.org/sources/ncurses-$version.tar.gz)
 
 build() {
 cd ncurses-$version
