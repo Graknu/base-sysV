@@ -1,6 +1,6 @@
 version=4.4
 
-source=(http://yaolinux.techozor.fr/sources-base/sed-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/sed-$version.tar.xz)
 
 build() {
 cd sed-$version
