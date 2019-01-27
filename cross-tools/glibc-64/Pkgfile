@@ -1,5 +1,5 @@
 version=2.25
-source=(http://yaolinux.techozor.fr/sources-base/glibc-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/glibc-$version.tar.xz)
 
 build() {
 cd glibc-$version
