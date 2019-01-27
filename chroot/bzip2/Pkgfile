@@ -1,6 +1,6 @@
 version=1.0.6
 
-source=(http://yaolinux.techozor.fr/sources-base/bzip2-$version.tar.gz)
+source=(http://download.yaolinux.org/sources/bzip2-$version.tar.gz)
 
 build() {
 cd bzip2-$version
