@@ -1,6 +1,6 @@
 version=0.17.1
 
-source=(http://yaolinux.techozor.fr/sources-base/isl-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/isl-$version.tar.xz)
 
 build() {
 cd isl-$version
