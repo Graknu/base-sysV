@@ -1,7 +1,7 @@
 version=7.1.0
 
-source=(http://yaolinux.techozor.fr/sources-base/gcc-7.1.0.tar.bz2
-	http://yaolinux.techozor.fr/sources-base/gcc-7.1.0-specs-1.patch)
+source=(http://download.yaolinux.org/sources/gcc-7.1.0.tar.bz2
+	http://download.yaolinux.org/sources/gcc-7.1.0-specs-1.patch)
 
 build() {
 cd gcc-$version
