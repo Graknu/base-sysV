@@ -1,6 +1,6 @@
 version=0.19.8.1
 
-source=(http://yaolinux.techozor.fr/sources-base/gettext-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/gettext-$version.tar.xz)
 
 build() {
 cd gettext-$version
