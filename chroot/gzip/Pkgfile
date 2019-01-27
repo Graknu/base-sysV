@@ -1,6 +1,6 @@
 version=1.8
 
-source=(http://yaolinux.techozor.fr/sources-base/gzip-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/gzip-$version.tar.xz)
 
 build() {
 cd gzip-$version
