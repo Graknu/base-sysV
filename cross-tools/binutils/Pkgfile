@@ -1,5 +1,5 @@
 version=2.28
-source=(http://yaolinux.techozor.fr/sources-base/binutils-$version.tar.bz2)
+source=(http://download.yaolinux.org/sources/binutils-$version.tar.bz2)
 
 build() {
 cd binutils-$version
