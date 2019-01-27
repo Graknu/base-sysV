@@ -1,6 +1,6 @@
 version=0.28-1
 
-source=(http://yaolinux.techozor.fr/sources-base/pkg-config-lite-$version.tar.gz)
+source=(http://download.yaolinux.org/sources/pkg-config-lite-$version.tar.gz)
 
 build() {
 cd pkg-config-lite-$version
