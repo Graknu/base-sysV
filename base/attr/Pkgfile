@@ -5,7 +5,7 @@ name=attr
 version=2.4.47
 
 
-source=(http://yaolinux.techozor.fr/sources-base/attr-2.4.47.src.tar.gz)
+source=(http://download.yaolinux.org/sources/attr-2.4.47.src.tar.gz)
 
 
 build() {

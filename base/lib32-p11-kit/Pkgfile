@@ -3,7 +3,7 @@ name=lib32-p11-kit
 description="Provides a way to load and enumerate PKCS#11 modules"
 packager=rems
 version=0.23.9
-source=(http://download.yaolinux.org/sources-base/p11-kit-0.23.9.tar.gz)
+source=(http://download.yaolinux.org/sources/p11-kit-0.23.9.tar.gz)
 
 prepare(){
     cd p11-kit-$version

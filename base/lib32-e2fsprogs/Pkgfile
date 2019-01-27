@@ -5,7 +5,7 @@ name=lib32-e2fsprogs
 version=1.43.4
 
 
-source=(http://yaolinux.techozor.fr/sources-base/e2fsprogs-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/e2fsprogs-$version.tar.xz)
 
 
 build() {

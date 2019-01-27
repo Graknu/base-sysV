@@ -3,9 +3,9 @@ description="General Purpose Mouse: mouse server for the console and xterm."
 packager=rems
 version=1.20.7
 
-source=(http://yaolinux.techozor.fr/sources-base/gpm-1.20.7.tar.gz
+source=(http://download.yaolinux.org/sources/gpm-1.20.7.tar.gz
         gpm-1.20.7-glibc-2.26-1.patch
-        http://yaolinux.techozor.fr/sources-base/blfs-systemd-units-20180105.tar.bz2)
+        http://download.yaolinux.org/sources/blfs-systemd-units-20180105.tar.bz2)
 
 build() {
 cd $name-$version

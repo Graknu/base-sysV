@@ -4,7 +4,7 @@ packager="Hugo <graknu@techozor.fr>"
 name=yaolinux
 version=0.4
 
-source=(http://download.yaolinux.org/sources-base/$name-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/$name-$version.tar.xz)
 
 build () {
 cd $name-$version

@@ -5,7 +5,7 @@ name=pkg-config-lite
 version=0.28-1
 
 
-source=(http://yaolinux.techozor.fr/sources-base/pkg-config-lite-0.28-1.tar.gz)
+source=(http://download.yaolinux.org/sources/pkg-config-lite-0.28-1.tar.gz)
 
 
 build() {

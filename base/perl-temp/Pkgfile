@@ -6,7 +6,7 @@ name=perl-temp
 version=5.26.0
 
 
-source=(http://yaolinux.techozor.fr/sources-base/perl-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/perl-$version.tar.xz)
 
 
 build() {

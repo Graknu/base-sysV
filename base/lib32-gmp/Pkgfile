@@ -6,7 +6,7 @@ name=lib32-gmp
 version=6.1.2
 
 
-source=(http://yaolinux.techozor.fr/sources-base/gmp-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/gmp-$version.tar.xz)
 
 
 build() {

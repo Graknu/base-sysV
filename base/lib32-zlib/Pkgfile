@@ -7,7 +7,7 @@ name=lib32-zlib
 version=1.2.11
 
 
-source=(http://yaolinux.techozor.fr/sources-base/zlib-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/zlib-$version.tar.xz)
 
 
 build() {

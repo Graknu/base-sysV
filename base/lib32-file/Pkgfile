@@ -3,7 +3,7 @@ description="File type identification utility"
 packager=rems
 version=5.31
 
-source=(http://yaolinux.techozor.fr/sources-base/file-5.31.tar.gz)
+source=(http://download.yaolinux.org/sources/file-5.31.tar.gz)
 
 build() {
 cd file-$version

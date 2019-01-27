@@ -6,8 +6,8 @@ packager=rems
 version=7.7p1
 
 source=(https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$name-$version.tar.gz
-        http://yaolinux.techozor.fr/sources-base/openssh-7.7p1-openssl-1.1.0-1.patch
-        http://yaolinux.techozor.fr/sources-base/blfs-systemd-units-20180105.tar.bz2)
+        http://download.yaolinux.org/sources/openssh-7.7p1-openssl-1.1.0-1.patch
+        http://download.yaolinux.org/sources/blfs-systemd-units-20180105.tar.bz2)
 
 build() {
 cd $name-$version

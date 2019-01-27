@@ -4,7 +4,7 @@ packager="Hugo <graknu@techozor.fr>"
 name=libcap
 version=2.25
 
-source=(http://yaolinux.techozor.fr/sources-base/libcap-2.25.tar.xz)
+source=(http://download.yaolinux.org/sources/libcap-2.25.tar.xz)
 
 
 build() {

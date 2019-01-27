@@ -3,7 +3,7 @@ description="To create nice user interfaces to shell scripts or other scripting 
 packager=rems
 version=1.3-20160828
 
-source=(http://yaolinux.techozor.fr/sources-base/$name_$version.orig.tar.gz)
+source=(http://download.yaolinux.org/sources/$name_$version.orig.tar.gz)
 
 build() {
 cd -$version

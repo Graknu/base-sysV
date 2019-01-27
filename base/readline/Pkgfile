@@ -4,7 +4,7 @@ packager=rems
 version=7.0
 
 source=(http://ftp.gnu.org/gnu/readline/readline-7.0.tar.gz
-        http://yaolinux.techozor.fr/sources-base/readline-7.0-branch_update-1.patch)
+        http://download.yaolinux.org/sources/readline-7.0-branch_update-1.patch)
 
 build() {
 cd readline-$version

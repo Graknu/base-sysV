@@ -6,7 +6,7 @@ name=lib32-flex
 version=2.6.4
 
 
-source=(http://yaolinux.techozor.fr/sources-base/flex-$version.tar.gz)
+source=(http://download.yaolinux.org/sources/flex-$version.tar.gz)
 
 
 build() {

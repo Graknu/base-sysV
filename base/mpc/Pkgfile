@@ -6,7 +6,7 @@ name=mpc
 version=1.0.3
 
 
-source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.gz)
+source=(http://download.yaolinux.org/sources/$name-$version.tar.gz)
 
 
 build() {

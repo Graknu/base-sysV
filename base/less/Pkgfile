@@ -3,7 +3,7 @@ description="A terminal based program for viewing text files"
 packager=rems
 version=491
 
-source=(http://yaolinux.techozor.fr/sources-base/less-491.tar.gz)
+source=(http://download.yaolinux.org/sources/less-491.tar.gz)
 
 build() {
 cd less-$version

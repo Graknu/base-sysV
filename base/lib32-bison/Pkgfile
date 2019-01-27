@@ -6,7 +6,7 @@ name=lib32-bison
 version=3.0.4
 
 
-source=(http://yaolinux.techozor.fr/sources-base/bison-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/bison-$version.tar.xz)
 
 
 build() {

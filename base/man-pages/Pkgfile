@@ -6,7 +6,7 @@ name=man-pages
 version=4.09
 
 
-source=(http://yaolinux.techozor.fr/sources-base/man-pages-4.09.tar.xz)
+source=(http://download.yaolinux.org/sources/man-pages-4.09.tar.xz)
 
 
 build() {

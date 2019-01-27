@@ -5,7 +5,7 @@ name=lib32-acl
 version=2.2.52
 
 
-source=(http://yaolinux.techozor.fr/sources-base/acl-2.2.52.src.tar.gz)
+source=(http://download.yaolinux.org/sources/acl-2.2.52.src.tar.gz)
 
 
 build() {

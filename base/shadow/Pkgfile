@@ -6,7 +6,7 @@ name=shadow
 version=4.5
 
 
-source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/$name-$version.tar.xz)
 
 
 build() {

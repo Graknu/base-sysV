@@ -4,7 +4,7 @@ packager=rems
 version=20170329.3.1
 _version=20170329-3.1
 
-source=(http://yaolinux.techozor.fr/sources-base/$name-$_version.tar.gz)
+source=(http://download.yaolinux.org/sources/$name-$_version.tar.gz)
 
 build() {
     cd $name-${_version}

@@ -3,7 +3,7 @@ description="Squashfs is a compressed read-only filesystem for Linux."
 packager=rems
 version=4.3
 
-source=(http://yaolinux.techozor.fr/sources-base/$name$version.tar.gz)
+source=(http://download.yaolinux.org/sources/$name$version.tar.gz)
 
 build() {
 cd $name$version/squashfs-tools

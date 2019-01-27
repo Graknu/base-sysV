@@ -3,7 +3,7 @@ description="Utility for transferring files with URL syntax to many protocols"
 packager=rems
 version=7.59.0
 
-source=(http://yaolinux.techozor.fr/sources-base/curl-7.59.0.tar.xz)
+source=(http://download.yaolinux.org/sources/curl-7.59.0.tar.xz)
 
 build() {
 cd $name-$version

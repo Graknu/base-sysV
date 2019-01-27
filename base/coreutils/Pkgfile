@@ -5,8 +5,8 @@ name=coreutils
 version=8.27
 
 
-source=(http://yaolinux.techozor.fr/sources-base/coreutils-8.27.tar.xz
-	http://yaolinux.techozor.fr/sources-base/coreutils-8.27-uname-1.patch)
+source=(http://download.yaolinux.org/sources/coreutils-8.27.tar.xz
+	http://download.yaolinux.org/sources/coreutils-8.27-uname-1.patch)
 
 
 build() {

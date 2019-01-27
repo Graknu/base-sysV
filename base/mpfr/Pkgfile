@@ -6,8 +6,8 @@ name=mpfr
 version=3.1.5
 
 
-source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz
-	http://yaolinux.techozor.fr/sources-base/$name-$version-fixes-1.patch)
+source=(http://download.yaolinux.org/sources/$name-$version.tar.xz
+	http://download.yaolinux.org/sources/$name-$version-fixes-1.patch)
 
 
 build() {

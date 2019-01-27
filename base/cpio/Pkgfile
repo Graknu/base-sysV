@@ -3,7 +3,7 @@ description="Copies files into or out of a cpio or tar archive."
 packager=rems
 version=2.12
 
-source=(http://yaolinux.techozor.fr/sources-base/cpio-2.12.tar.bz2)
+source=(http://download.yaolinux.org/sources/cpio-2.12.tar.bz2)
 
 build() {
 cd $name-$version

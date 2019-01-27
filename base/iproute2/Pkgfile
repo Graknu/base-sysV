@@ -5,7 +5,7 @@ name=iproute2
 version=4.9.0
 
 
-source=(http://yaolinux.techozor.fr/sources-base/iproute2-4.9.0.tar.xz)
+source=(http://download.yaolinux.org/sources/iproute2-4.9.0.tar.xz)
 
 
 build() {

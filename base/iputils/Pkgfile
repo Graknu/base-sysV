@@ -3,8 +3,8 @@ description="Network monitoring tools, including ping"
 packager=rems
 version=s20150815
 
-source=(http://yaolinux.techozor.fr/sources-base/iputils-s20150815.tar.xz
-        http://yaolinux.techozor.fr/sources-base/iputils-s20150815-build-1.patch)
+source=(http://download.yaolinux.org/sources/iputils-s20150815.tar.xz
+        http://download.yaolinux.org/sources/iputils-s20150815-build-1.patch)
 
 build() {
 cd iputils-$version

@@ -6,9 +6,9 @@ name=lib32-glibc
 version=2.25
 
 
-source=(http://yaolinux.techozor.fr/sources-base/glibc-2.25.tar.xz
-        http://yaolinux.techozor.fr/sources-base/linux-4.9.tar.xz
-        http://yaolinux.techozor.fr/sources-base/patch-4.9.21.xz)
+source=(http://download.yaolinux.org/sources/glibc-2.25.tar.xz
+        http://download.yaolinux.org/sources/linux-4.9.tar.xz
+        http://download.yaolinux.org/sources/patch-4.9.21.xz)
 
 
 build() {

@@ -6,7 +6,7 @@ name=zlib
 version=1.2.11
 
 
-source=(http://yaolinux.techozor.fr/sources-base/$name-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/$name-$version.tar.xz)
 
 
 build() {
