@@ -1,6 +1,6 @@
 version=2.7.5
 
-source=(http://yaolinux.techozor.fr/sources-base/patch-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/patch-$version.tar.xz)
 
 build() {
 cd patch-$version
