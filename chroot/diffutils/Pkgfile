@@ -1,6 +1,6 @@
 version=3.6
 
-source=(http://yaolinux.techozor.fr/sources-base/diffutils-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/diffutils-$version.tar.xz)
 
 build() {
 cd diffutils-$version
