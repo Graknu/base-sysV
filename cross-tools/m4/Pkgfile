@@ -1,6 +1,6 @@
 version=1.4.18
 
-source=(http://yaolinux.techozor.fr/sources-base/m4-$version.tar.xz)
+source=(http://download.yaolinux.org/sources/m4-$version.tar.xz)
 
 build() {
 cd m4-$version
