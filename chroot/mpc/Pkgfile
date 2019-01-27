@@ -1,6 +1,6 @@
 version=1.0.3
 
-source=(http://yaolinux.techozor.fr/sources-base/mpc-$version.tar.gz)
+source=(http://download.yaolinux.org/sources/mpc-$version.tar.gz)
 
 build() {
 cd mpc-$version
