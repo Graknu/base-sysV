@@ -1,4 +1,4 @@
-version=2.4.1
+version=2.4.111
 source=(http://downloads.nutyx.org/files/cards-$version.tar.xz)
 build()
 {
