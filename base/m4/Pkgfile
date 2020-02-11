@@ -11,6 +11,10 @@ source=(http://download.yaolinux.org/sources/$name-$version.tar.xz)
 
 build() {
 cd $name-$version
+
+sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
+echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
+
 CC="gcc -m64" ./configure \
     --prefix=/usr
 make
