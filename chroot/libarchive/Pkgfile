@@ -12,6 +12,9 @@ cd $name-$version
 	--without-openssl --disable-acl \
 	--disable-bsdcpio --without-zlib \
 	--disable-xattr \
+	--build=${CLFS_HOST} \
+	--host=${CLFS_TARGET} \
+	--target=${CLFS_TARGET} \
 	--without-iconv --without-bz2lib
 make
 make install
