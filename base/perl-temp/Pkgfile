@@ -17,5 +17,15 @@ sed -i 's@/usr/include@/tools/include@g' ext/Errno/Errno_pm.PL
     -Dcc="gcc -m32"
 make
 make DESTDIR=$PKG install
+
+find $PKG -iname 'TODO*' -or \
+	-iname 'Change*' -or \
+	-iname 'README*' -or \
+	-name '*.bs' -or \
+	-name .packlist -or \
+	-name perllocal.pod | xargs rm
+
+find $PKG -depth -empty -exec rmdir {} \;
+
 }
 
