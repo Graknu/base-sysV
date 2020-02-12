@@ -30,6 +30,15 @@ echo 'installstyle="lib64/perl5"' >> hints/linux.sh
 make
 make DESTDIR=$PKG install
 
+find $PKG -iname 'TODO*' -or \
+	-iname 'Change*' -or \
+	-iname 'README*' -or \
+	-name '*.bs' -or \
+	-name .packlist -or \
+	-name perllocal.pod | xargs rm
+
+find $PKG -depth -empty -exec rmdir {} \;
+
 unset BUILD_ZLIB BUILD_BZIP2
 
 mv -v $PKG/usr/bin/perl{,-64}
@@ -37,5 +46,4 @@ mv -v $PKG/usr/bin/perl5.26.0{,-64}
 
 ln -sv multiarch_wrapper $PKG/usr/bin/perl
 ln -sv multiarch_wrapper $PKG/usr/bin/perl5.26.0
-
 }
