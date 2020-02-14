@@ -221,7 +221,7 @@ mount -vt proc proc ${CLFS}/proc
 mount -vt tmpfs tmpfs ${CLFS}/run 
 mount -vt sysfs sysfs ${CLFS}/sys
 [ -h ${CLFS}/dev/shm ] && mkdir -pv ${CLFS}/$(readlink ${CLFS}/dev/shm) 
-cp -v /etc/resolv.conf $LFS/etc
+cp -v /etc/resolv.conf $CLFS/etc
 ```
 
 ## We check the correct mount
@@ -254,7 +254,7 @@ chown -Rv 0:0 /cross-tools
 
 ## Creating directories
 ```bash
-mkdir -pv /{bin,boot,dev,{etc/,}opt,home,lib{,64},mnt}
+mkdir -pv /{bin,boot,dev,etc,opt,home,lib{,64},mnt}
 mkdir -pv /{proc,media/{floppy,cdrom},run/{,shm},sbin,srv,sys}
 mkdir -pv /var/{lock,log,mail,spool}
 mkdir -pv /var/{opt,cache,lib{,64}/{misc,locate},local}
