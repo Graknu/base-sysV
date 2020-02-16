@@ -11,6 +11,11 @@ source=(http://download.yaolinux.org/sources/perl-$version.tar.xz)
 
 build() {
 cd perl-$version
+
+sed -e '9751 a#ifndef PERL_IN_XSUB_RE' \
+    -e '9808 a#endif'                  \
+    -i regexec.c
+
 sed -i 's@/usr/include@/tools/include@g' ext/Errno/Errno_pm.PL
 ./configure.gnu \
     --prefix=/tools \
