@@ -2,7 +2,7 @@
 
 ## on a normal Nutyx in root
 ```bash
-cards install cards.devel git 
+cards install cards.devel git screen
 ```
 ```bash
 wget https://raw.githubusercontent.com/YaoLinux/cross-base_sysD/master/scripts/install-nutyx.in -O install-nutyx
